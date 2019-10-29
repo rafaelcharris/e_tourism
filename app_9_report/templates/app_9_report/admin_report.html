@@ -22,43 +22,25 @@
             <th class="bg-primary"></th>
             <th class="bg-primary"></th>
             <th class="bg-primary"></th>
-            <th class="bg-success"></th>
-            <th class="bg-success"></th>
-            <th class="bg-success"></th>
-            <th class="bg-success"></th>
-            <th class="bg-success"></th>
-            <th class="bg-warning"></th>
         </tr>
         <tr>
             <th>P_code</th>
             <th>Consent Name</th>
             <th>ID Number</th>
-            <th>Add<br>treatment</th>
-            <th>Add<br>is_correct</th>
-            <th>Add<br>acc_payoff</th>
-            <th>Add<br>final_payoff</th>
-            <th>Trust<br>metarole</th>
-            <th>Trust<br>paying_round</th>
-            <th>Trust<br>t_final_payoff</th>
-            <th>Trust<br>b_final_payoff</th>
-            <th>Trust<br>trust_totalsum_payoff</th>
-            <th>FINAL<br>report_finalfinal_payoff</th>
+            <th>Market<br>Role</th>
+            <th>Market<br>Seller_valuation</th>
+            <th>Market<br>Buyer_valuation</th>
+            <th>Market<br>Package</th>
         </tr>
         {% for row in table_rows %}
         <tr>
             <td>{{ row.participant_code }}</td>
             <td>{{ row.consent_name }}</td>
             <td>{{ row.consent_id_number }}</td>
-            <td>{{ row.addition_treatment }}</td>
-            <td>{{ row.addition_acc_was_correct }}</td>
-            <td>{{ row.addition_acc_payoff }}</td>
-            <td>{{ row.addition_final_payoff }}</td>
-            <td>{{ row.trust_metarole }}</td>
-            <td>{{ row.trust_paying_round }}</td>
-            <td>{{ row.trust_t_money_payoff }}</td>
-            <td>{{ row.trust_b_money_payoff }}</td>
-            <td>{{ row.report_trust_totalsum_payoff }}</td>
-            <td>{{ row.report_FINAL_payoff }}</td>
+            <td>{{ row.market_role }}</td>
+            <td>{{ row.market_seller_valuation }}</td>
+            <td>{{ row.market_buyer_valuation }}</td>
+            <td>{{ row.market_seller_package }}</td>
         </tr>
         {% endfor %}
     </table>
