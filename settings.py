@@ -10,12 +10,13 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 SESSION_CONFIGS = [
-    # dict(
-    #    name='public_goods',
-    #    display_name="Public Goods",
-    #    num_demo_participants=3,
-    #    app_sequence=['public_goods', 'payment_info']
-    # ),
+    dict(
+        name = 'e_tourism_market',
+        display_name = "Market",
+        num_demo_participants = 4,
+        app_sequence = ['app_0_consent', 'app_1_market', 'app_8_summary'],
+        use_browser_bots = False,
+    )
 ]
 
 
@@ -27,7 +28,12 @@ LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
-ROOMS = []
+ROOMS = [
+    dict(
+        name = 'Study',
+        display_name = 'Study',
+    )
+]
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable

@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    SUMMARY
+{% endblock %}
+
+{% block content %}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Results from the market</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>{{ player.summary_name }}</td>
+            </tr>
+            <tr>
+                <td>Id</td>
+                <td>{{ player.summary_id }}</td>
+            </tr>
+            <tr>
+                <td>Role</td>
+                <td>{{ player.summary_role }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+    Please click on the "Next" button to continue with the questionnaire.
+    </p>
+
+    {% next_button %}
+{% endblock %}
+
+
+{% block styles  %}
+    <link href="{% static "css.css" %}" rel="stylesheet">
+{% endblock %}
+

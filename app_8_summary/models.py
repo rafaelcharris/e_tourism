@@ -27,34 +27,16 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    #primera parte:
-    summary_addition_acc_was_correct = models.IntegerField()
-    summary_addition_acc_payoff = models.IntegerField()
-    summary_addition_final_payoff = models.FloatField()
+    summary_name = models.LongStringField()
+    summary_id = models.IntegerField()
+    summary_role = models.BooleanField()
 
-    #segunda parte:
-    #summary_trust_role = models.LongStringField()
-    #summary_trust_round_number = models.IntegerField()
-    summary_trust_t_money_payoff = models.IntegerField()
-    summary_trust_b_money_payoff = models.IntegerField()
-    summary_trust_totalsum_payoff = models.IntegerField()
-    #FINAL
-    summary_FINAL_payoff = models.FloatField()
+    def push_vars_to_summary(self): #pushes vars to summary page
+        self.summary_role = self.participant.vars.get('role')
+        self.summary_name = self.participant.vars.get('consent_name')
+        self.summary_id = self.participant.vars.get('consent_id_number')
+        print("[[ APP_8_SUMMARY]] - PLAYER - PUSH_VARS_TO_SUMMARY.............--------------------------------]")
 
-    def push_vars_to_summary(self):
-        self.summary_addition_acc_was_correct = self.participant.vars.get('addition_acc_was_correct')
-        self.summary_addition_acc_payoff = self.participant.vars.get('addition_acc_payoff')
-        self.summary_addition_final_payoff = self.participant.vars.get('addition_final_payoff')
-
-        #self.summary_trust_role = self.participant.vars.get('addition_acc_was_correct')
-        #self.summary_trust_round_number = self.participant.vars.get('addition_acc_acc_payoff')
-        self.summary_trust_t_money_payoff = self.participant.vars.get('t_money_payoff')
-        self.summary_trust_b_money_payoff = self.participant.vars.get('b_money_payoff')
-        self.summary_trust_totalsum_payoff = self.participant.vars.get('trust_totalsum_payoff')
-
-        self.summary_FINAL_payoff = self.participant.vars.get('addition_final_payoff') + self.participant.vars.get('trust_totalsum_payoff')
-        print("[[ APP_3_SUMMARY]] - PLAYER - PUSH_VARS_TO_SUMMARY.............--------------------------------]")
-
-    def report_summary(self):
-        self.participant.vars['FINAL_payoff'] = self.summary_FINAL_payoff
-        print("[[ APP_3_SUMMARY]] - PLAYER - REPORT_SUMMARY.............--------------------------------]")
+#    def report_summary(self): # pushes vars to the admin_report
+#        self.participant.vars['FINAL_payoff'] = self.summary_FINAL_payoff
+#        print("[[ APP_8_SUMMARY]] - PLAYER - REPORT_SUMMARY.............--------------------------------]")
