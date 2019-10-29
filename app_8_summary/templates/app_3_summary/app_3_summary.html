@@ -1,0 +1,76 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    RESUMEN DE LA ACTIVIDAD DE HOY
+{% endblock %}
+
+{% block content %}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Resultado de la primera parte</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Cantidad de sumas correctas</td>
+                <td>{{ player.summary_addition_acc_was_correct }}</td>
+            </tr>
+            <tr>
+                <td>Cantidad de puntos experimentales ganados por sumas correctas</td>
+                <td>{{ player.summary_addition_acc_payoff }}</td>
+            </tr>
+            <tr>
+                <td>Cantidad final de puntos experimentales despues de ser afectado</td>
+                <td>{{ player.summary_addition_final_payoff }}</td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+                <th scope="col">Resultado de la segunda parte parte</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Sus ganancias para las decisiones de la segunda parte fueron</td>
+                <td>{{ player.summary_trust_t_money_payoff }} pesos colombianos</td>
+            </tr>
+            <tr>
+                <td>Sus ganancias para las intenciones de la segunda parte fueron</td>
+                <td>{{ player.summary_trust_b_money_payoff }} pesos colombianos</td>
+            </tr>
+            <tr>
+                <td>Sus ganancias para la segunda parte fueron</td>
+                <td>{{ player.summary_trust_totalsum_payoff }} pesos colombianos</td>
+            </tr>
+        </tbody>
+                <thead>
+            <tr>
+                <th scope="col">Ganancia total</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Su ganancia total es:</td>
+                <td>{{ player.summary_FINAL_payoff }} pesos colombianos</td>
+            </tr>
+
+    </table>
+
+    <p>
+    Por favor de clic en el botón "Siguiente" para continuar con el cuestionario.
+    </p>
+
+    {% next_button %}
+{% endblock %}
+
+
+{% block styles  %}
+    <link href="{% static "css.css" %}" rel="stylesheet">
+{% endblock %}
+

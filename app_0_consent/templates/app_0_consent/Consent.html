@@ -1,0 +1,59 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Consentimiento informado
+{% endblock %}
+
+{% block content %}
+
+    <p>Usted ha sido invitado a participar en una investigación cuyo propósito es entender cómo las personas toman
+        decisiones. El estudio será llevado a cabo por el equipo de la Unidad de Estudios Comportamentales y de
+        Política Pública (UEC-CID), bajo la supervisión del Profesor Francesco Bogliacino de la Facultad de Ciencias
+        Económicas de la Universidad Nacional de Colombia. Usted debe ser mayor de edad para poder participar en el
+        estudio.
+    </p>
+    <p>Si usted acepta, tendrá que realizar una tarea y tomar cuatro decisiones o menos. Además, deberá responder
+        algunas preguntas. Estas actividades las hará en un lugar en que pueda sentirse cómodo para realizarlas.
+        La participación en esta actividad requerirá un máximo de 60 minutos de su tiempo.
+    </p>
+    <p>Su participación es completamente voluntaria y podrá marcharse en cualquier momento. Así mismo, si usted desea
+        dejar sin respuesta algunas de las preguntas, está en completa libertad de hacerlo. Sin embargo, los
+        investigadores agradeceríamos que las respondiera todas.
+    </p>
+    <p>El presente estudio se acoge a las disposiciones éticas colombianas de investigación, la Resolución 8430 de
+        1993, que establece las normas científicas, técnicas y administrativas que involucran la participación de
+        personas en estudios científicos. La presente investigación se clasifica como una en la que la participación
+        de seres humanos tiene riesgos mínimos en la medida en que no genera riesgos presentes o posteriores a la
+        investigación para las personas que participan en ella. Los posibles inconvenientes están asociados al tiempo
+        necesario para completar las actividades requeridas en la investigación.
+    </p>
+    <p>Si existe algo de esta investigación que usted quiera que se le aclare, si desea informar de algún problema o
+        tiene preguntas acerca de sus derechos como participante o de cualquier otro aspecto de esta investigación, por
+        favor no dude en contactar al equipo de la Unidad de Estudios Comportamentales y de Política Pública (UEC-CID)
+        al correo electrónico uec_fcebog@unal.edu.co o al teléfono 316-5000 ext. 10346).
+    </p>
+    <p>Escribiendo su nombre y su número de documento a continuación, usted declara que ha sido debidamente informado y
+        que participa a esta investigación de manera voluntaria.
+    </p>
+    <p>Atentamente,
+    </p>
+    <p>La Unidad de Estudios Comportamentales y de Política Pública (UEC-CID)<br>
+        Facultad de Ciencias Económicas<br>
+        Universidad Nacional de Colombia</p>
+    </p>
+    <p>
+    </p>
+    <p>Nombre completo: {{ form.nombre }}
+    </p>
+    <p>Numero de documento de identidad: {{ form.id_number }}
+    </p>
+
+<button class="otree-btn-next btn btn-primary next-button otree-next-button">Acepto participar</button>
+
+{% endblock %}
+
+{% block styles  %}
+    <link href="{% static "css.css" %}" rel="stylesheet">
+{% endblock %}
+

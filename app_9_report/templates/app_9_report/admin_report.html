@@ -1,0 +1,67 @@
+<style style="text/css">
+  	.table-responsive{
+		width:100%;
+		border-collapse:collapse;
+	}
+	.table-responsive tr{
+		background: #ffffff ;
+	}
+	/* Define the hover highlight color for the table row */
+    .table-responsive tr:hover {
+          background-color: #ffff99;
+    }
+</style>
+
+<div class="table-responsive">
+    <table class="table table-sm" style="max-width:970px; font-size: 12px">.
+        <tr>
+            <th class="bg-secondary"></th>
+            <th class="bg-secondary"></th>
+            <th class="bg-secondary"></th>
+            <th class="bg-primary"></th>
+            <th class="bg-primary"></th>
+            <th class="bg-primary"></th>
+            <th class="bg-primary"></th>
+            <th class="bg-success"></th>
+            <th class="bg-success"></th>
+            <th class="bg-success"></th>
+            <th class="bg-success"></th>
+            <th class="bg-success"></th>
+            <th class="bg-warning"></th>
+        </tr>
+        <tr>
+            <th>P_code</th>
+            <th>Consent Name</th>
+            <th>ID Number</th>
+            <th>Add<br>treatment</th>
+            <th>Add<br>is_correct</th>
+            <th>Add<br>acc_payoff</th>
+            <th>Add<br>final_payoff</th>
+            <th>Trust<br>metarole</th>
+            <th>Trust<br>paying_round</th>
+            <th>Trust<br>t_final_payoff</th>
+            <th>Trust<br>b_final_payoff</th>
+            <th>Trust<br>trust_totalsum_payoff</th>
+            <th>FINAL<br>report_finalfinal_payoff</th>
+        </tr>
+        {% for row in table_rows %}
+        <tr>
+            <td>{{ row.participant_code }}</td>
+            <td>{{ row.consent_name }}</td>
+            <td>{{ row.consent_id_number }}</td>
+            <td>{{ row.addition_treatment }}</td>
+            <td>{{ row.addition_acc_was_correct }}</td>
+            <td>{{ row.addition_acc_payoff }}</td>
+            <td>{{ row.addition_final_payoff }}</td>
+            <td>{{ row.trust_metarole }}</td>
+            <td>{{ row.trust_paying_round }}</td>
+            <td>{{ row.trust_t_money_payoff }}</td>
+            <td>{{ row.trust_b_money_payoff }}</td>
+            <td>{{ row.report_trust_totalsum_payoff }}</td>
+            <td>{{ row.report_FINAL_payoff }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+Notes:
