@@ -3,17 +3,16 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class MyPage(Page):
-    pass
+class seller_p1(Page):
+    form_model = 'player'
+    form_fields = ['ask_price']
 
+    def vars_for_template(self):
+        return dict(
+            role = self.player.role,
+            seller_valuation = self.player.seller_valuation,
+#            buyer_valuation = self.player.buyer_valuation,
+#            bid_price = self.player.bid_price,
 
-class ResultsWaitPage(WaitPage):
-    def after_all_players_arrive(self):
-        pass
-
-
-class Results(Page):
-    pass
-
-
-page_sequence = [MyPage, ResultsWaitPage, Results]
+        )
+page_sequence = [seller_p1]

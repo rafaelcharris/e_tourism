@@ -33,7 +33,7 @@ class Subsession(BaseSubsession):
         if self.round_number == 1:
             role = itertools.cycle([False, True])
             for p in self.get_players():
-                p.role =next(role)
+                p.role = next(role)
                 p.participant.vars['role'] = p.role
 
         # loading valuiations:
@@ -75,5 +75,8 @@ class Player(BasePlayer):
     seller_valuation = models.IntegerField()
     buyer_valuation = models.IntegerField()
     seller_package = models.IntegerField()
+
+    bid_price = models.IntegerField()
+    ask_price = models.IntegerField()
 
 
