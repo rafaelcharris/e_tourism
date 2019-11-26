@@ -40,7 +40,11 @@ class Subsession(BaseSubsession):
         #seller_valuations = [7, 6, 5, 5, 4, 4, 3, 2, 1, 1]
         #buyer_valuations = [10, 10, 9, 8, 8, 7, 6, 6, 5, 4]
         seller_valuations = itertools.cycle([7, 6, 5, 5, 4, 4, 3, 2, 1, 1])
-        buyer_valuations = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
+        buyer_valuations_pac1 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
+        buyer_valuations_pac2 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
+        buyer_valuations_pac3 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
+        buyer_valuations_pac4 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
+        buyer_valuations_pac5 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
         for p in self.get_players():
             if p.role == False:
                 #p.seller_valuation = numpy.random.choice(seller_valuations, replace=False)
@@ -48,9 +52,16 @@ class Subsession(BaseSubsession):
                 p.participant.vars['seller_valuation'] = p.seller_valuation
             elif p.role == True:
                 #p.buyer_valuation = numpy.random.choice(buyer_valuations, replace=False)
-                p.buyer_valuation = next(buyer_valuations)
-                p.participant.vars['buyer_valuation'] = p.buyer_valuation
-
+                p.buyer_valuation_pac1 = next(buyer_valuations_pac1)
+                p.buyer_valuation_pac2 = next(buyer_valuations_pac2)
+                p.buyer_valuation_pac3 = next(buyer_valuations_pac3)
+                p.buyer_valuation_pac4 = next(buyer_valuations_pac4)
+                p.buyer_valuation_pac5 = next(buyer_valuations_pac5)
+                p.participant.vars['buyer_valuation_pac1'] = p.buyer_valuation_pac1
+                p.participant.vars['buyer_valuation_pac2'] = p.buyer_valuation_pac2
+                p.participant.vars['buyer_valuation_pac3'] = p.buyer_valuation_pac3
+                p.participant.vars['buyer_valuation_pac4'] = p.buyer_valuation_pac4
+                p.participant.vars['buyer_valuation_pac5'] = p.buyer_valuation_pac5
         # loading packages:
         packages = [1, 2, 3, 4, 5]
         for p in self.get_players():
@@ -71,9 +82,14 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    role = models.BooleanField  # 0 = seller, 1 = buyer
+
+    agent_role = models.BooleanField()  # 0 = seller, 1 = buyer
     seller_valuation = models.IntegerField()
-    buyer_valuation = models.IntegerField()
+    buyer_valuation_pac1 = models.IntegerField()
+    buyer_valuation_pac2 = models.IntegerField()
+    buyer_valuation_pac3 = models.IntegerField()
+    buyer_valuation_pac4 = models.IntegerField()
+    buyer_valuation_pac5 = models.IntegerField()
     seller_package = models.IntegerField()
 
     bid_price = models.IntegerField()
