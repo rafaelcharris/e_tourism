@@ -9,10 +9,10 @@ class seller_p1(Page):
 
     def vars_for_template(self):
         return dict(
-            role = self.player.role,
+            agent_role = self.player.agent_role,
             seller_valuation = self.player.seller_valuation,
+            seller_package = self.player.seller_package
 #            buyer_valuation = self.player.buyer_valuation,
 #            bid_price = self.player.bid_price,
-
         )
 page_sequence = [seller_p1]
