@@ -22,6 +22,10 @@
             <th class="bg-primary"></th>
             <th class="bg-primary"></th>
             <th class="bg-primary"></th>
+            <th class="bg-primary"></th>
+            <th class="bg-primary"></th>
+            <th class="bg-primary"></th>
+            <th class="bg-primary"></th>
         </tr>
         <tr>
             <th>P_code</th>
@@ -29,8 +33,12 @@
             <th>ID Number</th>
             <th>Market<br>Role</th>
             <th>Market<br>Seller_valuation</th>
-            <th>Market<br>Buyer_valuation</th>
-            <th>Market<br>Package</th>
+            <th>Market<br>Buyer_Package</th>
+            <th>Market<br>Buyer_valuation_pac1</th>
+            <th>Market<br>Buyer_valuation_pac2</th>
+            <th>Market<br>Buyer_valuation_pac3</th>
+            <th>Market<br>Buyer_valuation_pac4</th>
+            <th>Market<br>Buyer_valuation_pac5</th>
         </tr>
         {% for row in table_rows %}
         <tr>
@@ -39,8 +47,12 @@
             <td>{{ row.consent_id_number }}</td>
             <td>{{ row.market_role }}</td>
             <td>{{ row.market_seller_valuation }}</td>
-            <td>{{ row.market_buyer_valuation }}</td>
             <td>{{ row.market_seller_package }}</td>
+            <td>{{ row.market_buyer_valuation_pac1 }}</td>
+            <td>{{ row.market_buyer_valuation_pac2 }}</td>
+            <td>{{ row.market_buyer_valuation_pac3 }}</td>
+            <td>{{ row.market_buyer_valuation_pac4 }}</td>
+            <td>{{ row.market_buyer_valuation_pac5 }}</td>
         </tr>
         {% endfor %}
     </table>
