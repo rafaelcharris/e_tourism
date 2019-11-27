@@ -21,8 +21,10 @@ Your app description
 
 class Constants(BaseConstants):
     name_in_url = 'app_1_market'
-    players_per_group = None
+    players_per_group = 2
     num_rounds = 1
+    endowment = 3
+    see_list_cost = 0.3
 
 
 class Subsession(BaseSubsession):
@@ -36,9 +38,14 @@ class Subsession(BaseSubsession):
                 p.agent_role = next(agent_role)
                 p.participant.vars['agent_role'] = p.agent_role
 
-        # loading valuiations:
-        #seller_valuations = [7, 6, 5, 5, 4, 4, 3, 2, 1, 1]
-        #buyer_valuations = [10, 10, 9, 8, 8, 7, 6, 6, 5, 4]
+        # loading packages:
+        packages = [1, 2, 3, 4, 5]
+        for p in self.get_players():
+            if p.agent_role == False:
+                p.seller_package = numpy.random.choice(packages, replace=False)
+                p.participant.vars['seller_package'] = p.seller_package
+
+        # loading valuations:
         seller_valuations = itertools.cycle([7, 6, 5, 5, 4, 4, 3, 2, 1, 1])
         buyer_valuations_pac1 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
         buyer_valuations_pac2 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
@@ -84,15 +91,21 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     agent_role = models.BooleanField()  # 0 = seller, 1 = buyer
+
+    seller_package = models.IntegerField()
     seller_valuation = models.IntegerField()
+    ask_price_ini = models.IntegerField()
+    see_list = models.BooleanField()
+    com_practice = models.IntegerField( choices = [1, 2, 3, 4])
+    ask_price_fin = models.IntegerField()
+
     buyer_valuation_pac1 = models.IntegerField()
     buyer_valuation_pac2 = models.IntegerField()
     buyer_valuation_pac3 = models.IntegerField()
     buyer_valuation_pac4 = models.IntegerField()
     buyer_valuation_pac5 = models.IntegerField()
-    seller_package = models.IntegerField()
-
     bid_price = models.IntegerField()
-    ask_price = models.IntegerField()
+
+
 
 

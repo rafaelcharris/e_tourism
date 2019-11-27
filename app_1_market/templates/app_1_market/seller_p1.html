@@ -28,8 +28,20 @@
                 <td>{{ seller_valuation }}</td>
             </tr>
             <tr>
-                <td>Ask price</td>
-                <td>{% formfield player.ask_price %}</td>
+                <td>Set an initial Ask-price</td>
+                <td>{% formfield player.ask_price_ini %}</td>
+            </tr>
+            <tr>
+                <td>See full list of packages and prices at a cost of {{ Constants.see_list_cost }}?</td>
+                <td>{% formfield player.see_list %}</td>
+            </tr>
+            <tr>
+                <td>Pick a commercial practice from the following list</td>
+                <td>{% formfield player.com_practice %}</td>
+            </tr>
+            <tr>
+                <td>Set a final Ask-price</td>
+                <td>{% formfield player.ask_price_fin %}</td>
             </tr>
         </tbody>
     </table>
