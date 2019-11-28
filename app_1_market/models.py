@@ -9,28 +9,30 @@ from otree.api import (
     currency_range,
 )
 import itertools
-import numpy
+import numpy as np
 
 
-author = 'Your name here'
+author = 'UEC'
 
 doc = """
-Your app description
+Markets
 """
 
 
 class Constants(BaseConstants):
     name_in_url = 'app_1_market'
-    players_per_group = 2
-    num_rounds = 1
+    players_per_group = 10
+    num_rounds = 5
     endowment = 3
     see_list_cost = 0.3
+
+    buy_choices =[]
 
 
 class Subsession(BaseSubsession):
 
-    def creating_session(self):
 
+    def creating_session(self):
         # loading roles:
         if self.round_number == 1:
             agent_role = itertools.cycle([False, True])
@@ -39,11 +41,16 @@ class Subsession(BaseSubsession):
                 p.participant.vars['agent_role'] = p.agent_role
 
         # loading packages:
-        packages = [1, 2, 3, 4, 5]
+        packages = [i for i in range(1, 6)]
+
         for p in self.get_players():
             if p.agent_role == False:
-                p.seller_package = numpy.random.choice(packages, replace=False)
+                p.seller_package = np.random.choice(packages, replace=False) #todo revisar si el replacement es en realidad True
                 p.participant.vars['seller_package'] = p.seller_package
+
+        for i in range(1, Constants.players_per_group):
+            choice = [i, 'Buy from seller {}'.format(i) + 'Package {}'.format(np.random.choice(packages))]
+            Constants.buy_choices.append(choice)
 
         # loading valuations:
         seller_valuations = itertools.cycle([7, 6, 5, 5, 4, 4, 3, 2, 1, 1])
@@ -52,6 +59,7 @@ class Subsession(BaseSubsession):
         buyer_valuations_pac3 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
         buyer_valuations_pac4 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
         buyer_valuations_pac5 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
+
         for p in self.get_players():
             if p.agent_role == False:
                 #p.seller_valuation = numpy.random.choice(seller_valuations, replace=False)
@@ -77,11 +85,6 @@ class Subsession(BaseSubsession):
                 p.participant.vars['seller_package'] = p.seller_package
 
 
-#        print("[[ APP_1_MARKET]] - PLAYER - CREATING_SESSION.............[[[ ROUND NUMBER ==> ", self.round_number, " <== ]]")
-#        print("[[ APP_1_MARKET]] - PLAYER - CREATING_SESSION.............[[[ PLAYER_ID ==> ", self.id_in_group, " <== ]]")
-#        print("[[ APP_1_MARKET]] - PLAYER - CREATING_SESSION.............[[[ AGENT_ROLE ==> ", self.participant.vars['agent_role'], " <== ]]")
-#        print("[[ APP_1_MARKET]] - PLAYER - CREATING_SESSION.............[[[ SELLER_VALUATION ==> ", self.participant.vars['seller_valuation'], " <== ]]")
-#        print("[[ APP_1_MARKET]] - PLAYER - CREATING_SESSION.............[[[ BUYER_VALUATION ==> ", self.participant.vars['buyer_valuation'], " <== ]]")
 
 
 class Group(BaseGroup):
