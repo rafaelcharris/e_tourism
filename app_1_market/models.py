@@ -33,15 +33,14 @@ class Subsession(BaseSubsession):
 
 
     def creating_session(self):
-        # loading roles:
-        if self.round_number == 1:
-            agent_role = itertools.cycle([False, True])
-            for p in self.get_players():
-                p.agent_role = next(agent_role)
-                p.participant.vars['agent_role'] = p.agent_role
-
         # loading packages:
         packages = [i for i in range(1, 6)]
+
+        for p in self.get_players():
+            if p.agent_role == False:
+                p.seller_package = np.random.choice(packages,
+                                                    replace=False)  # todo revisar si el replacement es en realidad True
+                p.participant.vars['seller_package'] = p.seller_package
 
         for p in self.get_players():
             if p.agent_role == False:
@@ -81,7 +80,7 @@ class Subsession(BaseSubsession):
         packages = [1, 2, 3, 4, 5]
         for p in self.get_players():
             if p.agent_role == False:
-                p.seller_package = numpy.random.choice(packages, replace=False)
+                p.seller_package = np.random.choice(packages, replace=False)
                 p.participant.vars['seller_package'] = p.seller_package
 
 
@@ -92,6 +91,12 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+
+    def role(self):
+        if self.id_in_group == Constants.players_per_group:
+            return 'buyer'
+        return 'seller {}'.format(self.id_in_group)
+
 
     agent_role = models.BooleanField()  # 0 = seller, 1 = buyer
 
