@@ -3,36 +3,25 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class seller_p1(Page):
+class seller(Page):
     form_model = 'player'
-    form_fields = ['ask_price_ini', 'see_list', 'com_practice', 'ask_price_fin']
+    form_fields = ['ask_price_ini', 'see_list', 'com_practice', 'ask_price_fin', 'role', 'seller_package',
+                   'seller_valuation']
 
     def is_displayed(self):
-        if self.player.agent_role == False:
+        if self.player.role == 'seller':
             return True
-        else:
-            return False
 
-    def vars_for_template(self):
-        return dict(
-            agent_role = self.player.agent_role,
-            seller_valuation = self.player.seller_valuation,
-            seller_package = self.player.seller_package
-        )
-
-class buyer_p1(Page):
+class buyer(Page):
     form_model = 'player'
     form_fields = ['bid_price']
 
     def is_displayed(self):
-        if self.player.agent_role == True:
+        if self.player.role == 'buyer':
             return True
-        else:
-            return False
 
     def vars_for_template(self):
         return dict(
-            agent_role = self.player.agent_role,
             buyer_valuation_pac1=self.player.buyer_valuation_pac1,
             buyer_valuation_pac2=self.player.buyer_valuation_pac2,
             buyer_valuation_pac3=self.player.buyer_valuation_pac3,
@@ -41,5 +30,4 @@ class buyer_p1(Page):
             bid_price = self.player.bid_price,
         )
 
-page_sequence = [seller_p1,
-                 buyer_p1]
+page_sequence = [seller, buyer]

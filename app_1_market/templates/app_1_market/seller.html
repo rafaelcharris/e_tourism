@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Seller
+{% endblock %}
+<p> This is your role {{player.role}} </p>
+
+<p> Este es el paquete que lo tocó {% player.seller_package %}</p>
+<p> Este es la valuation de ese paquete {% player.seller_valuation %}</p>
+
+<p> Ahora escoge entre las siguientes prácticas comerciales {% formfield player.com_practice %}</p>
+
+<p> Elige el precio inicial {% formfield player.ask_price_ini %} </p>
+
+<p>¿Desea ver los precios de los otros a un costo de {{Constants.see_list_cost}}
+    {{% formfield player.see_list %}}
+</p>
+
+{% if formfield player.see_list == 1 %}
+    {% for p in group.get_players %}
+    {% if 'seller' in p.role %}
+    <i>Price from {{p.role}}: {{p.ask_price_ini}}</i><br/>
+    {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+
+            {% next_button %}
+{% block content %}

@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Buyer
+{% endblock %}
+<p> This is your role {{player.role}} </p>
+
+<p> Este es la valuation de ese paquete {% player.seller_valuation %}</p>
+
+<p> Elige el precio inicial {% formfield player.ask_price_ini %} </p>
+
+{% block content %}

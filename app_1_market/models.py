@@ -43,18 +43,20 @@ class Subsession(BaseSubsession):
             p.seller_package = np.random.randint(1,5)
             p.participant.vars['seller_package'] = p.seller_package
 
-        #Assign valuations. It is without replacement for both sellers and buyers.
+        #Assign valuations. It is without replacement for sellers.
         for p in self.group.get_players_by_role('seller'):
             p.seller_valuation = np.random.choice(Constants.seller_valuations, replace = False)
 
+        #Assign valuations for each packaque for the sellers
         for p in self.group.get_players_by_role('buyer'):
             for pac in Constants.packages:
                 p.buyer_valuation[pac] = np.random.choice(Constants.buyer_valuations, replace = False)
+                return dict(paquete = pac, valuation = p.buyer_valuation)
+                #todo seria mejor crear in diccionario que relacione paquete y valuación.
 
 
 class Group(BaseGroup):
-    def set_packages(self):
-
+    pass
 
 
 
@@ -69,13 +71,15 @@ class Player(BasePlayer):
 
     agent_role = models.BooleanField()
 
+    #Seller
     seller_package = models.IntegerField()
     seller_valuation = models.IntegerField()
     ask_price_ini = models.IntegerField()
-    see_list = models.BooleanField()
-    com_practice = models.IntegerField( choices = [1, 2, 3, 4])
+    see_list = models.BooleanField(initial = 0)
+    com_practice = models.IntegerField(choices = [1, 2, 3, 4])
     ask_price_fin = models.IntegerField()
 
+    #Buyer
     buyer_valuations = models.IntegerField()
     buyer_valuation_pac2 = models.IntegerField()
     buyer_valuation_pac3 = models.IntegerField()
