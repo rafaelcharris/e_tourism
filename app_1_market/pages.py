@@ -17,8 +17,7 @@ class buyer(Page):
     form_fields = ['bid_price']
 
     def is_displayed(self):
-        if self.player.role == 'buyer':
-            return True
+        return self.player.role == 'buyer'
 
     def vars_for_template(self):
         return dict(

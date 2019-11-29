@@ -9,7 +9,6 @@
 <p> Este es el paquete que lo tocó {% player.seller_package %}</p>
 <p> Este es la valuation de ese paquete {% player.seller_valuation %}</p>
 
-<p> Ahora escoge entre las siguientes prácticas comerciales {% formfield player.com_practice %}</p>
 
 <p> Elige el precio inicial {% formfield player.ask_price_ini %} </p>
 
@@ -25,7 +24,9 @@
     {% endfor %}
 {% endif %}
 
+<p> Ahora escoge entre las siguientes prácticas comerciales {% formfield player.com_practice %}</p>
 
-
-            {% next_button %}
+<p> Choose one of thi</p>
+    {% formfield player.ask_price_fin %}
+    {% next_button %}
 {% block content %}
