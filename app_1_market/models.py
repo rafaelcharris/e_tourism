@@ -26,79 +26,48 @@ class Constants(BaseConstants):
     endowment = 3
     see_list_cost = 0.3
 
-    buy_choices =[]
+    buy_choices =[] #Tal vez me toca quitar esto
+    packages = [i for i in range(1, 6)]
+
+    seller_valuations = [7, 6, 5, 5, 4, 4, 3, 2, 1, 1]
+    buyer_valuations = [10, 10, 9, 8, 8, 7, 6, 6, 5, 4]
+
+    com_practice = [i for i in range(1,5)]
 
 
 class Subsession(BaseSubsession):
 
-
     def creating_session(self):
-        # loading packages:
-        packages = [i for i in range(1, 6)]
+        #assign packages con replacement
+        for p in self.group.get_players_by_role('seller'):
+            p.seller_package = np.random.randint(1,5)
+            p.participant.vars['seller_package'] = p.seller_package
 
-        for p in self.get_players():
-            if p.agent_role == False:
-                p.seller_package = np.random.choice(packages,
-                                                    replace=False)  # todo revisar si el replacement es en realidad True
-                p.participant.vars['seller_package'] = p.seller_package
+        #Assign valuations. It is without replacement for both sellers and buyers.
+        for p in self.group.get_players_by_role('seller'):
+            p.seller_valuation = np.random.choice(Constants.seller_valuations, replace = False)
 
-        for p in self.get_players():
-            if p.agent_role == False:
-                p.seller_package = np.random.choice(packages, replace=False) #todo revisar si el replacement es en realidad True
-                p.participant.vars['seller_package'] = p.seller_package
-
-        for i in range(1, Constants.players_per_group):
-            choice = [i, 'Buy from seller {}'.format(i) + 'Package {}'.format(np.random.choice(packages))]
-            Constants.buy_choices.append(choice)
-
-        # loading valuations:
-        seller_valuations = itertools.cycle([7, 6, 5, 5, 4, 4, 3, 2, 1, 1])
-        buyer_valuations_pac1 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
-        buyer_valuations_pac2 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
-        buyer_valuations_pac3 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
-        buyer_valuations_pac4 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
-        buyer_valuations_pac5 = itertools.cycle([10, 10, 9, 8, 8, 7, 6, 6, 5, 4])
-
-        for p in self.get_players():
-            if p.agent_role == False:
-                #p.seller_valuation = numpy.random.choice(seller_valuations, replace=False)
-                p.seller_valuation = next(seller_valuations)
-                p.participant.vars['seller_valuation'] = p.seller_valuation
-            elif p.agent_role == True:
-                #p.buyer_valuation = numpy.random.choice(buyer_valuations, replace=False)
-                p.buyer_valuation_pac1 = next(buyer_valuations_pac1)
-                p.buyer_valuation_pac2 = next(buyer_valuations_pac2)
-                p.buyer_valuation_pac3 = next(buyer_valuations_pac3)
-                p.buyer_valuation_pac4 = next(buyer_valuations_pac4)
-                p.buyer_valuation_pac5 = next(buyer_valuations_pac5)
-                p.participant.vars['buyer_valuation_pac1'] = p.buyer_valuation_pac1
-                p.participant.vars['buyer_valuation_pac2'] = p.buyer_valuation_pac2
-                p.participant.vars['buyer_valuation_pac3'] = p.buyer_valuation_pac3
-                p.participant.vars['buyer_valuation_pac4'] = p.buyer_valuation_pac4
-                p.participant.vars['buyer_valuation_pac5'] = p.buyer_valuation_pac5
-        # loading packages:
-        packages = [1, 2, 3, 4, 5]
-        for p in self.get_players():
-            if p.agent_role == False:
-                p.seller_package = np.random.choice(packages, replace=False)
-                p.participant.vars['seller_package'] = p.seller_package
-
-
+        for p in self.group.get_players_by_role('buyer'):
+            for pac in Constants.packages:
+                p.buyer_valuation[pac] = np.random.choice(Constants.buyer_valuations, replace = False)
 
 
 class Group(BaseGroup):
-    pass
+    def set_packages(self):
+
+
 
 
 class Player(BasePlayer):
-
+    #Definir los roles buyer o seller
     def role(self):
-        if self.id_in_group == Constants.players_per_group:
+        if self.id_in_group % 2 ==0: # Si el id en el grupo es par asignele el role de buyer
             return 'buyer'
-        return 'seller {}'.format(self.id_in_group)
+        else:
+            return 'seller'
 
 
-    agent_role = models.BooleanField()  # 0 = seller, 1 = buyer
+    agent_role = models.BooleanField()
 
     seller_package = models.IntegerField()
     seller_valuation = models.IntegerField()
@@ -107,7 +76,7 @@ class Player(BasePlayer):
     com_practice = models.IntegerField( choices = [1, 2, 3, 4])
     ask_price_fin = models.IntegerField()
 
-    buyer_valuation_pac1 = models.IntegerField()
+    buyer_valuations = models.IntegerField()
     buyer_valuation_pac2 = models.IntegerField()
     buyer_valuation_pac3 = models.IntegerField()
     buyer_valuation_pac4 = models.IntegerField()
