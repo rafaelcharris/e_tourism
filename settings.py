@@ -14,7 +14,7 @@ SESSION_CONFIGS = [
         name = 'e_tourism_market',
         display_name = "Market",
         num_demo_participants = 20,
-        app_sequence = ['app_1_market', 'app_8_summary', 'app_9_report'],
+        app_sequence = ['app_1_market'],
         use_browser_bots = False,
     )
 ]

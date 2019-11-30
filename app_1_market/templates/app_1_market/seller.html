@@ -4,22 +4,70 @@
 {% block title %}
     Seller
 {% endblock %}
-<p> This is your role {{player.role}} </p>
 
-<p> Este es el paquete que lo tocó {% player.seller_package %}</p>
-<p> Este es la valuation de ese paquete {% player.seller_valuation %}</p>
+{% block content %}
+{% block title %}
+    Seller
+{% endblock %}
+
+{% block content %}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Important title here</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Role</td>
+                <td>{{ role }}</td>
+            </tr>
+            <tr>
+                <td>Seller package</td>
+                <td>{{ player.seller_package }}</td>
+            </tr>
+            <tr>
+                <td>Seller valuation</td>
+                <td>{{ player.seller_valuation }}</td>
+            </tr>
+            <tr>
+                <td>Set an initial Ask-price</td>
+                <td>{% formfield player.ask_price_ini label = "Please set an initial price" %}</td>
+            </tr>
+            <tr>
+                <td>See full list of packages and prices at a cost of {{ Constants.see_list_cost }}?</td>
+                <td>{% formfield player.see_list %}</td>
+            </tr>
+
+            <tr>
+                <td>Pick a commercial practice from the following list</td>
+                <td>{% formfield player.com_practice %}</td>
+            </tr>
+            <tr>
+                <td>Set a final Ask-price</td>
+                <td>{% formfield player.ask_price_fin %}</td>
+            </tr>
+        </tbody>
+    </table>
 
 
-<p> Elige el precio inicial {% formfield player.ask_price_ini %} </p>
+<p> Este es la valuation de ese paquete:  </p>
 
-<p>¿Desea ver los precios de los otros a un costo de {{Constants.see_list_cost}}
-    {{% formfield player.see_list %}}
-</p>
+{% formfield player.ask_price_ini label = "PLease set an initial price"%}
 
-{% if formfield player.see_list == 1 %}
+<p> Do you want to see other sellers prices at a cost of {{Constants.see_list_cost}} ?</p>
+{% formfield player.see_list %}
+
+{% comment %}
+Creo que toca separa esto en dos páginas para que el programa pueda cargar el ask_price_ini de los otros.
+{% endcomment %}
+
+{% if player.see_list == 1 %}
     {% for p in group.get_players %}
-    {% if 'seller' in p.role %}
-    <i>Price from {{p.role}}: {{p.ask_price_ini}}</i><br/>
+    {% if 'seller' in role %}
+    <i>Price from {{role}}: {{p.ask_price_ini}}</i><br/>
     {% endif %}
     {% endfor %}
 {% endif %}
@@ -29,4 +77,4 @@
 <p> Choose one of thi</p>
     {% formfield player.ask_price_fin %}
     {% next_button %}
-{% block content %}
+{% endblock %}

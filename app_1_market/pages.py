@@ -5,28 +5,29 @@ from .models import Constants
 
 class seller(Page):
     form_model = 'player'
-    form_fields = ['ask_price_ini', 'see_list', 'com_practice', 'ask_price_fin', 'role', 'seller_package',
+    form_fields = ['ask_price_ini', 'see_list', 'com_practice', 'ask_price_fin', 'seller_package',
                    'seller_valuation']
 
     def is_displayed(self):
-        if self.player.role == 'seller':
-            return True
+        return self.player.role() != 'buyer'
 
+    def vars_for_template(self):
+        self.subsession.assign_pac_val()
+
+        return dict(
+            seller_package = self.player.seller_package,
+            role = self.participant.vars['role']
+        )
 class buyer(Page):
     form_model = 'player'
     form_fields = ['bid_price']
 
     def is_displayed(self):
-        return self.player.role == 'buyer'
+        return self.player.role() != 'seller'
 
     def vars_for_template(self):
+        self.group.assign_pac_val()
         return dict(
-            buyer_valuation_pac1=self.player.buyer_valuation_pac1,
-            buyer_valuation_pac2=self.player.buyer_valuation_pac2,
-            buyer_valuation_pac3=self.player.buyer_valuation_pac3,
-            buyer_valuation_pac4=self.player.buyer_valuation_pac4,
-            buyer_valuation_pac5 = self.player.buyer_valuation_pac5,
-            bid_price = self.player.bid_price,
+            role = self.participant.vars['role']
         )
-
 page_sequence = [seller, buyer]
