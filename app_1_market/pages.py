@@ -11,8 +11,6 @@ class seller(Page):
         return self.player.role() != 'buyer'
 
     def vars_for_template(self):
-        self.subsession.assign_pac_val()
-
         return dict(
             seller_package = self.player.seller_package,
             role = self.participant.vars['role']
@@ -44,7 +42,6 @@ class buyer(Page):
         return self.player.role() != 'seller'
 
     def vars_for_template(self):
-        self.subsession.assign_pac_val()
         return dict(
             role = self.participant.vars['role']
         )
