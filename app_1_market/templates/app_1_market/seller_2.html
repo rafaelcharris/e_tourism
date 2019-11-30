@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Seller
+{% endblock %}
+
+{% block content %}
+{% block title %}
+    Seller page 2
+{% endblock %}
+
+<table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Important title here</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+     {% if player.see_list == 1 %}
+        {% for p in group.get_players %}
+        {% if 'seller' in role %}
+        <i>Price from {{p.role}}: {{p.ask_price_ini}}</i><br/>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+
+        <tbody>
+            <tr>
+                <td>Pick a commercial practice from the following list</td>
+                <td>{% formfield player.com_practice %}</td>
+            </tr>
+            <tr>
+                <td>Set a final Ask-price</td>
+                <td>{% formfield player.ask_price_fin %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% next_button %}
+{% endblock %}

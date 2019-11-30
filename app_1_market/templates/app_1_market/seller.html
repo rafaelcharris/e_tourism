@@ -7,7 +7,7 @@
 
 {% block content %}
 {% block title %}
-    Seller
+    Seller page 1
 {% endblock %}
 
 {% block content %}
@@ -52,14 +52,6 @@
         </tbody>
     </table>
 
-
-<p> Este es la valuation de ese paquete:  </p>
-
-{% formfield player.ask_price_ini label = "PLease set an initial price"%}
-
-<p> Do you want to see other sellers prices at a cost of {{Constants.see_list_cost}} ?</p>
-{% formfield player.see_list %}
-
 {% comment %}
 Creo que toca separa esto en dos páginas para que el programa pueda cargar el ask_price_ini de los otros.
 {% endcomment %}
@@ -76,5 +68,6 @@ Creo que toca separa esto en dos páginas para que el programa pueda cargar el a
 
 <p> Choose one of thi</p>
     {% formfield player.ask_price_fin %}
+
     {% next_button %}
 {% endblock %}
