@@ -21,7 +21,7 @@ Markets
 
 class Constants(BaseConstants):
     name_in_url = 'app_1_market'
-    players_per_group = 20 #creo que hay un error porque no voy a usar las características de los grupos
+    players_per_group = 4
     num_rounds = 5
     endowment = 3
     see_list_cost = 0.3

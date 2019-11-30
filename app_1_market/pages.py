@@ -2,7 +2,7 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
-class instructions(page):
+class instructions(Page):
     pass
 
 class seller(Page):
@@ -18,9 +18,12 @@ class seller(Page):
             role = self.participant.vars['role']
         )
 
-class ResultsWaitPage(WaitPage):
+class MyWaitPage(WaitPage):
     def is_displayed(self):
         return self.player.role() != 'seller'
+
+    title_text = "You are a Buyer"
+    body_text = "Please wait while the sellers set their offers"
 
 
 class seller_2(Page):
@@ -54,6 +57,13 @@ class buyer(Page):
             pac5 = self.player.buyer_valuation_pac5
         )
 
+class ResultsWaitPage(WaitPage):
+    def is_displayed(self):
+        return self.player.role() != 'buyer'
+
+    title_text = "You offer has been made"
+    body_text = "Please wait while the buyers choose a product"
+
 class buyer_2(Page):
     form_model = 'player'
     form_fields = ['package_purchased']
@@ -69,4 +79,9 @@ class buyer_2(Page):
     def is_displayed(self):
         return self.player.role() != 'seller'
 
-page_sequence = [instructions, ResultsWaitPage, seller, seller_2, buyer]
+page_sequence = [instructions,
+                 MyWaitPage,
+                 seller,
+                 seller_2,
+                 ResultsWaitPage,
+                 buyer]
