@@ -17,8 +17,9 @@ class seller(Page):
         )
 
 class ResultsWaitPage(WaitPage):
-    def after_all_players_arrive(self):
-        pass
+    def is_displayed(self):
+        return self.player.role() != 'seller'
+
 
 class seller_2(Page):
     form_model = 'player'
@@ -36,7 +37,7 @@ class seller_2(Page):
 
 class buyer(Page):
     form_model = 'player'
-    form_fields = ['bid_price']
+    form_fields = ['package_purchased']
 
     def is_displayed(self):
         return self.player.role() != 'seller'
@@ -53,10 +54,11 @@ class buyer(Page):
 
 class buyer_2(Page):
     form_model = 'player'
-    form_fields = ['bid_price']
+    form_fields = ['package_purchased']
 
     def vars_for_template(self):
         return dict(
+        role=self.participant.vars['role'],
         player = self.player.id_in_group,
         price = self.player.ask_price_fin,
         seller_package = self.player.seller_package
@@ -65,4 +67,4 @@ class buyer_2(Page):
     def is_displayed(self):
         return self.player.role() != 'seller'
 
-page_sequence = [seller, seller_2, buyer, buyer_2]
+page_sequence = [ResultsWaitPage, seller, seller_2, buyer]

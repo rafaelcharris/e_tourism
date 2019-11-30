@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    Buyer
+    Buyer (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}))
 {% endblock %}
 
 {% block content %}
@@ -59,6 +59,7 @@
                 <td>Supplier</td>
                 <td>Package</td>
                 <td>Price</td>
+                <td>Purchase</td>
 
 {%for p in group.get_players %}
     {% if p.role == "seller" %}
@@ -67,6 +68,7 @@
                 <td>{{p}}</td>
                 <td>{{p.seller_package}}</td>
                 <td>{{p.ask_price_fin}}</td>
+                <td><button name = "package_purchased" value = {{p.seller_package}} class = "btn btn-primary btn-large">Purchase</button></td>
             </tr>
             </tr>
 {% endif %}
