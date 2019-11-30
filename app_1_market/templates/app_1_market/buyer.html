@@ -59,10 +59,20 @@
                 <td>Supplier</td>
                 <td>Package</td>
                 <td>Price</td>
-            </tr>
-        </tbody>
-    </table>
 
+{%for p in group.get_players %}
+    {% if p.role == "seller" %}
+
+            <tr>
+                <td>{{p}}</td>
+                <td>{{p.seller_package}}</td>
+                <td>{{p.ask_price_fin}}</td>
+            </tr>
+            </tr>
+{% endif %}
+{% endfor %}
+        </tbody>
+        </table>
 
     {% next_button %}
 

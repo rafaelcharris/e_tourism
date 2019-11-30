@@ -53,11 +53,13 @@ class buyer(Page):
 
 class buyer_2(Page):
     form_model = 'player'
-    form_fields = []
+    form_fields = ['bid_price']
 
     def vars_for_template(self):
         return dict(
-        price = self.player.ask_price_fin
+        player = self.player.id_in_group,
+        price = self.player.ask_price_fin,
+        seller_package = self.player.seller_package
         )
 
 page_sequence = [seller, seller_2, buyer, buyer_2]
