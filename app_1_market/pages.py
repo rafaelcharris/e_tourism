@@ -43,6 +43,11 @@ class buyer(Page):
 
     def vars_for_template(self):
         return dict(
-            role = self.participant.vars['role']
+            role = self.participant.vars['role'],
+            pac1 = self.player.buyer_valuation_pac1,
+            pac2 = self.player.buyer_valuation_pac2,
+            pac3 = self.player.buyer_valuation_pac3,
+            pac4 = self.player.buyer_valuation_pac4,
+            pac5 = self.player.buyer_valuation_pac5
         )
 page_sequence = [seller, seller_2, buyer]

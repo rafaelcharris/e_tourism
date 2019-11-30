@@ -55,14 +55,14 @@ class Subsession(BaseSubsession):
                     p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
                 else:
             # Assign valuations for each packaque for the sellers
-            #Esta parte del código debería asignarle un valor random a cada valuación
-                    return {
-                    'packages_buyer': [
-                        p.buyer_valuation_pac1, p.buyer_valuation_pac2, p.buyer_valuation_pac3,
-                        p.buyer_valuation_pac4, p.buyer_valuation_pac5
-                    ],
-                    'valuations_packages': [numpy.random.choice(Constants.buyer_valuations, replace = False) for x in range(5)]
-                    }
+            #Esta parte del código debería asignarle un valor random a cada paquete
+                    p.valuations = dict(zip(Constants.packages, numpy.random.choice(Constants.buyer_valuations, size =5, replace = False)))
+                    p.buyer_valuation_pac1 = p.valuations.get(1)
+                    p.buyer_valuation_pac2 = p.valuations.get(2)
+                    p.buyer_valuation_pac3 = p.valuations.get(3)
+                    p.buyer_valuation_pac4 = p.valuations.get(4)
+                    p.buyer_valuation_pac5 = p.valuations.get(5)
+
 class Group(BaseGroup):
     pass
 
@@ -89,6 +89,6 @@ class Player(BasePlayer):
     buyer_valuation_pac5 = models.IntegerField()
     bid_price = models.IntegerField()
 
-
+    valuations = dict()
 
 
