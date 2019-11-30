@@ -62,4 +62,7 @@ class buyer_2(Page):
         seller_package = self.player.seller_package
         )
 
+    def is_displayed(self):
+        return self.player.role() != 'seller'
+
 page_sequence = [seller, seller_2, buyer, buyer_2]

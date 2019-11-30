@@ -40,7 +40,6 @@ class Constants(BaseConstants):
     com_practice = [i for i in range(1,5)]
 
 
-
 class Subsession(BaseSubsession):
     def creating_session(self):
         #crear roles
