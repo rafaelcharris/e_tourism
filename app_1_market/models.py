@@ -39,6 +39,7 @@ class Constants(BaseConstants):
 
     com_practice = [i for i in range(1,5)]
 
+    instructions_template ='app_1_market/instructions.html'
 
 class Subsession(BaseSubsession):
     def creating_session(self):

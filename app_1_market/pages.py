@@ -2,6 +2,8 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
+class instructions(page):
+    pass
 
 class seller(Page):
     form_model = 'player'
@@ -67,4 +69,4 @@ class buyer_2(Page):
     def is_displayed(self):
         return self.player.role() != 'seller'
 
-page_sequence = [ResultsWaitPage, seller, seller_2, buyer]
+page_sequence = [instructions, ResultsWaitPage, seller, seller_2, buyer]
