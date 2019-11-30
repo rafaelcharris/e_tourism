@@ -50,4 +50,14 @@ class buyer(Page):
             pac4 = self.player.buyer_valuation_pac4,
             pac5 = self.player.buyer_valuation_pac5
         )
-page_sequence = [seller, seller_2, buyer]
+
+class buyer_2(Page):
+    form_model = 'player'
+    form_fields = []
+
+    def vars_for_template(self):
+        return dict(
+        price = self.player.ask_price_fin
+        )
+
+page_sequence = [seller, seller_2, buyer, buyer_2]

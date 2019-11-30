@@ -46,13 +46,14 @@ class Subsession(BaseSubsession):
                     roles = itertools.cycle(['seller', 'buyer'])
                     for p in self.get_players():
                         p.participant.vars['role'] = next(roles)
-                    #Esto le asigna a los jugadores desde la primera ronda el role de vededor o de comprador
+        #Esto le asigna a los jugadores desde la primera ronda el role de vededor o de comprador
         #assign packages con replacement
             for p in self.get_players():
                 if p.participant.vars['role'] == 'seller':
                     p.seller_package = numpy.random.randint(1, 5)
                     p.participant.vars['seller_package'] = p.seller_package
                     p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
+                    #todo Y si hago un diccionario relacionando valuation package y price final?!!!!
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
