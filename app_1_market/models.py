@@ -95,3 +95,7 @@ class Player(BasePlayer):
     package_purchased = models.IntegerField()
 
 
+    #set payoff
+    def set_payoff(self):
+        pass
+

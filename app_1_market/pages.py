@@ -19,8 +19,12 @@ class seller(Page):
         )
 
 class MyWaitPage(WaitPage):
+
     def is_displayed(self):
         return self.player.role() != 'seller'
+
+    def after_all_players_arrive(self):
+        self.set_payoff()
 
     title_text = "You are a Buyer"
     body_text = "Please wait while the sellers set their offers"
