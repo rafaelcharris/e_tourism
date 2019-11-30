@@ -5,6 +5,15 @@ from .models import Constants
 class instructions(Page):
     pass
 
+class MyWaitPage(WaitPage):
+
+    def is_displayed(self):
+        return self.player.role() != 'seller'
+
+    title_text = "You are a Buyer"
+    body_text = "Please wait while the sellers set their offers"
+
+
 class seller(Page):
     form_model = 'player'
     form_fields = ['ask_price_ini', 'see_list']
@@ -18,17 +27,12 @@ class seller(Page):
             role = self.participant.vars['role']
         )
 
-class MyWaitPage(WaitPage):
-
+class SellerWaitPage(WaitPage):
     def is_displayed(self):
-        return self.player.role() != 'seller'
+        return self.player.role() == 'seller'
 
-    def after_all_players_arrive(self):
-        self.set_payoff()
-
-    title_text = "You are a Buyer"
-    body_text = "Please wait while the sellers set their offers"
-
+    title_text = "Please Wait"
+    body_text = "Please wait while the other sellers set their prices"
 
 class seller_2(Page):
     form_model = 'player'
@@ -61,7 +65,7 @@ class buyer(Page):
             pac5 = self.player.buyer_valuation_pac5
         )
 
-class ResultsWaitPage(WaitPage):
+class BuyerWaitPage(WaitPage):
     def is_displayed(self):
         return self.player.role() != 'buyer'
 
@@ -83,9 +87,31 @@ class buyer_2(Page):
     def is_displayed(self):
         return self.player.role() != 'seller'
 
+class ResultsWaitPage(WaitPage):
+    def set_payoffs(self):
+        # set payoff
+        def set_payoff(self):
+            buyer = self.get_player_by_role('buyer')
+            seller = self.get_player_by_role('seller')
+
+            for p in self.get_players():
+                buyer.payoff = p.participant.vars['seller_valuations'][self.package_purchased] - \
+                               p.participant['package_valuations'][
+                                   self.package_purchased]  # necesito la id del jugador al que le compró
+
+                seller.payoff = p.participant.vars['seller_valuations'][self.package_purchased] - \
+                                p.participant['package_valuations'][
+                                    self.package_purchased] - Constants.see_list_cost * int(self.see_list)
+
+        pass
+
+    def after_all_players_arrive(self):
+        self.set_payoffs()
+
 page_sequence = [instructions,
                  MyWaitPage,
                  seller,
+                 SellerWaitPage,
                  seller_2,
-                 ResultsWaitPage,
+                 BuyerWaitPage,
                  buyer]

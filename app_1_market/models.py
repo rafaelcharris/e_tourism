@@ -56,7 +56,7 @@ class Subsession(BaseSubsession):
                     p.seller_package = numpy.random.randint(1, 5)
                     p.participant.vars['seller_package'] = p.seller_package
                     p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
-                    #todo Y si hago un diccionario relacionando valuation package y price final?!!!!
+                    p.participant.vars['sellers_valuation']  = dict(zip(p.seller_package, p.seller_valuation))
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
@@ -93,9 +93,6 @@ class Player(BasePlayer):
     buyer_valuation_pac5 = models.IntegerField()
     bid_price = models.IntegerField()
     package_purchased = models.IntegerField()
+    seller_purchased = models.IntegerField()
 
-
-    #set payoff
-    def set_payoff(self):
-        pass
 
