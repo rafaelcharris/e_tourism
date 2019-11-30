@@ -2,13 +2,10 @@
 {% load otree static %}
 
 {% block title %}
-    Seller
+    Seller page 2
 {% endblock %}
 
 {% block content %}
-{% block title %}
-    Seller page 2
-{% endblock %}
 
 <table class="table table-bordered">
         <thead>
@@ -17,14 +14,6 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-     {% if player.see_list == 1 %}
-        {% for p in group.get_players %}
-        {% if 'seller' in role %}
-        <i>Price from {{p.role}}: {{p.ask_price_ini}}</i><br/>
-        {% endif %}
-        {% endfor %}
-    {% endif %}
-
         <tbody>
             <tr>
                 <td>Pick a commercial practice from the following list</td>
@@ -37,5 +26,12 @@
         </tbody>
     </table>
 
+     {% if player.see_list == 1 %}
+        {% for p in group.get_players %}
+        {% if p.role == 'seller' %}
+        <i>Price from {{p}}: {{p.ask_price_ini}}</i><br/>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
     {% next_button %}
 {% endblock %}

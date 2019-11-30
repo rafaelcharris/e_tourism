@@ -47,23 +47,22 @@ class Subsession(BaseSubsession):
                     for p in self.get_players():
                         p.participant.vars['role'] = next(roles)
                     #Esto le asigna a los jugadores desde la primera ronda el role de vededor o de comprador
-    def assign_pac_val(self):
         #assign packages con replacement
-        for p in self.get_players():
-            if p.participant.vars['role'] == 'seller':
-                p.seller_package = numpy.random.randint(1, 5)
-                p.participant.vars['seller_package'] = p.seller_package
-                p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
-            else:
-        # Assign valuations for each packaque for the sellers
-        #Esta parte del código debería asignarle un valor random a cada valuación
-                return {
-                'packages_buyer': [
-                    p.buyer_valuation_pac1, p.buyer_valuation_pac2, p.buyer_valuation_pac3,
-                    p.buyer_valuation_pac4, p.buyer_valuation_pac5
-                ],
-                'valuations_packages': [numpy.random.choice(Constants.buyer_valuations, replace = False) for x in range(5)]
-                }
+            for p in self.get_players():
+                if p.participant.vars['role'] == 'seller':
+                    p.seller_package = numpy.random.randint(1, 5)
+                    p.participant.vars['seller_package'] = p.seller_package
+                    p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
+                else:
+            # Assign valuations for each packaque for the sellers
+            #Esta parte del código debería asignarle un valor random a cada valuación
+                    return {
+                    'packages_buyer': [
+                        p.buyer_valuation_pac1, p.buyer_valuation_pac2, p.buyer_valuation_pac3,
+                        p.buyer_valuation_pac4, p.buyer_valuation_pac5
+                    ],
+                    'valuations_packages': [numpy.random.choice(Constants.buyer_valuations, replace = False) for x in range(5)]
+                    }
 class Group(BaseGroup):
     pass
 
@@ -83,7 +82,7 @@ class Player(BasePlayer):
     ask_price_fin = models.IntegerField()
 
     #Buyer
-    buyer_valuations_pac1 = models.IntegerField()
+    buyer_valuation_pac1 = models.IntegerField()
     buyer_valuation_pac2 = models.IntegerField()
     buyer_valuation_pac3 = models.IntegerField()
     buyer_valuation_pac4 = models.IntegerField()

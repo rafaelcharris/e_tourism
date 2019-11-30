@@ -5,8 +5,7 @@ from .models import Constants
 
 class seller(Page):
     form_model = 'player'
-    form_fields = ['ask_price_ini', 'see_list', 'ask_price_fin', 'seller_package',
-                   'seller_valuation']
+    form_fields = ['ask_price_ini', 'see_list']
 
     def is_displayed(self):
         return self.player.role() != 'buyer'
@@ -18,14 +17,24 @@ class seller(Page):
             seller_package = self.player.seller_package,
             role = self.participant.vars['role']
         )
+
+class ResultsWaitPage(WaitPage):
+    def after_all_players_arrive(self):
+        pass
+
 class seller_2(Page):
     form_model = 'player'
     form_fields = [
-        'see_list',
-        'com_practice'
+        'com_practice',
+        'ask_price_fin'
     ]
     def is_displayed(self):
         return self.player.role() != 'buyer'
+
+    def vars_for_template(self):
+        dict(
+            role = self.player.role()
+        )
 
 class buyer(Page):
     form_model = 'player'
@@ -35,7 +44,7 @@ class buyer(Page):
         return self.player.role() != 'seller'
 
     def vars_for_template(self):
-        self.group.assign_pac_val()
+        self.subsession.assign_pac_val()
         return dict(
             role = self.participant.vars['role']
         )

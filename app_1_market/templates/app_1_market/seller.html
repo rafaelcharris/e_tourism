@@ -2,11 +2,6 @@
 {% load otree static %}
 
 {% block title %}
-    Seller
-{% endblock %}
-
-{% block content %}
-{% block title %}
     Seller page 1
 {% endblock %}
 
@@ -40,34 +35,12 @@
                 <td>See full list of packages and prices at a cost of {{ Constants.see_list_cost }}?</td>
                 <td>{% formfield player.see_list %}</td>
             </tr>
-
-            <tr>
-                <td>Pick a commercial practice from the following list</td>
-                <td>{% formfield player.com_practice %}</td>
-            </tr>
-            <tr>
-                <td>Set a final Ask-price</td>
-                <td>{% formfield player.ask_price_fin %}</td>
-            </tr>
         </tbody>
     </table>
 
 {% comment %}
 Creo que toca separa esto en dos páginas para que el programa pueda cargar el ask_price_ini de los otros.
 {% endcomment %}
-
-{% if player.see_list == 1 %}
-    {% for p in group.get_players %}
-    {% if 'seller' in role %}
-    <i>Price from {{role}}: {{p.ask_price_ini}}</i><br/>
-    {% endif %}
-    {% endfor %}
-{% endif %}
-
-<p> Ahora escoge entre las siguientes prácticas comerciales {% formfield player.com_practice %}</p>
-
-<p> Choose one of thi</p>
-    {% formfield player.ask_price_fin %}
 
     {% next_button %}
 {% endblock %}
