@@ -42,7 +42,9 @@ class Constants(BaseConstants):
 
     instructions_template ='app_1_market/instructions.html'
 
+
 class Subsession(BaseSubsession):
+
     def creating_session(self):
         #crear roles
             if self.round_number == 1:
@@ -59,8 +61,7 @@ class Subsession(BaseSubsession):
                     p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
                     p.seller_id = next(Constants.id)
                     p.participant.vars['seller_id'] = p.seller_id #assign a seller id
-                    #Create dictionary with all the sellers information
-                    #p.participant.vars['sellers_valuation'] = zip(p.seller_package, p.seller_valuation)
+
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
@@ -71,19 +72,26 @@ class Subsession(BaseSubsession):
                     p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
                     p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
                     p.participant.vars['buyer_id'] = next(Constants.id)
+
+            sellers_valuations = dict(zip(self.player.seller_id, zip(self.player.seller_package, self.player.seller_valuation)))
+
+
 class Group(BaseGroup):
+
     #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
     #debo recuperar qué vendió y a cómo
     def get_info(self):
         for p in self.get_players():
-            if p.role == 'buyer':
-                my_seller = self.get_players_by_id(p.seller)
-                print(my_seller)
-                #Estas funciuones no están trabajando
-                #get package info
-                p.package_purchased = self.get_players_by_id(p.seller).package
-                #get paid price info
-                p.paid = self.get_players_by_id(p.seller).ask_price_fin
+            p.payoff = Constants.endowment
+
+            if p.seller_id :
+                seller = self.get_player_by_id(self.seller_id)
+                buyer = self.get_player_by_role('buyer')
+
+                self.final_price = seller.ask_price_fin
+                p.paid = self.final_price
+                buyer.payoff +=-self.final_price
+                seller.payoff += self.final_price - self.seller_valuation
 
 class Player(BasePlayer):
     def role(self):
@@ -111,15 +119,3 @@ class Player(BasePlayer):
     seller = models.IntegerField()
     paid = models.IntegerField()
     buyer_id = models.IntegerField()
-    # set payoff
-    def set_payoff(self):
-        if self.role == "buyer":
-            # el pago de este jugador es el initial endowment + su valuación de ese paquete menos slo que le costó el paquete
-            self.payoff = Constants.endowment + self.participant.vars["valuations"][self.package_purchased] - \
-                       self.paid
-
-        # else:
-        #    p.payoff = Constants.endowment + p.participant.vars['seller_valuations'][self.package] - \
-        #                p.participant['package_valuations'][
-        #                    self.package_purchased] - Constants.see_list_cost * int(self.see_list)
-
