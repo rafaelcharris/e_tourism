@@ -33,6 +33,7 @@ class Constants(BaseConstants):
     #    buy_choices.append(choice)
 
     packages = [i for i in range(1, 6)]
+    id = itertools.cycle([i for i in range(1,11)])
 
     seller_valuations = [7, 6, 5, 5, 4, 4, 3, 2, 1, 1]
     buyer_valuations = [10, 10, 9, 8, 8, 7, 6, 6, 5, 4]
@@ -56,7 +57,9 @@ class Subsession(BaseSubsession):
                     p.seller_package = numpy.random.randint(1, 5)
                     p.participant.vars['seller_package'] = p.seller_package
                     p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
-                    #p.participant.vars['sellers_valuation']  = dict(zip(p.seller_package, p.seller_valuation))
+                    p.participant.vars['seller_id'] = next(Constants.id) #assign a seller id
+                    #Create dictionary with all the sellers information
+                    #p.participant.vars['sellers_valuation']  = dict[p.seller_package] = p.seller_valuation)
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
@@ -66,7 +69,7 @@ class Subsession(BaseSubsession):
                     p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
                     p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
                     p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
-
+                    p.participant.vars['buyer_id'] = next(Constants.id)
 class Group(BaseGroup):
 
     #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
