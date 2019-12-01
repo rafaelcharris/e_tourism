@@ -68,11 +68,11 @@
                 <td>{{p.seller_package}}</td>
                 <td>{{p.ask_price_fin}}</td>
                 <td><button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Purchase
-                    <input name="package" type="hidden" value={{p.seller_package}}> </input>
+                    <input name="package_purchased" type="hidden" value={{p.seller_package}}> </input>
                     </button>
                 </td>
             </tr>
-
+{{ form.package_purchased.errors }}
     {% endif %}
 {% endfor %}
         </tbody>
