@@ -106,9 +106,9 @@ class ResultsWaitPage(WaitPage):
         self.set_payoffs()
 
 page_sequence = [instructions,
-                 MyWaitPage,
                  seller,
                  SellerWaitPage,
                  seller_2,
+                 MyWaitPage,
                  SecondWaitPage,
                  buyer]
