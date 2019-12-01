@@ -68,7 +68,17 @@ class Subsession(BaseSubsession):
                     p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
 
 class Group(BaseGroup):
-    pass
+
+    #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
+    #debo recuperar qué vendió y a cómo
+    def get_info(self):
+        for p in self.get_players():
+            if p.role == 'buyer':
+                #Estas funciuones no están trabajando
+                #get package info
+                p.package_purchased = self.group.get_players_by_id(p.seller).package
+                #get paid price info
+                p.paid = self.get_players_by_id(p.seller).ask_price_fin
 
 class Player(BasePlayer):
     def role(self):
@@ -94,4 +104,17 @@ class Player(BasePlayer):
     bid_price = models.IntegerField()
     package_purchased = models.IntegerField()
     seller = models.IntegerField()
+    paid = models.IntegerField()
+
+    # set payoff
+    def set_payoff(self):
+        if self.role == "buyer":
+            # el pago de este jugador es el initial endowment + su valuación de ese paquete menos slo que le costó el paquete
+            self.payoff = Constants.endowment + self.participant.vars["valuations"][self.package_purchased] - \
+                       self.paid
+
+        # else:
+        #    p.payoff = Constants.endowment + p.participant.vars['seller_valuations'][self.package] - \
+        #                p.participant['package_valuations'][
+        #                    self.package_purchased] - Constants.see_list_cost * int(self.see_list)
 

@@ -1,0 +1,43 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    (Period {{ subsession.round_number }} of {{ Constants.num_rounds }})
+{% endblock %}
+
+{% block content %}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Results</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Role</td>
+                <td>{{ role }}</td>
+            </tr>
+            {% comment %}
+            La idea es mostrarle a los buyers una info y a los sellers otra
+            {% endcomment %}
+{% if player.role == 'buyer' %}
+            <tr>
+                <td>Package purchased</td>
+                <td>{{ package }}</td>
+            </tr>
+            <tr>
+                <td> Price</td>
+                <td>{{ price }}</td>
+            </tr>
+            <tr>
+                <td>Your payoff</td>
+                <td>{{ payoff }}</td>
+            </tr>
+{% endif %}
+        </tbody>
+    </table>
+
+    {% next_button %}
+{% endblock %}
