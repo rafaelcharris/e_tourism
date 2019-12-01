@@ -90,8 +90,7 @@ class Group(BaseGroup):
                 #get info of the package
                 #buyer.package_purchased = seller.seller_package
 
-                buyer.paid = seller.ask_price_fin
-                buyer.payoff =-seller.ask_price_fin
+                buyer.payoff =-buyer.paid
                 seller.payoff = seller.ask_price_fin - seller.seller_valuation - int(p.see_list)*Constants.see_list_cost
 
 class Player(BasePlayer):

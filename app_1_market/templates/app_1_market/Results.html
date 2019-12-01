@@ -19,13 +19,15 @@
                 <td>Role</td>
                 <td>{{ role }}</td>
             </tr>
-            {% comment %}
-            La idea es mostrarle a los buyers una info y a los sellers otra
-            {% endcomment %}
+
 {% if player.role == 'buyer' %}
             <tr>
                 <td>Package purchased</td>
                 <td>{{ package }}</td>
+            </tr>
+            <tr>
+                <td> Seller </td>
+                <td>{{ seller }}</td>
             </tr>
             <tr>
                 <td> Price</td>
