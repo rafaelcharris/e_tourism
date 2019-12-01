@@ -73,13 +73,12 @@ class SecondWaitPage(WaitPage):
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
-        self.group.get_info()
+        self.group.get_payoff()
 
 
 class Results(Page):
 
     def vars_for_template(self):
-        self.player.set_payoff()
         return dict(
             role = self.participant.vars['role'],
             payoff = self.player.payoff,

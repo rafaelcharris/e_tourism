@@ -80,7 +80,7 @@ class Group(BaseGroup):
 
     #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
     #debo recuperar qué vendió y a cómo
-    def get_info(self):
+    def set_payoff(self):
         for p in self.get_players():
             p.payoff = Constants.endowment
 
@@ -91,7 +91,7 @@ class Group(BaseGroup):
                 self.final_price = seller.ask_price_fin
                 p.paid = self.final_price
                 buyer.payoff +=-self.final_price
-                seller.payoff += self.final_price - self.seller_valuation
+                seller.payoff += self.final_price - self.seller_valuation - int(p.see_list)*Constants.see_list_cost
 
 class Player(BasePlayer):
     def role(self):
