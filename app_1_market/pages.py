@@ -6,9 +6,8 @@ class instructions(Page):
     pass
 
 class MyWaitPage(WaitPage):
-
     def is_displayed(self):
-        return self.player.role() != 'seller'
+        return self.player.role() == 'buyer'
 
     title_text = "You are a Buyer"
     body_text = "Please wait while the sellers set their offers"
@@ -65,16 +64,14 @@ class buyer(Page):
             pac5 = self.player.buyer_valuation_pac5
         )
 
-class BuyerWaitPage(WaitPage):
-    def is_displayed(self):
-        return self.player.role() != 'buyer'
-
+class SecondWaitPage(WaitPage):
     title_text = "You offer has been made"
-    body_text = "Please wait while the buyers choose a product"
+    def is_displayed(self):
+        return self.player.role == "seller"
 
 class buyer_2(Page):
     form_model = 'player'
-    form_fields = ['package_purchased']
+    form_fields = ['seller']
 
     def vars_for_template(self):
         return dict(
@@ -113,5 +110,5 @@ page_sequence = [instructions,
                  seller,
                  SellerWaitPage,
                  seller_2,
-                 BuyerWaitPage,
+                 SecondWaitPage,
                  buyer]

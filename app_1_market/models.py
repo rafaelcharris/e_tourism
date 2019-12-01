@@ -56,7 +56,7 @@ class Subsession(BaseSubsession):
                     p.seller_package = numpy.random.randint(1, 5)
                     p.participant.vars['seller_package'] = p.seller_package
                     p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
-                    p.participant.vars['sellers_valuation']  = dict(zip(p.seller_package, p.seller_valuation))
+                    #p.participant.vars['sellers_valuation']  = dict(zip(p.seller_package, p.seller_valuation))
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
@@ -94,5 +94,5 @@ class Player(BasePlayer):
     bid_price = models.IntegerField()
     package_purchased = models.IntegerField()
     seller_purchased = models.IntegerField()
-
+    seller = models.IntegerField()
 
