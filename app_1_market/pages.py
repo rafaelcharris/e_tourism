@@ -74,24 +74,28 @@ class ResultsWaitPage(WaitPage):
     #debo recuperar qué vendió y a cómo
 
     def set_payoffs(self):
+        def get_package(self):
+            for p in self.get_players():
+                if p.role == 'buyer':
+                    p.package_purchased = self.group.get_players_by_id(p.seller).seller.package
         # set payoff
         def set_payoff(self):
-            buyer = self.get_player_by_role('buyer')
-            seller = self.get_player_by_role('seller')
-
             for p in self.get_players():
-                buyer.payoff = p.participant.vars['seller_valuations'][self.package_purchased] - \
-                               p.participant['package_valuations'][
-                                   self.package_purchased]  # necesito la id del jugador al que le compró
+                if p.role == "buyer":
+                    #el pago de este jugador es el initial endowment + su valuación menos lo que le costó el paquete
+                    p.payoff = Constants.endowment + p.participant.vars["valuations"][p.package_purchased] - \
+                               self.group.get_players_by_id(seller).ask_price_fin
 
-                seller.payoff = p.participant.vars['seller_valuations'][self.package_purchased] - \
-                                p.participant['package_valuations'][
-                                    self.package_purchased] - Constants.see_list_cost * int(self.see_list)
+                #else:
+                #    p.payoff = Constants.endowment + p.participant.vars['seller_valuations'][self.package] - \
+                #                p.participant['package_valuations'][
+                #                    self.package_purchased] - Constants.see_list_cost * int(self.see_list)
 
-        pass
 
     def after_all_players_arrive(self):
         self.set_payoffs()
+
+class Results(Page):
 
 page_sequence = [instructions,
                  seller,
@@ -99,4 +103,6 @@ page_sequence = [instructions,
                  seller_2,
                  MyWaitPage,
                  SecondWaitPage,
-                 buyer]
+                 buyer,
+                 ResultsWaitPage]
+
