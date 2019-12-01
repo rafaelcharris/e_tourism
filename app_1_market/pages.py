@@ -49,8 +49,7 @@ class seller_2(Page):
 
 class buyer(Page):
     form_model = 'player'
-    form_fields = ['package_purchased',
-                   'seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
+    form_fields = ['seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
     def is_displayed(self):
         return self.player.role() != 'seller'
@@ -71,6 +70,9 @@ class SecondWaitPage(WaitPage):
         return self.player.role == "seller"
 
 class ResultsWaitPage(WaitPage):
+    #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
+    #debo recuperar qué vendió y a cómo
+
     def set_payoffs(self):
         # set payoff
         def set_payoff(self):
