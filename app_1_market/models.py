@@ -57,9 +57,10 @@ class Subsession(BaseSubsession):
                     p.seller_package = numpy.random.randint(1, 5)
                     p.participant.vars['seller_package'] = p.seller_package
                     p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
-                    p.participant.vars['seller_id'] = next(Constants.id) #assign a seller id
+                    p.seller_id = next(Constants.id)
+                    p.participant.vars['seller_id'] = p.seller_id #assign a seller id
                     #Create dictionary with all the sellers information
-                    #p.participant.vars['sellers_valuation']  = dict[p.seller_package] = p.seller_valuation)
+                    #p.participant.vars['sellers_valuation'] = zip(p.seller_package, p.seller_valuation)
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
@@ -71,7 +72,6 @@ class Subsession(BaseSubsession):
                     p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
                     p.participant.vars['buyer_id'] = next(Constants.id)
 class Group(BaseGroup):
-
     #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
     #debo recuperar qué vendió y a cómo
     def get_info(self):
@@ -99,7 +99,7 @@ class Player(BasePlayer):
     see_list = models.BooleanField(initial = False)
     com_practice = models.IntegerField(choices = [1, 2, 3, 4])
     ask_price_fin = models.IntegerField()
-
+    seller_id = models.IntegerField()
     #Buyer
     buyer_valuation_pac1 = models.IntegerField()
     buyer_valuation_pac2 = models.IntegerField()
@@ -110,7 +110,7 @@ class Player(BasePlayer):
     package_purchased = models.IntegerField()
     seller = models.IntegerField()
     paid = models.IntegerField()
-
+    buyer_id = models.IntegerField()
     # set payoff
     def set_payoff(self):
         if self.role == "buyer":
