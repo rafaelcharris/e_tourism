@@ -83,7 +83,7 @@ class Group(BaseGroup):
     def set_payoff(self):
         for p in self.get_players():
 
-            if p.seller_id :
+            if p.role == "seller" :
 
                 buyer = self.get_player_by_role('buyer')
                 seller = self.get_player_by_id(buyer.my_seller)
