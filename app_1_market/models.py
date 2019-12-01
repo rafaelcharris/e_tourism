@@ -74,9 +74,11 @@ class Group(BaseGroup):
     def get_info(self):
         for p in self.get_players():
             if p.role == 'buyer':
+                my_seller = self.get_players_by_id(p.seller)
+                print(my_seller)
                 #Estas funciuones no están trabajando
                 #get package info
-                p.package_purchased = self.group.get_players_by_id(p.seller).package
+                p.package_purchased = self.get_players_by_id(p.seller).package
                 #get paid price info
                 p.paid = self.get_players_by_id(p.seller).ask_price_fin
 
