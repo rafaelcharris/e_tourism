@@ -93,6 +93,5 @@ class Player(BasePlayer):
     buyer_valuation_pac5 = models.IntegerField()
     bid_price = models.IntegerField()
     package_purchased = models.IntegerField()
-    seller_purchased = models.IntegerField()
     seller = models.IntegerField()
 

@@ -49,7 +49,8 @@ class seller_2(Page):
 
 class buyer(Page):
     form_model = 'player'
-    form_fields = ['package_purchased']
+    form_fields = ['package_purchased',
+                   'seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
     def is_displayed(self):
         return self.player.role() != 'seller'
@@ -68,21 +69,6 @@ class SecondWaitPage(WaitPage):
     title_text = "You offer has been made"
     def is_displayed(self):
         return self.player.role == "seller"
-
-class buyer_2(Page):
-    form_model = 'player'
-    form_fields = ['seller']
-
-    def vars_for_template(self):
-        return dict(
-        role=self.participant.vars['role'],
-        player = self.player.id_in_group,
-        price = self.player.ask_price_fin,
-        seller_package = self.player.seller_package
-        )
-
-    def is_displayed(self):
-        return self.player.role() != 'seller'
 
 class ResultsWaitPage(WaitPage):
     def set_payoffs(self):
