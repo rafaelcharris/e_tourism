@@ -73,7 +73,7 @@ class Subsession(BaseSubsession):
                     p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
                     p.participant.vars['buyer_id'] = next(Constants.id)
 
-            sellers_valuations = dict(zip(self.player.seller_id, zip(self.player.seller_package, self.player.seller_valuation)))
+            #sellers_valuations = dict(zip(self.player.seller_id, zip(self.player.seller_package, self.player.seller_valuation)))
 
 
 class Group(BaseGroup):
@@ -85,13 +85,12 @@ class Group(BaseGroup):
             p.payoff = Constants.endowment
 
             if p.seller_id :
-                seller = self.get_player_by_id(self.seller_id)
+                seller = self.get_player_by_id(p.seller_id)
                 buyer = self.get_player_by_role('buyer')
 
-                self.final_price = seller.ask_price_fin
-                p.paid = self.final_price
-                buyer.payoff +=-self.final_price
-                seller.payoff += self.final_price - self.seller_valuation - int(p.see_list)*Constants.see_list_cost
+                buyer.paid = seller.ask_price_fin
+                buyer.payoff +=-seller.ask_price_fin
+                seller.payoff += seller.ask_price_fin - seller.seller_valuation - int(p.see_list)*Constants.see_list_cost
 
 class Player(BasePlayer):
     def role(self):
@@ -108,6 +107,7 @@ class Player(BasePlayer):
     com_practice = models.IntegerField(choices = [1, 2, 3, 4])
     ask_price_fin = models.IntegerField()
     seller_id = models.IntegerField()
+
     #Buyer
     buyer_valuation_pac1 = models.IntegerField()
     buyer_valuation_pac2 = models.IntegerField()
@@ -116,6 +116,6 @@ class Player(BasePlayer):
     buyer_valuation_pac5 = models.IntegerField()
     bid_price = models.IntegerField()
     package_purchased = models.IntegerField()
-    seller = models.IntegerField()
+    my_seller = models.IntegerField()
     paid = models.IntegerField()
     buyer_id = models.IntegerField()
