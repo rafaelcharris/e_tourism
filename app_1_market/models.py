@@ -88,7 +88,7 @@ class Group(BaseGroup):
                 buyer = self.get_player_by_role('buyer')
                 seller = self.get_player_by_id(buyer.my_seller)
                 #get info of the package
-                buyer.package_purchased = seller.seller_package
+                #buyer.package_purchased = seller.seller_package
 
                 buyer.paid = seller.ask_price_fin
                 buyer.payoff =-seller.ask_price_fin

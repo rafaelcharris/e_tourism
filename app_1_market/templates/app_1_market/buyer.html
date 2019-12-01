@@ -67,7 +67,10 @@
                 <td>Seller {{p.seller_id}}</td>
                 <td>{{p.seller_package}}</td>
                 <td>{{p.ask_price_fin}}</td>
-                <td><button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Purchase</button></td>
+                <td><button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Purchase
+                    <input name="package" type="hidden" value={{p.seller_package}}> </input>
+                    </button>
+                </td>
             </tr>
 
     {% endif %}

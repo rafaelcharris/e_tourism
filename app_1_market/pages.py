@@ -49,7 +49,7 @@ class seller_2(Page):
 
 class buyer(Page):
     form_model = 'player'
-    form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
+    form_fields = ['my_seller', 'package_purchased'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
     def is_displayed(self):
         return self.player.role() != 'seller'
