@@ -23,26 +23,19 @@
             La idea es mostrarle a los buyers una info y a los sellers otra
             {% endcomment %}
 {% if player.role == 'buyer' %}
-            {% comment %}
-            No he agregado esa información
             <tr>
                 <td>Package purchased</td>
                 <td>{{ package }}</td>
             </tr>
-            {% endcomment %}
             <tr>
                 <td> Price</td>
                 <td>{{ price }}</td>
             </tr>
+{% endif %}
             <tr>
                 <td>Your payoff</td>
                 <td>{{ payoff }}</td>
             </tr>
-
-{% else %}
-            <td>Your payoff</td>
-            <td>{{ payoff }}</td>
-{% endif %}
         </tbody>
     </table>
 

@@ -82,15 +82,17 @@ class Group(BaseGroup):
     #debo recuperar qué vendió y a cómo
     def set_payoff(self):
         for p in self.get_players():
-            p.payoff = Constants.endowment
 
             if p.seller_id :
-                seller = self.get_player_by_id(p.seller_id)
+
                 buyer = self.get_player_by_role('buyer')
+                seller = self.get_player_by_id(buyer.my_seller)
+                #get info of the package
+                buyer.package_purchased = seller.seller_package
 
                 buyer.paid = seller.ask_price_fin
-                buyer.payoff +=-seller.ask_price_fin
-                seller.payoff += seller.ask_price_fin - seller.seller_valuation - int(p.see_list)*Constants.see_list_cost
+                buyer.payoff =-seller.ask_price_fin
+                seller.payoff = seller.ask_price_fin - seller.seller_valuation - int(p.see_list)*Constants.see_list_cost
 
 class Player(BasePlayer):
     def role(self):
