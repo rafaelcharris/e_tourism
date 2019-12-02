@@ -107,6 +107,7 @@ class Player(BasePlayer):
     com_practice = models.IntegerField(choices = [1, 2, 3, 4])
     ask_price_fin = models.IntegerField()
     seller_id = models.IntegerField()
+    purchased = models.BooleanField()
 
     #Buyer
     buyer_valuation_pac1 = models.IntegerField()
