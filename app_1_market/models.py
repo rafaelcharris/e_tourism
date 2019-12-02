@@ -81,19 +81,24 @@ class Group(BaseGroup):
     #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
     #debo recuperar qué vendió y a cómo
     def set_payoff(self):
+
         for p in self.get_players():
-
-            if p.role == "seller" :
-
-                buyer = self.get_player_by_role('buyer')
-                seller = self.get_player_by_id(buyer.my_seller)
+            if p.role() == "buyer":
+                the_seller = self.get_player_by_id(p.my_seller)
+                print("el vendedor de" +str(p.id_in_group)+  "es :" + str(the_seller) )
+                #El codigo de abajo devuelve el paquete, pero en pages, no sé por qué no funciona acá.
+                #self.group.get_player_by_id(self.player.my_seller).seller_package,
                 #get info of the package
-                #buyer.package_purchased = seller.seller_package
-
-                buyer.payoff =-buyer.paid
-                seller.payoff = seller.ask_price_fin - seller.seller_valuation - int(p.see_list)*Constants.see_list_cost
+                p.package_purchased = the_seller.seller_package
+                print("package purchased contiene esta mierda:" + str(p.package_purchased) + "de tipo" + str(type(p.package_purchased)))
+                p.paid = the_seller.ask_price_fin
+                p.payoff = p.participant.vars['valuations'][p.package_purchased] - p.paid
+            else:
+                print("Esta corriendo esta parte. el rol es: " + str(p.role()))
+            #    p.payoff = p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost #if he is not purchased, then he earns nothing
 
 class Player(BasePlayer):
+
     def role(self):
         if self.participant.vars['role'] == 'buyer':
             return 'buyer'
