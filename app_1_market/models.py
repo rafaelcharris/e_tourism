@@ -26,12 +26,6 @@ class Constants(BaseConstants):
     endowment = 3
     see_list_cost = 0.3
 
-    #Guardar los paquetes que los jugadores pueden comprar para mostrarles todas las opciones junto con la estrategia de compra
-    #buy_choices = []
-    #for i in range(1, players_per_group):
-    #    choice = [i, 'Buy from seller {}'.format(i)]
-    #    buy_choices.append(choice)
-
     packages = [i for i in range(1, 6)]
     id = itertools.cycle([i for i in range(1,11)])
 
@@ -60,6 +54,7 @@ class Subsession(BaseSubsession):
                     p.participant.vars['seller_package'] = p.seller_package
                     p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
                     p.seller_id = next(Constants.id)
+                    #todo have to fix this id. They don't work as I would like it to
                     p.participant.vars['seller_id'] = p.seller_id #assign a seller id
 
                 else:
@@ -71,9 +66,9 @@ class Subsession(BaseSubsession):
                     p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
                     p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
                     p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
+                #todo fix this id. They don't work as it should
                     p.participant.vars['buyer_id'] = next(Constants.id)
 
-            #sellers_valuations = dict(zip(self.player.seller_id, zip(self.player.seller_package, self.player.seller_valuation)))
 
 
 class Group(BaseGroup):
@@ -85,17 +80,16 @@ class Group(BaseGroup):
         for p in self.get_players():
             if p.role() == "buyer":
                 the_seller = self.get_player_by_id(p.my_seller)
-                print("el vendedor de" +str(p.id_in_group)+  "es :" + str(the_seller) )
-                #El codigo de abajo devuelve el paquete, pero en pages, no sé por qué no funciona acá.
-                #self.group.get_player_by_id(self.player.my_seller).seller_package,
+
                 #get info of the package
                 p.package_purchased = the_seller.seller_package
-                print("package purchased contiene esta mierda:" + str(p.package_purchased) + "de tipo" + str(type(p.package_purchased)))
                 p.paid = the_seller.ask_price_fin
-                p.payoff = p.participant.vars['valuations'][p.package_purchased] - p.paid
+                p.payoff = p.participant.vars['valuations'].get(p.package_purchased) - p.paid
             else:
-                print("Esta corriendo esta parte. el rol es: " + str(p.role()))
-            #    p.payoff = p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost #if he is not purchased, then he earns nothing
+
+                p.payoff = p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost
+                #todo if he is not purchased, then he earns nothing!
+                #todo agregar una dummy de si fue purcheseado o no.
 
 class Player(BasePlayer):
 
