@@ -110,6 +110,7 @@ class Player(BasePlayer):
     purchased = models.BooleanField()
 
     #Buyer
+    #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
     buyer_valuation_pac1 = models.IntegerField()
     buyer_valuation_pac2 = models.IntegerField()
     buyer_valuation_pac3 = models.IntegerField()
