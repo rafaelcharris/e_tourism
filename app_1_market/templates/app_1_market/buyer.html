@@ -27,26 +27,12 @@
                 <td><b>Private valuations for packages<b/></td>
                 <td></td>
             </tr>
+            {% for pac, val in pac_val.items %}
             <tr>
-                <td>Package 1</td>
-                <td>{{ pac1 }}</td>
+                <td>Package {{pac}}</td>
+                <td>{{ val }}</td>
             </tr>
-            <tr>
-                <td>Package 2</td>
-                <td>{{ pac2 }}</td>
-            </tr>
-            <tr>
-                <td>Package 3</td>
-                <td>{{ pac3 }}</td>
-            </tr>
-            <tr>
-                <td>Package 4</td>
-                <td>{{ pac4 }}</td>
-            </tr>
-            <tr>
-                <td>Package 5</td>
-                <td>{{ pac5 }}</td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 
