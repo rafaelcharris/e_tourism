@@ -56,7 +56,19 @@
             <tr>
                 <td>Seller {{p.seller_id}}</td>
                 <td>{{p.seller_package}}</td>
-                <td>{{p.ask_price_fin}}</td>
+                <td>
+                {% if p.com_practice == 1 %}
+                    {{p.ask_price_fin}}
+                    <p><font size = "2">Best price guarantee</font></p>
+                {% elif p.com_practice == 2 %}
+                <p>Before <strike>{{p.ask_price_ini}}</strike></p>
+                <p> Now {{p.ask_price_fin}}</p>
+                {% elif p.com_practice == 3 %}
+                    {{p.ask_price_fin}}*
+                {% else %}
+                    {{p.ask_price_fin}}
+                {% endif %}
+                </td>
                 <td><button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Purchase</button>
                 </td>
             </tr>
