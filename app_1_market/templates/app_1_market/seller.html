@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    Seller P1
+    Seller (Period {{ subsession.round_number }} of {{ Constants.num_rounds }})
 {% endblock %}
 
 {% block content %}
@@ -11,41 +11,32 @@
         <thead>
             <tr>
                 <th scope="col">Important title here</th>
-                <th scope="col"></th>
+                <th scope="col">You are Player {{player.id_in_group}}</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>Role</td>
-                <td>{{ agent_role }}</td>
+                <td>{{ role }}</td>
             </tr>
             <tr>
                 <td>Seller package</td>
-                <td>{{ seller_package }}</td>
+                <td>{{ player.seller_package }}</td>
             </tr>
             <tr>
                 <td>Seller valuation</td>
-                <td>{{ seller_valuation }}</td>
+                <td>{{ player.seller_valuation }}</td>
             </tr>
             <tr>
                 <td>Set an initial Ask-price</td>
-                <td>{% formfield player.ask_price_ini %}</td>
+                <td>{% formfield player.ask_price_ini label = "Please set an initial price" %}</td>
             </tr>
             <tr>
                 <td>See full list of packages and prices at a cost of {{ Constants.see_list_cost }}?</td>
                 <td>{% formfield player.see_list %}</td>
             </tr>
-            <tr>
-                <td>Pick a commercial practice from the following list</td>
-                <td>{% formfield player.com_practice %}</td>
-            </tr>
-            <tr>
-                <td>Set a final Ask-price</td>
-                <td>{% formfield player.ask_price_fin %}</td>
-            </tr>
         </tbody>
     </table>
 
     {% next_button %}
-
 {% endblock %}
