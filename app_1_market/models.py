@@ -75,6 +75,8 @@ class Group(BaseGroup):
 
     #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
     #debo recuperar qué vendió y a cómo
+
+
     def set_payoff(self):
 
         for p in self.get_players():
@@ -90,6 +92,12 @@ class Group(BaseGroup):
                 p.payoff = p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost
                 #todo if he is not purchased, then he earns nothing!
                 #todo agregar una dummy de si fue purcheseado o no.
+    #Y si hago que esta función corra cuando hacen click. conectando con la función de javascript?
+    def pac_purchased(self):
+        for p in self.get_players():
+            if p.role() == "buyer":
+                the_seller = self.get_player_by_id(p.my_seller)
+                the_seller.sold = True
 
 class Player(BasePlayer):
 

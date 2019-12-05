@@ -67,7 +67,9 @@ class buyer(Page):
         )
 
 class ResultsWaitPage(WaitPage):
-    pass
+
+    def before_all_players_arrive(self):
+        self.group.pac_purchased()
 
 
 class Results(Page):
