@@ -65,12 +65,11 @@ class buyer(Page):
             pac4 = self.player.buyer_valuation_pac4,
             pac5 = self.player.buyer_valuation_pac5
         )
-
-class ResultsWaitPage(WaitPage):
-
-    def before_all_players_arrive(self):
+    def before_next_page(self):
         self.group.pac_purchased()
 
+class ResultsWaitPage(WaitPage):
+    pass
 
 class Results(Page):
 
