@@ -52,7 +52,7 @@ class Subsession(BaseSubsession):
                 if p.participant.vars['role'] == 'seller':
                     p.seller_package = numpy.random.randint(1, 5)
                     p.participant.vars['seller_package'] = p.seller_package
-                    p.seller_valuation = c(numpy.random.choice(Constants.seller_valuations, replace=False))
+                    p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
                     p.seller_id = next(Constants.id)
                     #todo have to fix this id. They don't work as I would like it to
                     p.participant.vars['seller_id'] = p.seller_id #assign a seller id
@@ -60,7 +60,7 @@ class Subsession(BaseSubsession):
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
-                    p.participant.vars["valuations"] = dict(zip(Constants.packages, c(numpy.random.choice(Constants.buyer_valuations, size =5, replace = False))))
+                    p.participant.vars["valuations"] = dict(zip(Constants.packages, numpy.random.choice(Constants.buyer_valuations, size =5, replace = False)))
                     p.buyer_valuation_pac1 = p.participant.vars["valuations"].get(1)
                     p.buyer_valuation_pac2 = p.participant.vars["valuations"].get(2)
                     p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
