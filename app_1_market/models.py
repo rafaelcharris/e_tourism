@@ -81,7 +81,7 @@ class Group(BaseGroup):
         for p in self.get_players():
             if p.role() == "buyer":
                 the_seller = self.get_player_by_id(p.my_seller)
-
+                the_seller.sold = True
                 #get info of the package
                 p.package_purchased = the_seller.seller_package
                 p.paid = the_seller.ask_price_fin
@@ -91,11 +91,7 @@ class Group(BaseGroup):
                 p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
 
     #Y si hago que esta función corra cuando hacen click. conectando con la función de javascript?
-    def pac_purchased(self):
-        for p in self.get_players():
-            if p.role() == "buyer":
-                the_seller = self.get_player_by_id(p.my_seller)
-                the_seller.sold = True
+
 
 class Player(BasePlayer):
 
@@ -115,7 +111,7 @@ class Player(BasePlayer):
     ])
     ask_price_fin = models.IntegerField()
     seller_id = models.IntegerField()
-    sold = models.BooleanField()
+    sold = models.BooleanField(initial = False)
 
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete

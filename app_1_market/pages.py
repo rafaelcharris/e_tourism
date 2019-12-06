@@ -49,7 +49,7 @@ class seller_2(Page):
 
 class buyer(Page):
     form_model = 'player'
-    form_fields = ['my_seller', "sold"] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
+    form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
     def is_displayed(self):
         return self.player.role() != 'seller'
@@ -65,8 +65,6 @@ class buyer(Page):
             pac4 = self.player.buyer_valuation_pac4,
             pac5 = self.player.buyer_valuation_pac5
         )
-    def before_next_page(self):
-        self.group.pac_purchased()
 
 class ResultsWaitPage(WaitPage):
     pass
@@ -75,12 +73,14 @@ class Results(Page):
 
     def vars_for_template(self):
         self.group.set_payoff()
+
         return dict(
             role = self.participant.vars['role'],
             payoff = self.player.payoff,
             package = self.player.package_purchased,
             price = self.player.paid,
-            seller = self.player.my_seller
+            seller = self.player.my_seller,
+            sold = self.player.sold
         )
 
 page_sequence = [instructions,
