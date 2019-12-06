@@ -23,14 +23,14 @@ class Constants(BaseConstants):
     name_in_url = 'app_1_market'
     players_per_group = 4
     num_rounds = 5
-    endowment = 3
-    see_list_cost = 0.3
+    endowment = 30
+    see_list_cost = 3
 
     packages = [i for i in range(1, 6)]
     id = itertools.cycle([i for i in range(1,11)])
 
-    seller_valuations = [7, 6, 5, 5, 4, 4, 3, 2, 1, 1]
-    buyer_valuations = [10, 10, 9, 8, 8, 7, 6, 6, 5, 4]
+    seller_valuations = [70, 60, 50, 50, 40, 40, 30, 20, 10, 10]
+    buyer_valuations = [100, 100, 90, 80, 80, 70, 60, 60, 50, 40]
 
     com_practice = [i for i in range(1,5)]
 
