@@ -115,7 +115,7 @@ class Player(BasePlayer):
     ])
     ask_price_fin = models.IntegerField()
     seller_id = models.IntegerField()
-    purchased = models.BooleanField()
+    sold = models.BooleanField()
 
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
