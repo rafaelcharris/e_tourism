@@ -77,7 +77,7 @@ class Group(BaseGroup):
     #debo recuperar qué vendió y a cómo
 
     def set_payoff(self):
-
+        #todo podría crear la lista de precios acá de una vez
         for p in self.get_players():
             if p.role() == "buyer":
                 the_seller = self.get_player_by_id(p.my_seller)
@@ -89,6 +89,22 @@ class Group(BaseGroup):
             else:
 
                 p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
+
+    def audit(self):
+        prices = []
+
+        for p in self.get_players():
+            if p.role() == "seller":
+                prices.append(p.ask_price_fin)
+        for p in self.get_players():
+            if p.comm_practice == 1:
+               return min(p.ask_price_fin, prices)
+            elif p.comm_practice == 2:
+                return p.ask_price_fin >= p.ask_price_ini
+            elif p.comm_practice == 3:
+                return #todo definir cómo es hacer trampa con drip pricing.
+
+
 
 class Player(BasePlayer):
 
