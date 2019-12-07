@@ -96,14 +96,17 @@ class Group(BaseGroup):
         for p in self.get_players():
             if p.role() == "seller":
                 prices.append(p.ask_price_fin)
-        for p in self.get_players():
-            if p.comm_practice == 1:
-               return min(p.ask_price_fin, prices)
-            elif p.comm_practice == 2:
-                return p.ask_price_fin >= p.ask_price_ini
-            elif p.comm_practice == 3:
-                return #todo definir cómo es hacer trampa con drip pricing.
-
+        #esta función debería prenderse un 20% de las veces para hacer un audit
+        if numpy.random.uniform(0, 1) <= Constants.prob_audit:
+            for p in self.get_players():
+                if p.role() == "seller":
+                    if p.comm_practice == 1:
+                       p.bad_practice =  p.ask_price_fin ==  min(prices)
+                    elif p.comm_practice == 2:
+                        p.bad_practice = p.ask_price_fin >= p.ask_price_ini
+                    else: # p.comm_practice == 3:
+                        p.bad_practice = False
+                        #todo definir cómo es hacer trampa con drip pricing.
 
 
 class Player(BasePlayer):
@@ -125,6 +128,7 @@ class Player(BasePlayer):
     ask_price_fin = models.IntegerField()
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
+    bad_practice = models.BooleanField()
 
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
