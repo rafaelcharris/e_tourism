@@ -107,7 +107,6 @@ class Group(BaseGroup):
                         return p.bad_practice
                     else: # p.comm_practice == 3:
                         p.bad_practice = False
-
                     return p.bad_practice
                         #todo definir cómo es hacer trampa con drip pricing.
 
