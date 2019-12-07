@@ -83,6 +83,22 @@ class Results(Page):
             sold = self.player.sold
         )
 
+class FinalResults(Page):
+
+    def is_displayed(self):
+        return self.round_number > 5
+
+    def vars_for_template(self):
+        return dict(
+            role = self.participant.vars['role'],
+            payoff = self.player.payoff,
+            package = self.player.package_purchased,
+            price = self.player.paid,
+            seller = self.player.my_seller,
+            sold = self.player.sold
+        )
+
+
 page_sequence = [instructions,
                  seller,
                  SellerWaitPage,
@@ -90,6 +106,7 @@ page_sequence = [instructions,
                  MyWaitPage,
                  buyer,
                  ResultsWaitPage,
-                 Results]
+                 Results,
+                 FinalResults]
 
 
