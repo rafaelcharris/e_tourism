@@ -101,11 +101,14 @@ class Group(BaseGroup):
             for p in self.get_players():
                 if p.role() == "seller":
                     if p.comm_practice == 1:
-                       p.bad_practice =  p.ask_price_fin ==  min(prices)
+                       p.bad_practice = p.ask_price_fin !=  min(prices)
                     elif p.comm_practice == 2:
-                        p.bad_practice = p.ask_price_fin >= p.ask_price_ini
+                        p.bad_practice = p.ask_price_fin <= p.ask_price_ini
+                        return p.bad_practice
                     else: # p.comm_practice == 3:
                         p.bad_practice = False
+
+                    return p.bad_practice
                         #todo definir cómo es hacer trampa con drip pricing.
 
 
