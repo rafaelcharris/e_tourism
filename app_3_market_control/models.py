@@ -85,7 +85,6 @@ class Group(BaseGroup):
                 p.paid = the_seller.ask_price_fin
                 p.payoff = p.participant.vars['valuations'].get(p.package_purchased) - p.paid
             else:
-
                 p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
 
 class Player(BasePlayer):
@@ -117,3 +116,4 @@ class Player(BasePlayer):
     my_seller = models.IntegerField()
     paid = models.IntegerField()
     buyer_id = models.IntegerField()
+    time_spent = models.FloatField()

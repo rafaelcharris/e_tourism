@@ -15,12 +15,12 @@
             </tr>
         </thead>
         <tbody>
-        {%if player.role == "seller" %}
+        {% if player.role == "seller" %}
             <tr>
                 <td>Your initial price was</td>
                 <td>{{ player.ask_price_ini }}</td>
             </tr>
-        {% endif %
+        {% endif %}
             <tr>
                 <td>Set a final Ask-price</td>
                 <td>{% formfield player.ask_price_fin %}</td>

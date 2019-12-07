@@ -36,7 +36,6 @@ class SellerWaitPage(WaitPage):
 class seller_2(Page):
     form_model = 'player'
     form_fields = [
-        'com_practice',
         'ask_price_fin'
     ]
     def is_displayed(self):
@@ -48,6 +47,7 @@ class seller_2(Page):
         )
 
 class buyer(Page):
+    timeout_seconds = 60 #tiempo para que la página pase
     form_model = 'player'
     form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
@@ -66,6 +66,8 @@ class buyer(Page):
             pac5 = self.player.buyer_valuation_pac5
         )
 
+
+
 class ResultsWaitPage(WaitPage):
     pass
 
@@ -73,7 +75,8 @@ class Results(Page):
 
     def vars_for_template(self):
         self.group.set_payoff()
-
+        import time
+        self.player.time_spent = time.time() + 60
         return dict(
             role = self.participant.vars['role'],
             payoff = self.player.payoff,
@@ -82,6 +85,7 @@ class Results(Page):
             seller = self.player.my_seller,
             sold = self.player.sold
         )
+
 
 class FinalResults(Page):
 
@@ -106,7 +110,6 @@ page_sequence = [instructions,
                  MyWaitPage,
                  buyer,
                  ResultsWaitPage,
-                 Results,
-                 FinalResults]
+                 Results]
 
 
