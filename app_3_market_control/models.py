@@ -87,6 +87,13 @@ class Group(BaseGroup):
             else:
                 p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
 
+    def who_purchased(self):
+        pac_sold = []
+        for p in self.get_players():
+            if p.role() == "buyer":
+                pac_sold.append(p.package_purchased)
+
+
 class Player(BasePlayer):
 
     def role(self):
