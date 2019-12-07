@@ -11,6 +11,13 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 SESSION_CONFIGS = [
     dict(
+        name='e_tourism_market_control',
+        display_name="Market",
+        num_demo_participants=4,
+        app_sequence=['app_3_control'],
+        use_browser_bots=False,
+    ),
+    dict(
         name = 'e_tourism_market_practices',
         display_name = "Market",
         num_demo_participants = 4,
