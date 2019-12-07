@@ -20,7 +20,7 @@ Markets
 
 
 class Constants(BaseConstants):
-    name_in_url = 'app_1_market'
+    name_in_url = 'app_1_market_com_practices'
     players_per_group = 4
     num_rounds = 5
     endowment = c(30)
@@ -34,7 +34,7 @@ class Constants(BaseConstants):
 
     com_practice = [i for i in range(1,5)]
 
-    instructions_template ='app_1_market/instructions.html'
+    instructions_template ='app_1_market_com_practices/instructions.html'
 
 
 class Subsession(BaseSubsession):

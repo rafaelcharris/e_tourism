@@ -20,7 +20,7 @@ Markets
 
 
 class Constants(BaseConstants):
-    name_in_url = 'app_1_market'
+    name_in_url = 'app_1_market_com_practices'
     players_per_group = 4
     num_rounds = 5
     endowment = c(30)
@@ -32,7 +32,9 @@ class Constants(BaseConstants):
     seller_valuations = [70, 60, 50, 50, 40, 40, 30, 20, 10, 10]
     buyer_valuations = [100, 100, 90, 80, 80, 70, 60, 60, 50, 40]
 
-    instructions_template ='app_1_market/instructions.html'
+    com_practice = [i for i in range(1,5)]
+
+    instructions_template ='app_1_market_com_practices/instructions.html'
 
 
 class Subsession(BaseSubsession):
@@ -101,6 +103,9 @@ class Player(BasePlayer):
     seller_valuation = models.IntegerField()
     ask_price_ini = models.IntegerField()
     see_list = models.BooleanField(initial = False)
+    com_practice = models.IntegerField(choices = [
+        [1, "Best Price Guarantee"], [2,"Reference Pricing"], [3, "Drip Pricing"], [4, "None"]
+    ])
     ask_price_fin = models.IntegerField()
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)

@@ -14,21 +14,28 @@ SESSION_CONFIGS = [
         name='e_tourism_market_control',
         display_name="Market",
         num_demo_participants=4,
-        app_sequence=['app_3_control'],
+        app_sequence=['app_3_market_control'],
         use_browser_bots=False,
     ),
     dict(
         name = 'e_tourism_market_practices',
         display_name = "Market",
         num_demo_participants = 4,
-        app_sequence = ['app_1_market'],
+        app_sequence = ['app_1_market_com_practices'],
         use_browser_bots = False,
     ),
     dict(
         name='e_tourism_market_buyer_ev',
         display_name="Market",
         num_demo_participants=4,
-        app_sequence=['app_1_market', "app_2_evaluation"],
+        app_sequence=['app_1_market_com_practices', "app_2_evaluation"],
+        use_browser_bots=False,
+    ),
+    dict(
+        name='e_tourism_market_regret',
+        display_name="Market",
+        num_demo_participants=4,
+        app_sequence=['app_4_market_regret'],
         use_browser_bots=False,
     )
 ]
