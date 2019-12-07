@@ -73,13 +73,14 @@ class Group(BaseGroup):
 
     #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
     #debo recuperar qué vendió y a cómo
-
+    pac_sold = [] #Lista de las personas que lograron vender su paquete.
     def set_payoff(self):
 
         for p in self.get_players():
             if p.role() == "buyer":
                 the_seller = self.get_player_by_id(p.my_seller)
                 the_seller.sold = True
+                self.group.pac_sold.append(p.my_seller)
                 #get info of the package
                 p.package_purchased = the_seller.seller_package
                 p.paid = the_seller.ask_price_fin
@@ -88,11 +89,12 @@ class Group(BaseGroup):
                 p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
 
     def who_purchased(self):
-        pac_sold = []
+        # Esta función debe definir quién compró el paquete
         for p in self.get_players():
-            if p.role() == "buyer":
-                pac_sold.append(p.package_purchased)
-
+            if p.package_purchased in self.pac_sold:
+                # si el paquete está en la lista, deme los jugadores que compraron ese paquete y compare el tiempo. El que tenga el menor tiempo,
+                # tiene el paquete
+                pass
 
 class Player(BasePlayer):
 
