@@ -27,7 +27,7 @@ class Constants(BaseConstants):
     see_list_cost = c(3)
 
     packages = [i for i in range(1, 6)]
-    id = itertools.cycle([i for i in range(1,11)])
+
 
     seller_valuations = [70, 60, 50, 50, 40, 40, 30, 20, 10, 10]
     buyer_valuations = [100, 100, 90, 80, 80, 70, 60, 60, 50, 40]
@@ -50,10 +50,11 @@ class Subsession(BaseSubsession):
         #assign packages con replacement
             for p in self.get_players():
                 if p.participant.vars['role'] == 'seller':
+                    id_s = itertools.cycle([i for i in range(1, 11)])
                     p.seller_package = numpy.random.randint(1, 5)
                     p.participant.vars['seller_package'] = p.seller_package
                     p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
-                    p.seller_id = next(Constants.id)
+                    p.seller_id = next(id_s)
                     #todo have to fix this id. They don't work as I would like it to
                     p.participant.vars['seller_id'] = p.seller_id #assign a seller id
 
@@ -66,10 +67,12 @@ class Subsession(BaseSubsession):
                     p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
                     p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
                     p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
+
+                    id_b = itertools.cycle([i for i in range(1, 11)])
                 #todo fix this id. They don't work as it should
-                    p.participant.vars['buyer_id'] = next(Constants.id)
+                    p.participant.vars['buyer_id'] = next(id_b)
 
-
+    #todo agregar límite de tiempo
 
 class Group(BaseGroup):
 
