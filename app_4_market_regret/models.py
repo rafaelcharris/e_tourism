@@ -20,7 +20,7 @@ Markets
 
 
 class Constants(BaseConstants):
-    name_in_url = 'app_1_market_com_practices'
+    name_in_url = 'app_4_market_regret'
     players_per_group = 4
     num_rounds = 5
     endowment = c(30)

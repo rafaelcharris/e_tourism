@@ -72,7 +72,8 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
 
     def vars_for_template(self):
-        self.group.set_payoff()
+        self.group.set_payoff(),
+        self.group.audit()
 
         return dict(
             role = self.participant.vars['role'],

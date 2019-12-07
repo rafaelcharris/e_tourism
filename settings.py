@@ -12,38 +12,38 @@ SESSION_CONFIG_DEFAULTS = dict(
 SESSION_CONFIGS = [
     dict(
         name='e_tourism_market_control',
-        display_name="Market",
+        display_name="Market Control",
         num_demo_participants=4,
         app_sequence=['app_3_market_control'],
         use_browser_bots=False,
     ),
     dict(
         name = 'e_tourism_market_practices',
-        display_name = "Market",
+        display_name = "Market Commercial Practices",
         num_demo_participants = 4,
         app_sequence = ['app_1_market_com_practices'],
         use_browser_bots = False,
     ),
     dict(
         name='e_tourism_market_buyer_ev',
-        display_name="Market",
+        display_name="Market Informal Sanction",
         num_demo_participants=4,
-        app_sequence=['app_1_market_com_practices', "app_2_evaluation"],
+        app_sequence=['app_2_informal_sanction'],
         use_browser_bots=False,
     ),
     dict(
         name='e_tourism_market_regret',
-        display_name="Market",
+        display_name="Market Regret",
         num_demo_participants=4,
         app_sequence=['app_4_market_regret'],
         use_browser_bots=False,
     ),
     dict(
-        name='e_tourism_formal_sanction',
-        display_name="Market",
-        num_demo_participants=4,
-        app_sequence=['app_5__market_formal_sanction'],
-        use_browser_bots=False,
+       name='e_tourism_formal_sanction',
+       display_name="Market Formal Sanction",
+       num_demo_participants=4,
+       app_sequence=['app_5_market_formal_sanction'],
+       use_browser_bots=False,
     )
 ]
 

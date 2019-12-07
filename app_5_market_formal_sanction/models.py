@@ -20,7 +20,7 @@ Markets
 
 
 class Constants(BaseConstants):
-    name_in_url = 'app_1_market_com_practices'
+    name_in_url = 'app_5_market_formal_sanction'
     players_per_group = 4
     num_rounds = 5
     endowment = c(30)
@@ -100,16 +100,16 @@ class Group(BaseGroup):
         if numpy.random.uniform(0, 1) <= Constants.prob_audit:
             for p in self.get_players():
                 if p.role() == "seller":
-                    if p.comm_practice == 1:
+                    if p.com_practice == 1:
                        p.bad_practice = p.ask_price_fin !=  min(prices)
-                    elif p.comm_practice == 2:
+                    elif p.com_practice == 2:
                         p.bad_practice = p.ask_price_fin <= p.ask_price_ini
                         return p.bad_practice
                     else: # p.comm_practice == 3:
                         p.bad_practice = False
                     return p.bad_practice
                         #todo definir cómo es hacer trampa con drip pricing.
-
+        return numpy.random.uniform(0, 1) <= Constants.prob_audit #el resultado de la función es verdadero o falso, para saber si alguien fue audited
 
 class Player(BasePlayer):
 
