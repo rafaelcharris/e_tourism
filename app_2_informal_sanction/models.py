@@ -125,3 +125,4 @@ class Player(BasePlayer):
     my_seller = models.IntegerField()
     paid = models.IntegerField()
     buyer_id = models.IntegerField()
+    sanction = models.BooleanField()

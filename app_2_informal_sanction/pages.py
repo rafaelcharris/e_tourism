@@ -65,7 +65,7 @@ class buyer(Page):
             pac4 = self.player.buyer_valuation_pac4,
             pac5 = self.player.buyer_valuation_pac5
         )
-
+    #todo agregar página/expandible de
 class ResultsWaitPage(WaitPage):
     pass
 
