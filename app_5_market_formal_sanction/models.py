@@ -107,7 +107,10 @@ class Group(BaseGroup):
                     else: # p.comm_practice == 3:
                         p.bad_practice = False
                         #todo definir cómo es hacer trampa con drip pricing.
-        return numpy.random.uniform(0, 1) <= Constants.prob_audit #el resultado de la función es verdadero o falso, para saber si alguien fue audited
+            return True #el resultado de la función es verdadero o falso, para saber si alguien fue audited
+        else:
+            return False
+
 
 class Player(BasePlayer):
 
@@ -136,7 +139,7 @@ class Player(BasePlayer):
 
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
-    bad_practice = models.BooleanField()
+    bad_practice = models.BooleanField(initial = False)
 
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete

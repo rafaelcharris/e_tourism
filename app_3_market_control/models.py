@@ -73,9 +73,9 @@ class Group(BaseGroup):
 
     #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
     #debo recuperar qué vendió y a cómo
-    pac_sold = [] #Lista de las personas que lograron vender su paquete.
+     #Lista de las personas que lograron vender su paquete.
     def set_payoff(self):
-
+        pac_sold = []
         for p in self.get_players():
             if p.role() == "buyer":
                 the_seller = self.get_player_by_id(p.my_seller)
