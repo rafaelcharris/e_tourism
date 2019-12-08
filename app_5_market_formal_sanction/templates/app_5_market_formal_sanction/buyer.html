@@ -54,7 +54,7 @@
 {%for p in group.get_players %}
     {% if p.role == "seller" %}
             <tr>
-                <td>Seller {{p.seller_id}}</td>
+                <td>Seller {{p.id_in_group}}</td>
                 <td>{{p.seller_package}}</td>
                 <td>
                 {% if p.com_practice == 1 %}

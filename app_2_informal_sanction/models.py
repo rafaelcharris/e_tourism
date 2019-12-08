@@ -105,11 +105,19 @@ class Player(BasePlayer):
     seller_package = models.IntegerField()
     seller_valuation = models.IntegerField()
     ask_price_ini = models.IntegerField()
+
+    def ask_price_ini_min(self):
+        return self.seller_valuation
+
     see_list = models.BooleanField(initial = False)
     com_practice = models.IntegerField(choices = [
         [1, "Best Price Guarantee"], [2,"Reference Pricing"], [3, "Drip Pricing"], [4, "None"]
     ])
     ask_price_fin = models.IntegerField()
+
+    def ask_price_fin_min(self):
+        return self.seller_valuation
+
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
 
