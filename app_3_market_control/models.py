@@ -137,5 +137,6 @@ class Player(BasePlayer):
     package_purchased = models.IntegerField()
     my_seller = models.IntegerField()
     paid = models.IntegerField()
+
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()

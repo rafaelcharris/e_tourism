@@ -27,7 +27,7 @@ class Constants(BaseConstants):
     see_list_cost = c(3)
     prob_audit = 0.2
     packages = [i for i in range(1, 6)]
-
+    sanction = c(6)
 
     seller_valuations = [70, 60, 50, 50, 40, 40, 30, 20, 10, 10]
     buyer_valuations = [100, 100, 90, 80, 80, 70, 60, 60, 50, 40]
@@ -88,7 +88,7 @@ class Group(BaseGroup):
                 p.payoff = p.participant.vars['valuations'].get(p.package_purchased) - p.paid
             else:
 
-                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
+                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold) - p.bad_practice*Constants.sanction
 
     def audit(self):
         prices = []
@@ -104,10 +104,8 @@ class Group(BaseGroup):
                        p.bad_practice = p.ask_price_fin !=  min(prices)
                     elif p.com_practice == 2:
                         p.bad_practice = p.ask_price_fin <= p.ask_price_ini
-                        return p.bad_practice
                     else: # p.comm_practice == 3:
                         p.bad_practice = False
-                    return p.bad_practice
                         #todo definir cómo es hacer trampa con drip pricing.
         return numpy.random.uniform(0, 1) <= Constants.prob_audit #el resultado de la función es verdadero o falso, para saber si alguien fue audited
 
