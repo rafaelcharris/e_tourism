@@ -72,7 +72,7 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
 
     def vars_for_template(self):
-        self.player.audited = self.group.audit(),
+        self.group.audit(),
         self.group.set_payoff()
 
         return dict(
@@ -83,7 +83,6 @@ class Results(Page):
             seller = self.player.my_seller,
             sold = self.player.sold,
             bad_practice = self.player.bad_practice,
-            audited = self.player.audited
         )
 
 
