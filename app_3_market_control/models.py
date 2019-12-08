@@ -89,12 +89,17 @@ class Group(BaseGroup):
                 p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
 
     def who_purchased(self):
-        # Esta función debe definir quién compró el paquete
         for p in self.get_players():
-            if p.package_purchased in self.pac_sold:
-                # si el paquete está en la lista, deme los jugadores que compraron ese paquete y compare el tiempo. El que tenga el menor tiempo,
+             pass
+        #list_purchased = [player.package_purchased for player in self.get_players()] #lista de las personas que vendieron
+        #https: // stackoverflow.com / questions / 1747817 / create - a - dictionary -
+        #with-list - comprehension
+        #buyer_sellers #{buyer, seller for buyer in p.role() = "buyer" for p in in self.get_players()}
+                # si el paquete está en la lista,
+                # deme los jugadores que compraron ese paquete
+                # y compare el tiempo. El que tenga el menor tiempo,
                 # tiene el paquete
-                pass
+        #.order_by()
 
 class Player(BasePlayer):
 
@@ -108,8 +113,16 @@ class Player(BasePlayer):
     seller_package = models.IntegerField()
     seller_valuation = models.IntegerField()
     ask_price_ini = models.IntegerField()
+
+    def ask_price_ini_min(self):
+        return self.seller_valuation
+
     see_list = models.BooleanField(initial = False)
     ask_price_fin = models.IntegerField()
+
+    def ask_price_fin_min(self):
+        return self.seller_valuation
+
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
 
