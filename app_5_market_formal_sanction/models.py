@@ -101,7 +101,7 @@ class Group(BaseGroup):
             for p in self.get_players():
                 if p.role() == "seller":
                     if p.com_practice == 1:
-                       p.bad_practice = p.ask_price_fin > min(prices)
+                        p.bad_practice = p.ask_price_fin > min(prices)
                     elif p.com_practice == 2:
                         p.bad_practice = p.ask_price_fin >= p.ask_price_ini
                     else: # p.comm_practice == 3:
@@ -140,6 +140,7 @@ class Player(BasePlayer):
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
     bad_practice = models.BooleanField(initial = False)
+    audited = models.BooleanField(initial = False)
 
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
