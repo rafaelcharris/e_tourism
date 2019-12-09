@@ -51,10 +51,13 @@ class buyer(Page):
     form_model = 'player'
     form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
+
     def is_displayed(self):
         return self.player.role() != 'seller'
 
     def vars_for_template(self):
+        import time
+        self.player.time_spent = time.time() + 60
         return dict(
             role = self.participant.vars['role'],
             pac_val = self.participant.vars['valuations'],
@@ -76,8 +79,7 @@ class Results(Page):
     def vars_for_template(self):
         self.group.set_payoff()
         self.group.who_purchased()
-        import time
-        self.player.time_spent = time.time() + 60
+
 
         return dict(
             role = self.participant.vars['role'],
