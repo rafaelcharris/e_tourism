@@ -17,7 +17,7 @@ author = 'UEC'
 doc = """
 Markets
 """
-
+#TODO PUEDO BORRAR ESTA APP PORQUE NO TIENE NADA DISTINTO A APP_1
 
 class Constants(BaseConstants):
     name_in_url = 'app_2_informal_sanction'
