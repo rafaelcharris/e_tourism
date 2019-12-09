@@ -87,6 +87,7 @@ class Results(Page):
             seller = self.player.my_seller,
             sold = self.player.sold,
             bad_practice = self.player.bad_practice,
+            audit = self.player.audited
         )
 
 
