@@ -97,23 +97,26 @@ class Group(BaseGroup):
 
         if len(sellers) != len(set(sellers)):
             sellers_dic = dict(collections.Counter(sellers))
+            print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
             for key, value in sellers_dic.items():
                 if value > 1:
                     buyers_time = {}
                     for p in self.get_players():
-                        if p.role() == "seller":
-                            if p.package_purchased == key:
-                                buyers_time[p.id_in_group] = p.time_spent #esto relaciona los compradores con sus tiempos (comrpadores que compraron algo repetid
-                                print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
-
-                        print("DICTIONARY: " + str(buyers_time))
-                        # after looping over all players I have here buyers and times
-                        # get the one with tge less time
-                        real_buyer = min(buyers_time, key = buyers_time.get)
-                        for jugador in buyers_time.keys():
-                            if jugador != real_buyer:
-                                b = self.get_player_by_id(jugador)
-                                b.package_purchased = None
+                        print("JUGADOR: " + str(p) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
+                        if p.package_purchased == key:
+                            print("INFO: " + str(p.package_purchased) + "key: " + str(key))
+                            buyers_time[p.id_in_group] = p.time_spent #esto relaciona los compradores con sus tiempos (comrpadores que compraron algo repetid
+                            print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
+                        else:
+                            break
+                    print("DICTIONARY: " + str(buyers_time))
+                    # after looping over all players I have here buyers and times
+                    # get the one with tge less time
+                    real_buyer = min(buyers_time, key = buyers_time.get)
+                    for jugador in buyers_time.keys():
+                        if jugador != real_buyer:
+                            b = self.get_player_by_id(jugador)
+                            b.package_purchased = None
 
 
 
