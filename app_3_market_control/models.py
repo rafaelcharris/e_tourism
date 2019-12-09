@@ -78,7 +78,7 @@ class Group(BaseGroup):
         for p in self.get_players():
             if p.role() == "buyer":
                 if p.my_seller > 0:
-                    the_seller = self.get_player_by_id(p.my_seller) #todo cuando seller es 0
+                    the_seller = self.get_player_by_id(p.my_seller)
                     the_seller.sold = True
                     #get info of the package
                     p.package_purchased = the_seller.seller_package
@@ -127,10 +127,6 @@ class Group(BaseGroup):
                             b = self.get_player_by_id(jugador)
                             b.package_purchased = 0
                             b.payoff = 0
-            #self.set_payoff() #Corre la función de pago otra vez
-
-#PROBLEMA LOGICO AL DETERMINAR EL PAGO. TOCA QUE LO RECALCULE CON LA FUNCIÒN DE TIEMPO PORQUE SI LO DEJO ASÌ SALE LA NFO EUA YA CALCULÒ
-#TODO arreglar la función de pago y de detectar el ganador. Creo que toca unirlas en una.
 
 class Player(BasePlayer):
 
