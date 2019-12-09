@@ -10,7 +10,7 @@ from otree.api import (
 )
 import itertools
 import numpy
-
+import collections
 
 author = 'UEC'
 
@@ -80,7 +80,7 @@ class Group(BaseGroup):
             if p.role() == "buyer":
                 the_seller = self.get_player_by_id(p.my_seller)
                 the_seller.sold = True
-                self.group.pac_sold.append(p.my_seller)
+                pac_sold.append(p.my_seller)
                 #get info of the package
                 p.package_purchased = the_seller.seller_package
                 p.paid = the_seller.ask_price_fin
@@ -89,17 +89,33 @@ class Group(BaseGroup):
                 p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
 
     def who_purchased(self):
+        sellers =[]
         for p in self.get_players():
-             pass
-        #list_purchased = [player.package_purchased for player in self.get_players()] #lista de las personas que vendieron
-        #https: // stackoverflow.com / questions / 1747817 / create - a - dictionary -
-        #with-list - comprehension
-        #buyer_sellers #{buyer, seller for buyer in p.role() = "buyer" for p in in self.get_players()}
-                # si el paquete está en la lista,
-                # deme los jugadores que compraron ese paquete
-                # y compare el tiempo. El que tenga el menor tiempo,
-                # tiene el paquete
-        #.order_by()
+            if p.role() == "buyer":
+                the_seller = self.get_player_by_id(p.my_seller)
+                sellers.append(the_seller.id_in_group)
+
+        if len(sellers) != len(set(sellers)):
+            sellers_dic = dict(collections.Counter(sellers))
+            for key, value in sellers_dic.items():
+                if value > 1:
+                    buyers_time = {}
+                    for p in self.get_players():
+                        if p.role() == "seller":
+                            if p.package_purchased == key:
+                                buyers_time[p.id_in_group] = p.time_spent #esto relaciona los compradores con sus tiempos (comrpadores que compraron algo repetid
+                                print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
+
+                        print("DICTIONARY: " + str(buyers_time))
+                        # after looping over all players I have here buyers and times
+                        # get the one with tge less time
+                        real_buyer = min(buyers_time, key = buyers_time.get)
+                        for jugador in buyers_time.keys():
+                            if jugador != real_buyer:
+                                b = self.get_player_by_id(jugador)
+                                b.package_purchased = None
+
+
 
 class Player(BasePlayer):
 

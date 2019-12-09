@@ -27,8 +27,15 @@
 {% if player.role == 'buyer' %}
             <tr>
                 <td>Package purchased</td>
+            {% if player.package_purchased != None %}
                 <td>{{ package }}</td>
             </tr>
+            {% else%}
+            <tr>
+                <td>Package purchased</td>
+                <td> Sorry, this package is no longer available because other player was faster than you</td>
+            </tr>
+            {% endif %}
             <tr>
                 <td> Seller </td>
                 <td>{{ seller }}</td>

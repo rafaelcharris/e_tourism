@@ -75,8 +75,10 @@ class Results(Page):
 
     def vars_for_template(self):
         self.group.set_payoff()
+        self.group.who_purchased()
         import time
         self.player.time_spent = time.time() + 60
+
         return dict(
             role = self.participant.vars['role'],
             payoff = self.player.payoff,
