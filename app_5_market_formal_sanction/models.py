@@ -96,9 +96,12 @@ class Group(BaseGroup):
             if p.role() == "seller":
                 prices.append(p.ask_price_fin)
         #esta función debería prenderse un 20% de las veces para hacer un audit
+
         if numpy.random.uniform(0, 1) <= Constants.prob_audit:
+
             for p in self.get_players():
                 if p.role() == "seller":
+                    p.audited = True
                     if p.com_practice == 1:
                         p.bad_practice = p.ask_price_fin > min(prices)
                     elif p.com_practice == 2:
@@ -106,9 +109,6 @@ class Group(BaseGroup):
                     else: # p.comm_practice == 3:
                         p.bad_practice = False
                         #todo definir cómo es hacer trampa con drip pricing.
-            return True #el resultado de la función es verdadero o falso, para saber si alguien fue audited
-        else:
-            return False
 
 
 class Player(BasePlayer):
@@ -153,3 +153,4 @@ class Player(BasePlayer):
     my_seller = models.IntegerField()
     paid = models.IntegerField()
     buyer_id = models.IntegerField()
+    time_spent = models.FloatField()

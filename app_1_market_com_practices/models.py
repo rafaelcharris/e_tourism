@@ -10,6 +10,7 @@ from otree.api import (
 )
 import itertools
 import numpy
+import collections
 
 
 author = 'UEC'
@@ -76,22 +77,59 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
-    #debo recuperar qué vendió y a cómo
 
     def set_payoff(self):
+        for p in self.get_players():
+            if p.role() == "buyer":
+                if p.my_seller > 0:
+                    the_seller = self.get_player_by_id(p.my_seller)
+                    the_seller.sold = True
+                    p.package_purchased = the_seller.seller_package
+                    p.paid = the_seller.ask_price_fin
+                    p.payoff = p.participant.vars['valuations'].get(p.package_purchased) - p.paid
+                else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
+                    p.package_purchased = 0
+                    p.payoff = 0
+            else:
+                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
 
+    def who_purchased(self):
+        sellers =[]
         for p in self.get_players():
             if p.role() == "buyer":
                 the_seller = self.get_player_by_id(p.my_seller)
-                the_seller.sold = True
-                #get info of the package
                 p.package_purchased = the_seller.seller_package
-                p.paid = the_seller.ask_price_fin
-                p.payoff = p.participant.vars['valuations'].get(p.package_purchased) - p.paid
-            else:
+                sellers.append(the_seller.id_in_group)
 
-                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
+        if len(sellers) != len(set(sellers)): #si la length de ambas listas difiere, signiifca que hay algun repetido que set elimino (porque en los sets no puede haber repetidos)
+            sellers_dic = dict(collections.Counter(sellers))
+            print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
+
+            for key, value in sellers_dic.items():
+                if value > 1:
+                    print("THIS WORKS: " + str(key))
+                    buyers_time = {}
+                    for p in self.get_players():
+                        if p.role() == "buyer":
+                            print("JUGADOR: " + str(p) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
+
+                            if p.my_seller == key:
+                                print("INFO: " + str(p.package_purchased) + "key: " + str(key))
+                                buyers_time[p.id_in_group] = p.time_spent
+                                print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
+                            else:
+                                print("EL COMPRADOR DEL JUGADOR NO ES IGUAL AL QUE SE REPITE")
+
+
+                    print("DICTIONARY: " + str(buyers_time))
+                    # after looping over all players I have here buyers and times
+                    # get the one with tge less time
+                    real_buyer = min(buyers_time, key = buyers_time.get)
+                    for jugador in buyers_time.keys():
+                        if jugador != real_buyer:
+                            b = self.get_player_by_id(jugador)
+                            b.package_purchased = 0
+                            b.payoff = 0
 
 class Player(BasePlayer):
 
@@ -133,3 +171,4 @@ class Player(BasePlayer):
     my_seller = models.IntegerField()
     paid = models.IntegerField()
     buyer_id = models.IntegerField()
+    time_spent = models.FloatField()

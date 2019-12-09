@@ -5,6 +5,11 @@ from .models import Constants
 class instructions(Page):
     pass
 
+
+class instructions_2(Page):
+    pass
+
+
 class MyWaitPage(WaitPage):
     def is_displayed(self):
         return self.player.role() == 'buyer'
@@ -75,7 +80,7 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
     def vars_for_template(self):
         self.group.set_payoff()
-
+        self.group.who_purchased()
 
         return dict(
             role = self.participant.vars['role'],
@@ -89,6 +94,7 @@ class Results(Page):
 
 
 page_sequence = [instructions,
+                 instructions_2,
                  seller,
                  SellerWaitPage,
                  seller_2,
