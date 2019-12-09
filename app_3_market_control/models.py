@@ -38,7 +38,7 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
 
     def creating_session(self):
-        #crear roles
+
             if self.round_number == 1:
                     roles = itertools.cycle(['seller', 'buyer'])
                     for p in self.get_players():
@@ -71,16 +71,12 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
-    #debo recuperar qué vendió y a cómo
-     #Lista de las personas que lograron vender su paquete.
     def set_payoff(self):
         for p in self.get_players():
             if p.role() == "buyer":
                 if p.my_seller > 0:
                     the_seller = self.get_player_by_id(p.my_seller)
                     the_seller.sold = True
-                    #get info of the package
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
                     p.payoff = p.participant.vars['valuations'].get(p.package_purchased) - p.paid
@@ -128,6 +124,7 @@ class Group(BaseGroup):
                             b.package_purchased = 0
                             b.payoff = 0
 
+
 class Player(BasePlayer):
 
     def role(self):
@@ -154,7 +151,7 @@ class Player(BasePlayer):
     sold = models.BooleanField(initial = False)
 
     #Buyer
-    #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
+
     buyer_valuation_pac1 = models.IntegerField()
     buyer_valuation_pac2 = models.IntegerField()
     buyer_valuation_pac3 = models.IntegerField()
