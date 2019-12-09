@@ -15,10 +15,12 @@
             </tr>
         </thead>
         <tbody>
+        {% if player.role == "seller" %}
             <tr>
-                <td>Pick a commercial practice from the following list</td>
-                <td>{% formfield player.com_practice %}</td>
+                <td>Your initial price was</td>
+                <td>{{ player.ask_price_ini }}</td>
             </tr>
+        {% endif %}
             <tr>
                 <td>Set a final Ask-price</td>
                 <td>{% formfield player.ask_price_fin %}</td>

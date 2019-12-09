@@ -20,21 +20,21 @@ Markets
 
 
 class Constants(BaseConstants):
-    name_in_url = 'app_1_market'
+    name_in_url = 'app_4_market_regret'
     players_per_group = 4
     num_rounds = 5
-    endowment = 3
-    see_list_cost = 0.3
+    endowment = c(30)
+    see_list_cost = c(3)
 
     packages = [i for i in range(1, 6)]
     id = itertools.cycle([i for i in range(1,11)])
 
-    seller_valuations = [7, 6, 5, 5, 4, 4, 3, 2, 1, 1]
-    buyer_valuations = [10, 10, 9, 8, 8, 7, 6, 6, 5, 4]
+    seller_valuations = [70, 60, 50, 50, 40, 40, 30, 20, 10, 10]
+    buyer_valuations = [100, 100, 90, 80, 80, 70, 60, 60, 50, 40]
 
     com_practice = [i for i in range(1,5)]
 
-    instructions_template ='app_1_market/instructions.html'
+    instructions_template ='app_1_market_com_practices/instructions.html'
 
 
 class Subsession(BaseSubsession):
@@ -76,28 +76,19 @@ class Group(BaseGroup):
     #Acá calcular los resultados de la ronda para los pagos tengo el id del vendedor, a partir de eso
     #debo recuperar qué vendió y a cómo
 
-
     def set_payoff(self):
 
         for p in self.get_players():
             if p.role() == "buyer":
                 the_seller = self.get_player_by_id(p.my_seller)
-
+                the_seller.sold = True
                 #get info of the package
                 p.package_purchased = the_seller.seller_package
                 p.paid = the_seller.ask_price_fin
                 p.payoff = p.participant.vars['valuations'].get(p.package_purchased) - p.paid
             else:
 
-                p.payoff = p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost
-                #todo if he is not purchased, then he earns nothing!
-                #todo agregar una dummy de si fue purcheseado o no.
-    #Y si hago que esta función corra cuando hacen click. conectando con la función de javascript?
-    def pac_purchased(self):
-        for p in self.get_players():
-            if p.role() == "buyer":
-                the_seller = self.get_player_by_id(p.my_seller)
-                the_seller.sold = True
+                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
 
 class Player(BasePlayer):
 
@@ -111,13 +102,21 @@ class Player(BasePlayer):
     seller_package = models.IntegerField()
     seller_valuation = models.IntegerField()
     ask_price_ini = models.IntegerField()
+
+    def ask_price_ini_min(self):
+        return self.seller_valuation
+
     see_list = models.BooleanField(initial = False)
     com_practice = models.IntegerField(choices = [
         [1, "Best Price Guarantee"], [2,"Reference Pricing"], [3, "Drip Pricing"], [4, "None"]
     ])
     ask_price_fin = models.IntegerField()
+
+    def ask_price_fin_min(self):
+        return self.seller_valuation
+
     seller_id = models.IntegerField()
-    purchased = models.BooleanField()
+    sold = models.BooleanField(initial = False)
 
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete

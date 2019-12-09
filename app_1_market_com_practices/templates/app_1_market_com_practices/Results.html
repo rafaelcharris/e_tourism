@@ -35,7 +35,12 @@
             </tr>
             <tr>
                 <td> Price</td>
-                <td>{{ price }}</td>
+                <td>{{ price|c}} </td>
+            </tr>
+{% else %}
+            <tr>
+                <td> Did you sold this package?</td>
+                <td>{{ sold }}</td>
             </tr>
 {% endif %}
             <tr>

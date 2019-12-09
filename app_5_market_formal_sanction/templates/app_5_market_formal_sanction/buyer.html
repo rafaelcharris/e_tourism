@@ -1,0 +1,81 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Buyer (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}))
+{% endblock %}
+
+{% block content %}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Important title here</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Role</td>
+                <td>{{ role }}</td>
+            </tr>
+            <tr>
+                <td>Your ID is</td>
+                <td>{{ player.id_in_group }}</td>
+            </tr>
+            <tr>
+                <td><b>Private valuations for packages</b></td>
+                <td></td>
+            </tr>
+            {% for pac, val in pac_val.items %}
+            <tr>
+                <td>Package {{pac}}</td>
+                <td>{{ val }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Market Post</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Supplier</td>
+                <td>Package</td>
+                <td>Price</td>
+                <td>Purchase</td>
+            </tr>
+{%for p in group.get_players %}
+    {% if p.role == "seller" %}
+            <tr>
+                <td>Seller {{p.id_in_group}}</td>
+                <td>{{p.seller_package}}</td>
+                <td>
+                {% if p.com_practice == 1 %}
+                    {{p.ask_price_fin}}
+                    <p><font size = "2">Best price guarantee</font></p>
+                {% elif p.com_practice == 2 %}
+                <p>Before <strike>{{p.ask_price_ini}}</strike></p>
+                <p> Now {{p.ask_price_fin}}</p>
+                {% elif p.com_practice == 3 %}
+                    {{p.ask_price_fin}}*
+                {% else %}
+                    {{p.ask_price_fin}}
+                {% endif %}
+                </td>
+                <td><button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Purchase</button>
+                </td>
+            </tr>
+    {% endif %}
+{% endfor %}
+        </tbody>
+        </table>
+    {% next_button %}
+
+{% endblock %}
