@@ -57,7 +57,7 @@ class buyer(Page):
 
     def vars_for_template(self):
         import time
-        self.player.time_spent = time.time() + 60
+        self.player.time_spent = time.time()
         return dict(
             role = self.participant.vars['role'],
             pac_val = self.participant.vars['valuations'],

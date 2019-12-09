@@ -126,6 +126,8 @@ class Group(BaseGroup):
                             b.package_purchased = None
 
 
+#PROBLEMA LOGICO AL DETERMINAR EL PAGO. TOCA QUE LO RECALCULE CON LA FUNCIÒN DE TIEMPO PORQUE SI LO DEJO ASÌ SALE LA NFO EUA YA CALCULÒ
+#TODO arreglar la función de pago y de detectar el ganador. Creo que toca unirlas en una.
 
 class Player(BasePlayer):
 
