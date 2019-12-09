@@ -72,7 +72,7 @@ class Subsession(BaseSubsession):
                 #todo fix this id. They don't work as it should
                     p.participant.vars['buyer_id'] = next(id_b)
 
-    #todo agregar límite de tiempo
+
 
 class Group(BaseGroup):
 
