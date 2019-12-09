@@ -119,7 +119,7 @@ class Group(BaseGroup):
                     print("DICTIONARY: " + str(buyers_time))
                     # after looping over all players I have here buyers and times
                     # get the one with tge less time
-                    real_buyer = max(buyers_time, key = buyers_time.get)
+                    real_buyer = min(buyers_time, key = buyers_time.get)
                     for jugador in buyers_time.keys():
                         if jugador != real_buyer:
                             b = self.get_player_by_id(jugador)
