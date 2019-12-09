@@ -110,7 +110,7 @@ class Group(BaseGroup):
 
                             if p.my_seller == key:
                                 print("INFO: " + str(p.package_purchased) + "key: " + str(key))
-                                buyers_time[p.id_in_group] = p.time_spent #TODO el problema està acà. No relaciona la
+                                buyers_time[p.id_in_group] = p.time_spent
                                 print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
                             else:
                                 print("EL COMPRADOR DEL JUGADOR NO ES IGUAL AL QUE SE REPITE")
