@@ -70,7 +70,6 @@ class buyer(Page):
         )
 
 
-
 class ResultsWaitPage(WaitPage):
     pass
 
