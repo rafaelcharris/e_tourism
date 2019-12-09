@@ -48,6 +48,8 @@ class seller_2(Page):
         )
 
 class buyer(Page):
+    timeout_seconds = 60 #tiempo para que la página pase
+
     form_model = 'player'
     form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
@@ -55,6 +57,8 @@ class buyer(Page):
         return self.player.role() != 'seller'
 
     def vars_for_template(self):
+        import time
+        self.player.time_spent = time.time()
         return dict(
             role = self.participant.vars['role'],
             pac_val = self.participant.vars['valuations'],

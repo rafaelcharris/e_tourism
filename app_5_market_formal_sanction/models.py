@@ -69,7 +69,6 @@ class Subsession(BaseSubsession):
                     id_b = itertools.cycle([i for i in range(1, 11)])
                     p.participant.vars['buyer_id'] = next(id_b)
 
-    #todo agregar límite de tiempo
 
 class Group(BaseGroup):
 

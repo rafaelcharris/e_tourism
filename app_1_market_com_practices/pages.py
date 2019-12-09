@@ -48,6 +48,7 @@ class seller_2(Page):
         )
 
 class buyer(Page):
+    timeout_seconds = 60
     form_model = 'player'
     form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
@@ -55,6 +56,8 @@ class buyer(Page):
         return self.player.role() != 'seller'
 
     def vars_for_template(self):
+        import time
+        self.player.time_spent = time.time()
         return dict(
             role = self.participant.vars['role'],
             pac_val = self.participant.vars['valuations'],
@@ -70,10 +73,10 @@ class ResultsWaitPage(WaitPage):
     pass
 
 class Results(Page):
-
     def vars_for_template(self):
         self.group.set_payoff()
 
+
         return dict(
             role = self.participant.vars['role'],
             payoff = self.player.payoff,
@@ -83,20 +86,6 @@ class Results(Page):
             sold = self.player.sold
         )
 
-class FinalResults(Page):
-
-    def is_displayed(self):
-        return self.round_number > 5
-
-    def vars_for_template(self):
-        return dict(
-            role = self.participant.vars['role'],
-            payoff = self.player.payoff,
-            package = self.player.package_purchased,
-            price = self.player.paid,
-            seller = self.player.my_seller,
-            sold = self.player.sold
-        )
 
 
 page_sequence = [instructions,
@@ -106,7 +95,7 @@ page_sequence = [instructions,
                  MyWaitPage,
                  buyer,
                  ResultsWaitPage,
-                 Results,
-                 FinalResults]
+                 Results
+                 ]
 
 

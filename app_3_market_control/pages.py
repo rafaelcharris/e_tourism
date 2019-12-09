@@ -57,7 +57,7 @@ class buyer(Page):
 
     def vars_for_template(self):
         import time
-        self.player.time_spent = time.time() + 60
+        self.player.time_spent = time.time()
         return dict(
             role = self.participant.vars['role'],
             pac_val = self.participant.vars['valuations'],
@@ -70,7 +70,6 @@ class buyer(Page):
         )
 
 
-
 class ResultsWaitPage(WaitPage):
     pass
 
@@ -80,7 +79,6 @@ class Results(Page):
         self.group.set_payoff()
         self.group.who_purchased()
 
-
         return dict(
             role = self.participant.vars['role'],
             payoff = self.player.payoff,
@@ -90,21 +88,6 @@ class Results(Page):
             sold = self.player.sold
         )
 
-
-class FinalResults(Page):
-
-    def is_displayed(self):
-        return self.round_number > 5
-
-    def vars_for_template(self):
-        return dict(
-            role = self.participant.vars['role'],
-            payoff = self.player.payoff,
-            package = self.player.package_purchased,
-            price = self.player.paid,
-            seller = self.player.my_seller,
-            sold = self.player.sold
-        )
 
 
 page_sequence = [instructions,
