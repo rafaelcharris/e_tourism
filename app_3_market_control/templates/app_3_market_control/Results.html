@@ -27,7 +27,7 @@
 {% if player.role == 'buyer' %}
             <tr>
                 <td>Package purchased</td>
-            {% if player.package_purchased != None %}
+            {% if player.package_purchased > 0 %}
                 <td>{{ package }}</td>
             </tr>
             {% else%}
