@@ -21,7 +21,7 @@ SESSION_CONFIGS = [
         name = 'e_tourism_market_practices',
         display_name = "Market Commercial Practices",
         num_demo_participants = 4,
-        app_sequence = ['app_1_market_com_practices'],
+        app_sequence = ['app_0_consent', 'app_1_market_com_practices'],
         use_browser_bots = False,
     ),
     dict(

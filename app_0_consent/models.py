@@ -26,12 +26,12 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    name = models.StringField()
+    nombre = models.StringField()
     id_number = models.IntegerField()
 
 
     def report_consent(self):
-        self.participant.vars['consent_name'] = self.name
+        self.participant.vars['consent_name'] = self.nombre
         self.participant.vars['consent_id_number'] = self.id_number
         print("[[ APP_0_CONSENT ]] - PLAYER - CONSENT_ADMIN.............ROUND NUMBER", self.round_number)
         print("[[ APP_0_CONSENT ]] - PLAYER - CONSENT_ADMIN.............PVARS ARE", self.participant.vars)

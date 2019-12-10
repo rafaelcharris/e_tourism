@@ -7,7 +7,6 @@
 
 {% block content %}
 
-    <h2>This is Master's instructions</h2>
     {% if player.see_list == 1 %}
     <table class="table table-bordered">
         <thead>
@@ -35,10 +34,8 @@
     {% else %}
     {% endif %}
 
-    <p>Your initial price was: {{player.ask_price_ini}}
-        If you wish to change the initial price to your package, please write the final price in the box below: </p>
-
-    <div class="form-inline"> {% formfield player.ask_price_fin %} </div>
+    <p>Your initial price was: {{player.ask_price_ini}} <br>
+        If you wish to change the initial price to your package, please write the final price in the box below: {{ form.ask_price_fin }} </p>
 
     {% next_button %}
 {% endblock %}
