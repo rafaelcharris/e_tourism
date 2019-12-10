@@ -48,7 +48,6 @@
             </tr>
         </thead>
         <tbody>
-
 {%for p in group.get_players %}
     {% if p.role == "seller" %}
             <tr>
@@ -57,202 +56,30 @@
                     <div class="card border-dark mb-3" style="max-width: 18rem;">
                         <h3 class="card-header">{{player.package}}</h3>
                         <div class="card-body text-dark">
+                            {% if p.com_practice == 1 %}
                             <h5 class="card-title">{{p.ask_price_fin}} </h5>
                             <br>
                             <p class="card-text">Best price guaranteed</p>
+                            {% elif p.com_practice == 2 %}
+                            <h5 class="card-title"><del>{{p.ask_price_ini|c}}</del> </h5>
+                            <br>
+                            <h5 class="card-title">{{p.ask_price_fin|c}} </h5>
+                            {% elif p.com_practice == 3 %}
+                            <h5 class="card-title">{{p.ask_price_fin}}* </h5>
+                            {% else %}
+                            <h5 class="card-title">{{p.ask_price_fin}} </h5>
+                            {% endif %}
                             <hr class="my-4">
                             <button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
                         </div>
                     </div>
                 </td>
-                <td>
-                {% if p.com_practice == 1 %}
-                    {{p.ask_price_fin}}
-                    <p><font size = "2">Best price guarantee</font></p>
-                {% elif p.com_practice == 2 %}
-                <p>Before <strike>{{p.ask_price_ini}}</strike></p>
-                <p> Now {{p.ask_price_fin}}</p>
-                {% elif p.com_practice == 3 %}
-                    {{p.ask_price_fin}}*
-                {% else %}
-                    {{p.ask_price_fin}}
-                {% endif %}
-                </td>
-                <td><button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
-                </td>
-            </tr>
     {% endif %}
 {% endfor %}
         </tbody>
         </table>
 
     <p>Once you click on the "Buy" button your payment will be calculated for this trading round.</p>
-
-
-    <h2> Master's Instructions</h2>
-
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">Rome</h3>
-                        <div class="card-body text-dark">
-                            <h5 class="card-title">80 ECU</h5>
-                            <br>
-                            <p class="card-text">Best price guaranteed</p>
-                            <hr class="my-4">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">Vienna</h3>
-                        <div class="card-body text-dark">
-                            <h5 class="card-title"><del> 100 ECU </del></h5>
-                            <h5 class="card-title">80 ECU</h5>
-                            <br>
-                            <hr class="my-4">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">Madrid</h3>
-                        <div class="card-body text-dark">
-                            <h5 class="card-title">120 ECU</h5>
-                            <br>
-                            <br>
-                            <hr class="my-4">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">Vienna</h3>
-                        <div class="card-body text-dark">
-                            <h5 class="card-title">90 ECU</h5>
-                            <br>
-                            <p class="card-text">Best price guaranteed</p>
-                            <hr class="my-4">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">Berlin</h3>
-                        <div class="card-body text-dark">
-                            <h5 class="card-title"> 108 ECU*</h5>
-                            <br>
-                            <br>
-                            <hr class="my-4">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">Rome</h3>
-                        <div class="card-body text-dark">
-                            <h5 class="card-title">80 ECU</h5>
-                            <br>
-                            <p class="card-text">Best price guaranteed</p>
-                            <hr class="my-4">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">Rome</h3>
-                        <div class="card-body text-dark">
-                            <h5 class="card-title">80 ECU</h5>
-                            <br>
-                            <p class="card-text">Best price guaranteed</p>
-                            <hr class="my-4">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">Rome</h3>
-                        <div class="card-body text-dark">
-                            <h5 class="card-title">80 ECU</h5>
-                            <br>
-                            <p class="card-text">Best price guaranteed</p>
-                            <hr class="my-4">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">Rome</h3>
-                        <div class="card-body text-dark">
-                            <h5 class="card-title">80 ECU</h5>
-                            <br>
-                            <p class="card-text">Best price guaranteed</p>
-                            <hr class="my-4">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">Paris</h3>
-                        <div class="card-body text-dark">
-                            <h5 class="card-title">80 ECU</h5>
-                            <br>
-                            <p class="card-text">Best price guaranteed</p>
-                            <hr class="my-4">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-
 
     {% next_button %}
 

@@ -24,8 +24,8 @@ class Constants(BaseConstants):
     name_in_url = 'app_1_market_com_practices'
     players_per_group = 4
     num_rounds = 5
-    endowment = c(30)
-    see_list_cost = c(3)
+    endowment = c(25) #TODO CAMBIAR EN LAS OTRAS APPS
+    see_list_cost = c(1)
 
     packages = [i for i in range(1, 6)]
 
