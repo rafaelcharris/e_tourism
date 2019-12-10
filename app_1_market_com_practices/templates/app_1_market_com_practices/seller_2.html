@@ -18,68 +18,27 @@
             </tr>
         </thead>
         <tbody>
+     {% if player.see_list == 1 %}
+        {% for p in group.get_players %}
+        {% if p.role == 'seller' %}
             <tr>
-                <th scope="row">1</th>
-                <td>Rome</td>
-                <td>100 ECU</td>
+                <td> {{p.id_in_group}}</td>
+                <td> {{p.seller_package}}</td>
+                <td> {{p.ask_price_ini}}</td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Berlin</td>
-                <td>120 ECU</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Madrid</td>
-                <td>80 ECU</td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>Madrid</td>
-                <td>100 ECU</td>
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td>Vienna</td>
-                <td>110 ECU</td>
-            </tr>
-            <tr>
-                <th scope="row">6</th>
-                <td>Paris</td>
-                <td>130 ECU</td>
-            </tr>
-            <tr>
-                <th scope="row">7</th>
-                <td>Vienna</td>
-                <td>90 ECU</td>
-            </tr>
-            <tr>
-                <th scope="row">8</th>
-                <td>Berlin</td>
-                <td>100 ECU</td>
-            </tr>
-            <tr>
-                <th scope="row">9</th>
-                <td>Berlin</td>
-                <td>80 ECU</td>
-            </tr>
-            <tr>
-                <th scope="row">10</th>
-                <td>Rome</td>
-                <td>70 ECU</td>
-            </tr>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
         </tbody>
     </table>
 
     {% else %}
     {% endif %}
-    <p>If you wish to change the initial price to your package, please write the final price in the box below: </p>
 
-    <div class="form-inline"> XXX &nbsp; ECU </div>
+    <p>Your initial price was: {{player.ask_price_ini}}
+        If you wish to change the initial price to your package, please write the final price in the box below: </p>
 
-    <br>
-
-    <p>Once you have set up the final price please click on the "Next" button</p>
+    <div class="form-inline"> {% formfield player.ask_price_fin %} </div>
 
     {% next_button %}
 {% endblock %}
