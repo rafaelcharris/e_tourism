@@ -2,64 +2,39 @@
 {% load otree static %}
 
 {% block title %}
-    Decision of the seller ----- Seller (Period {{ subsession.round_number }} of {{ Constants.num_rounds }})
+    Decision of the seller (Period {{ subsession.round_number }} of {{ Constants.num_rounds }})
 {% endblock %}
 
 {% block content %}
-
-    <h2>This is Rafa's instructions</h2>
     <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">Important title here</th>
-                <th scope="col">You are Player {{player.id_in_group}}</th>
-            </tr>
-        </thead>
+
         <tbody>
+        <tr>
+                <td>Your seller ID is:</td>
+                <td> {{player.id_in_group}} </td>
+        </tr>
             <tr>
-                <td>Role</td>
-                <td>{{ role }}</td>
+                <td>The package you are going to sell is:</td>
+                <td> {{player.seller_package}} </td>
             </tr>
             <tr>
-                <td>Seller package</td>
-                <td>{{ player.seller_package }}</td>
+                <td>The cost of this package is: </td>
+                <td> {{player.seller_valuation |c}}</td>
             </tr>
             <tr>
-                <td>Seller valuation</td>
-                <td>{{ player.seller_valuation }}</td>
+                <td>Please set the price at which you want to sell this package in the following box: <br>
+                Remember that for you to make a profit you must sell the package at a higher price than its cost.</td>
+                <td><div class = "form-inline"> {{ form.ask_price_ini}} &nbsp; ECU</div></td>
             </tr>
             <tr>
-                <td>Set an initial Ask-price</td>
-                <td>{% formfield player.ask_price_ini label = "Please set an initial price" %}</td>
-            </tr>
-            {% comment %}
-            Agregar restrucción: no se puede ofrecer un valor por debajo del valuation ni igual.
-            {% endcomment %}
-            <tr>
-                <td>See full list of packages and prices at a cost of {{ Constants.see_list_cost }}?</td>
-                <td>{% formfield player.see_list %}</td>
+                <td>Would you like to see the complete list of offers in the package market, including prices? <br>
+                    This action will cost you {{Constants.see_list_cost}} that will be deducted from your initial endowment. </td>
+                <td>{{ form.see_list }}</td>
+
             </tr>
         </tbody>
     </table>
 
-    <h2>This is master's instructions</h2>
-    <p>The package you are going to sell is XXX[Package]. The cost of this package is XXX[Cost].</p>
-
-    <p>Please set the price at which you want to sell this package in the following box:</p>
-
-    <div class="form-inline"> XXX &nbsp; ECU </div>
-
-    <p>Remember that for you to make a profit you must sell the package at a higher price at this cost.</p>
-
-    <p>Would you like to see the complete list of offers in the package market, including prices? This action will cost
-        you 1 ECU that will be deducted from your initial endowment.</p>
-
-    <div class="radio">
-        <label><input type="radio" name="optradio" checked>Yes</label>
-    </div>
-    <div class="radio">
-        <label><input type="radio" name="optradio">No</label>
-    </div>
 
     <p>Additionally, you can choose a commercial practice to help make your package more attractive in the market.</p>
 
@@ -135,7 +110,7 @@
         </tbody>
     </table>
 
-    <p>Remember that it is your decision whether or not to use any of these business practices.</p>
+    <p>Remember that it is your decision whether or not to use any of these commercial practices.</p>
 
     <p>In the table below you can see what your bid would look like in the list of bids with each of the business
         practices if you decided to use one of them.</p>
@@ -232,7 +207,19 @@
         </tbody>
     </table>
 
-    <h2>Here should be placed the question about what commercial practice to use</h2>
+<table class="table table-bordered">
+     <thead>
+            <tr>
+                <th colspan="2">Choose a commercial practice</th>
+            </tr>
+     </thead>
+        <tbody>
+            <tr>
+                <td>Now that you know how your offer will look if you choose a commercial practice, choose one from the following list: </td>
+                <td> {{ form.com_practice }} </td>
+            </tr>
+        </tbody>
+</table>
 
     <p>Please click on the "Next" button to see the complete list of offers and prices in the market and to define the
         final price of the package you are going to sell.</p>

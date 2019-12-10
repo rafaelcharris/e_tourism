@@ -3,7 +3,8 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 class instructions(Page):
-    pass
+    form_model = 'player'
+
 
 
 class instructions_2(Page):
@@ -20,7 +21,10 @@ class MyWaitPage(WaitPage):
 
 class seller(Page):
     form_model = 'player'
-    form_fields = ['ask_price_ini', 'see_list']
+    form_fields = ['ask_price_ini',
+                   'see_list',
+                   'com_practice'
+                   ]
 
     def is_displayed(self):
         return self.player.role() != 'buyer'
@@ -41,7 +45,6 @@ class SellerWaitPage(WaitPage):
 class seller_2(Page):
     form_model = 'player'
     form_fields = [
-        'com_practice',
         'ask_price_fin'
     ]
     def is_displayed(self):

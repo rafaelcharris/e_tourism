@@ -7,22 +7,23 @@
 
 {% block content %}
 
-    <p>In this part there will be a market for tourist packages. The market has a total of 5 negotiation rounds. Before
-        starting the first negotiation round, the computer will randomly assign you to one of two roles: either the
-        buyer role or the seller role. Keep in mind that the role to which you were assigned will be maintained during
+    <p>In this part, there will be a market for tourist packages. The market has a total of 5 negotiation rounds. Before
+        starting the first negotiation round, the computer will randomly assign you to one of two roles: either
+        buyer or seller. Keep in mind that the role to which you were assigned will be maintained during
         the 5 negotiation rounds.</p>
 
     <p>The objective of the market is that buyers and sellers can negotiate and eventually complete transactions
-        successfully in each of the negotiation rounds. The results of the transactions will affect your final payments.</p>
+        successfully in each of the negotiation rounds. The results of the transactions will affect your final payment.</p>
 
     <p>In this market each commodity is a tourist package. In total there are 5 types of tourist packages whose only
         difference will be the destination: Berlin, Madrid, Vienna, Paris and Rome.</p>
 
     <p>In each of the negotiation rounds, first the sellers will set prices to the packages they will sell and then the
         buyers will see a list containing the packages available in the market and the prices of each of these packages.
-        To complete a transaction, buyers must select the package of their preference and purchase it.</p>
+        To complete a transaction, buyers must select the package of their preference and purchase it. Bare in mind, that if two buyers
+        pick the same package, the fastest one will be the one who gets to complete the transaction.</p>
 
-    <p>Before starting, both sellers and buyers will have an initial endowment of 25 Experimental Currency Units (ECU) in
+    <p>Before starting, both sellers and buyers will have an initial endowment of {{Constants.endowment}} (Experimental Currency Units) in
         each of the trading rounds to make their decisions.</p>
 
     <p>Please click on the "Next" button to start the first round of negotiation.</p>
