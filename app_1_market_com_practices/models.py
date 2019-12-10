@@ -19,13 +19,14 @@ doc = """
 Markets
 """
 
+#TODO deal with id_in group = 0
 
 class Constants(BaseConstants):
     name_in_url = 'app_1_market_com_practices'
     players_per_group = 4
     num_rounds = 5
-    endowment = c(30)
-    see_list_cost = c(3)
+    endowment = c(25) #TODO CAMBIAR EN LAS OTRAS APPS
+    see_list_cost = c(1)
 
     packages = [i for i in range(1, 6)]
 
@@ -111,7 +112,7 @@ class Group(BaseGroup):
                     buyers_time = {}
                     for p in self.get_players():
                         if p.role() == "buyer":
-                            print("JUGADOR: " + str(p) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
+                            print("JUGADOR: " + str(p.id_in_group) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
 
                             if p.my_seller == key:
                                 print("INFO: " + str(p.package_purchased) + "key: " + str(key))
@@ -166,7 +167,7 @@ class Player(BasePlayer):
     buyer_valuation_pac3 = models.IntegerField()
     buyer_valuation_pac4 = models.IntegerField()
     buyer_valuation_pac5 = models.IntegerField()
-    bid_price = models.IntegerField()
+
     package_purchased = models.IntegerField()
     my_seller = models.IntegerField()
     paid = models.IntegerField()
