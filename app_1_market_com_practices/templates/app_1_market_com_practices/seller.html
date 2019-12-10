@@ -17,42 +17,23 @@
         </thead>
         <tbody>
             <tr>
-                <td>Role</td>
-                <td>{{ role }}</td>
-            </tr>
-            <tr>
-                <td>Seller package</td>
-                <td>{{ player.seller_package }}</td>
-            </tr>
-            <tr>
-                <td>Seller valuation</td>
-                <td>{{ player.seller_valuation }}</td>
-            </tr>
-            <tr>
-                <td>Set an initial Ask-price</td>
-                <td>{% formfield player.ask_price_ini label = "Please set an initial price" %}</td>
-            </tr>
-            {% comment %}
-            Agregar restrucción: no se puede ofrecer un valor por debajo del valuation ni igual.
-            {% endcomment %}
-            <tr>
-                <td>See full list of packages and prices at a cost of {{ Constants.see_list_cost }}?</td>
+                <td>See full list of packages and prices at a cost of</td>
                 <td>{% formfield player.see_list %}</td>
             </tr>
         </tbody>
     </table>
 
     <h2>This is master's instructions</h2>
-    <p>The package you are going to sell is XXX[Package]. The cost of this package is XXX[Cost].</p>
+    <p>The package you are going to sell is {{ player.seller_package }}. The cost of this package is {{ player.seller_valuation }}.</p>
 
-    <p>Please set the price at which you want to sell this package in the following box:</p>
+    <p></p>
 
-    <div class="form-inline"> XXX &nbsp; ECU </div>
+    <div class="form-inline"> {% formfield player.ask_price_ini label = "Please set the price at which you want to sell this package in the following box:" %}</div>
 
     <p>Remember that for you to make a profit you must sell the package at a higher price at this cost.</p>
 
     <p>Would you like to see the complete list of offers in the package market, including prices? This action will cost
-        you 1 ECU that will be deducted from your initial endowment.</p>
+        you {{Constants.see_list_cost}} that will be deducted from your initial endowment.</p>
 
     <div class="radio">
         <label><input type="radio" name="optradio" checked>Yes</label>
