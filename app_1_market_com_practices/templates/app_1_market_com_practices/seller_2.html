@@ -2,44 +2,84 @@
 {% load otree static %}
 
 {% block title %}
-    Seller (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}))
+    Decision of the seller ----- Seller (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}))
 {% endblock %}
 
 {% block content %}
 
-<table class="table table-bordered">
+    <h2>This is Master's instructions</h2>
+    {% if player.see_list == 1 %}
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">Important title here</th>
-                <th scope="col">You are Player {{player.id_in_group}}</th>
+                <th scope="col">Seller ID</th>
+                <th scope="col">Package</th>
+                <th scope="col">Price</th>
             </tr>
         </thead>
         <tbody>
-        {%if player.role == "seller" %}
             <tr>
-                <td>Your initial price was</td>
-                <td>{{ player.ask_price_ini }}</td>
-            </tr>
-        {% endif %}
-            <tr>
-                <td>Pick a commercial practice from the following list</td>
-                <td>{% formfield player.com_practice %}</td>
+                <th scope="row">1</th>
+                <td>Rome</td>
+                <td>100 ECU</td>
             </tr>
             <tr>
-                <td>Set a final Ask-price</td>
-                <td>{% formfield player.ask_price_fin %}</td>
+                <th scope="row">2</th>
+                <td>Berlin</td>
+                <td>120 ECU</td>
             </tr>
-     {% if player.see_list == 1 %}
-        {% for p in group.get_players %}
-        {% if p.role == 'seller' %}
             <tr>
-                <td> Price from Player {{p.id_in_group}}</td>
-                <td>{{p.ask_price_ini}}</td>
+                <th scope="row">3</th>
+                <td>Madrid</td>
+                <td>80 ECU</td>
             </tr>
-        {% endif %}
-        {% endfor %}
-    {% endif %}
+            <tr>
+                <th scope="row">4</th>
+                <td>Madrid</td>
+                <td>100 ECU</td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>Vienna</td>
+                <td>110 ECU</td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>Paris</td>
+                <td>130 ECU</td>
+            </tr>
+            <tr>
+                <th scope="row">7</th>
+                <td>Vienna</td>
+                <td>90 ECU</td>
+            </tr>
+            <tr>
+                <th scope="row">8</th>
+                <td>Berlin</td>
+                <td>100 ECU</td>
+            </tr>
+            <tr>
+                <th scope="row">9</th>
+                <td>Berlin</td>
+                <td>80 ECU</td>
+            </tr>
+            <tr>
+                <th scope="row">10</th>
+                <td>Rome</td>
+                <td>70 ECU</td>
+            </tr>
         </tbody>
-        </table>
+    </table>
+
+    {% else %}
+    {% endif %}
+    <p>If you wish to change the initial price to your package, please write the final price in the box below: </p>
+
+    <div class="form-inline"> XXX &nbsp; ECU </div>
+
+    <br>
+
+    <p>Once you have set up the final price please click on the "Next" button</p>
+
     {% next_button %}
 {% endblock %}
