@@ -19,6 +19,7 @@ doc = """
 Markets
 """
 
+#TODO deal with id_in group = 0
 
 class Constants(BaseConstants):
     name_in_url = 'app_1_market_com_practices'
@@ -111,7 +112,7 @@ class Group(BaseGroup):
                     buyers_time = {}
                     for p in self.get_players():
                         if p.role() == "buyer":
-                            print("JUGADOR: " + str(p) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
+                            print("JUGADOR: " + str(p.id_in_group) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
 
                             if p.my_seller == key:
                                 print("INFO: " + str(p.package_purchased) + "key: " + str(key))

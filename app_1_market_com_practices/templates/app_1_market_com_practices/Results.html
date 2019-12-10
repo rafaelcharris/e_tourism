@@ -7,6 +7,7 @@
 
 {% block content %}
 
+<p>Your results from this trading round are: </p>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -38,10 +39,12 @@
                 <td>{{ price|c}} </td>
             </tr>
 {% else %}
-            <tr>
-                <td> Did you sold this package?</td>
-                <td>{{ sold }}</td>
-            </tr>
+            {% if player.sold == False %}
+            You didn't manage to sell your tourist package. For this reason, your profit for this trading round is {{player.payoff |c}}.
+            {% else %}
+            You managed to sell your tourist package. For this reason, your profit for this trading round is: {{player.payoff |c}}
+            {% endif %}
+
 {% endif %}
             <tr>
                 <td>Your payoff</td>

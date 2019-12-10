@@ -51,7 +51,7 @@
 {%for p in group.get_players %}
     {% if p.role == "seller" %}
             <tr>
-                <td>Seller {{p.seller_id}}</td>
+                <td>Seller {{p.id_in_group}}</td>
                 <td>
                     <div class="card border-dark mb-3" style="max-width: 18rem;">
                         <h3 class="card-header">{{p.seller_package}}</h3>
