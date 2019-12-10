@@ -166,7 +166,7 @@ class Player(BasePlayer):
     buyer_valuation_pac3 = models.IntegerField()
     buyer_valuation_pac4 = models.IntegerField()
     buyer_valuation_pac5 = models.IntegerField()
-    bid_price = models.IntegerField()
+
     package_purchased = models.IntegerField()
     my_seller = models.IntegerField()
     paid = models.IntegerField()

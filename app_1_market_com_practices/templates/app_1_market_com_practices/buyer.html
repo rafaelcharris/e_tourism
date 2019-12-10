@@ -6,19 +6,17 @@
 {% endblock %}
 
 {% block content %}
+
+ <p>In the following table you will be able to see each one of the packages with its respective private valuation.</p>
     <h2> Rafa's Instructions</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">Important title here</th>
-                <th scope="col"></th>
+                <th scope="col">Package</th>
+                <th scope="col">Value</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Role</td>
-                <td>{{ role }}</td>
-            </tr>
             <tr>
                 <td>Your ID is</td>
                 <td>{{ player.id_in_group }}</td>
@@ -36,26 +34,37 @@
         </tbody>
     </table>
 
+
+    <p>On this page you will be able to see the complete list of package offers with their respective prices. Remember,
+        in order to purchase a package, it must be priced lower than or equal to the private value you received for that
+        package or the transaction will be canceled.</p>
+
+
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">Market Post</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">Seller ID</th>
+                <th scope="col">Offer</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Supplier</td>
-                <td>Package</td>
-                <td>Price</td>
-                <td>Purchase</td>
-            </tr>
+
 {%for p in group.get_players %}
     {% if p.role == "seller" %}
             <tr>
                 <td>Seller {{p.seller_id}}</td>
-                <td>{{p.seller_package}}</td>
+                <td>
+                    <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <h3 class="card-header">{{player.package}}</h3>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">{{p.ask_price_fin}} </h5>
+                            <br>
+                            <p class="card-text">Best price guaranteed</p>
+                            <hr class="my-4">
+                            <button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
+                        </div>
+                    </div>
+                </td>
                 <td>
                 {% if p.com_practice == 1 %}
                     {{p.ask_price_fin}}
@@ -69,7 +78,7 @@
                     {{p.ask_price_fin}}
                 {% endif %}
                 </td>
-                <td><button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Purchase</button>
+                <td><button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
                 </td>
             </tr>
     {% endif %}
@@ -77,50 +86,16 @@
         </tbody>
         </table>
 
+    <p>Once you click on the "Buy" button your payment will be calculated for this trading round.</p>
+
+
     <h2> Master's Instructions</h2>
 
-    <p>In the following table you will be able to see each one of the packages with its respective private valuation.</p>
 
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">Package</th>
-                <th scope="col">Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>Paris</th>
-                <td> 50 ECU</td>
-            </tr>
-            <tr>
-                <th>Madrid</th>
-                <td> 70 ECU</td>
-            </tr>
-            <tr>
-                <th>Rome</th>
-                <td> 60 ECU</td>
-            </tr>
-            <tr>
-                <th>Berlin</th>
-                <td> 80 ECU</td>
-            </tr>
-            <tr>
-                <th>Vienna</th>
-                <td> 90 ECU</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <p>On this page you will be able to see the complete list of package offers with their respective prices. Remember,
-        in order to purchase a package, it must be priced lower than or equal to the private value you received for that
-        package or the transaction will be canceled.</p>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">Seller ID</th>
-                <th scope="col">Offer</th>
             </tr>
         </thead>
         <tbody>
@@ -277,7 +252,7 @@
         </tbody>
     </table>
 
-    <p>Once you click on the "Buy" button your payment will be calculated for this trading round.</p>
+
 
     {% next_button %}
 
