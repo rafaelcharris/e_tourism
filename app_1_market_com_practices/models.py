@@ -30,6 +30,7 @@ class Constants(BaseConstants):
 
     packages = [i for i in range(1, 6)]
 
+    cities =["Rome", "Vienna", "Paris", "Madrid", "Berlin"]
 
     seller_valuations = [70, 60, 50, 50, 40, 40, 30, 20, 10, 10]
     buyer_valuations = [100, 100, 90, 80, 80, 70, 60, 60, 50, 40]
@@ -63,12 +64,12 @@ class Subsession(BaseSubsession):
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
-                    p.participant.vars["valuations"] = dict(zip(Constants.packages, numpy.random.choice(Constants.buyer_valuations, size =5, replace = False)))
-                    p.buyer_valuation_pac1 = p.participant.vars["valuations"].get(1)
-                    p.buyer_valuation_pac2 = p.participant.vars["valuations"].get(2)
-                    p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
-                    p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
-                    p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
+                    p.participant.vars["valuations"] = dict(zip(zip(Constants.packages, Constants.cities), numpy.random.choice(Constants.buyer_valuations, size = 5, replace = False)))
+                    #p.buyer_valuation_pac1 = p.participant.vars["valuations"].get(1)
+                    #p.buyer_valuation_pac2 = p.participant.vars["valuations"].get(2)
+                    #p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
+                    #p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
+                    #p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
 
                     id_b = itertools.cycle([i for i in range(1, 11)])
                 #todo fix this id. They don't work as it should
@@ -141,7 +142,16 @@ class Player(BasePlayer):
             return 'seller'
 
     #Seller
-    seller_package = models.IntegerField()
+    seller_package = models.IntegerField(choices =
+    [
+        [0, "None"],
+        [1, "Rome"],
+        [2, "Vienna"],
+        [3, "Paris"],
+        [4, "Madrid"],
+        [5, "Berlin"]
+
+    ])
     seller_valuation = models.IntegerField()
     ask_price_ini = models.IntegerField()
 
@@ -167,6 +177,17 @@ class Player(BasePlayer):
     buyer_valuation_pac3 = models.IntegerField()
     buyer_valuation_pac4 = models.IntegerField()
     buyer_valuation_pac5 = models.IntegerField()
+
+    buyer_packages = models.IntegerField(choices =
+    [
+        [0, "None"],
+        [1, "Rome"],
+        [2, "Vienna"],
+        [3, "Paris"],
+        [4, "Madrid"],
+        [5, "Berlin"]
+    ]
+    )
 
     package_purchased = models.IntegerField()
     my_seller = models.IntegerField()
