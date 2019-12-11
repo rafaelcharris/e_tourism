@@ -6,6 +6,11 @@
 {% endblock %}
 
 {% block content %}
+<script>
+$(document).ready(function() {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 
  <p>In the following table you will be able to see each one of the packages with its respective private valuation.</p>
     <table class="table table-bordered">
@@ -64,7 +69,9 @@
                             <br>
                             <h5 class="card-title">{{p.ask_price_fin|c}} </h5>
                             {% elif p.com_practice == 3 %}
-                            <h5 class="card-title">{{p.ask_price_fin}}* </h5>
+                            <h5 class="card-title">
+                               {{p.ask_price_fin}} <a href = # data-toggle="tooltip" title = "{{p.ask_price_fin}} + 5 ECU" data-original-title="Default tooltip">*</a>
+                            </h5>
                             {% else %}
                             <h5 class="card-title">{{p.ask_price_fin}} </h5>
                             {% endif %}
