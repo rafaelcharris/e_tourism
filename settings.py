@@ -24,13 +24,13 @@ SESSION_CONFIGS = [
         app_sequence = ['app_1_market_com_practices'],
         use_browser_bots = False,
     ),
-    dict(
-        name='e_tourism_market_buyer_ev',
-        display_name="Market Informal Sanction",
-        num_demo_participants=4,
-        app_sequence=['app_2_informal_sanction'],
-        use_browser_bots=False,
-    ),
+   # dict(
+   #     name='e_tourism_market_buyer_ev',
+   #     display_name="Market Informal Sanction",
+   #     num_demo_participants=4,
+   #     app_sequence=['app_2_informal_sanction'],
+   #     use_browser_bots=False,
+   # ),
     dict(
         name='e_tourism_market_regret',
         display_name="Market Regret",

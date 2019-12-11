@@ -90,34 +90,35 @@ class Group(BaseGroup):
         sellers =[]
         for p in self.get_players():
             if p.role() == "buyer":
-                the_seller = self.get_player_by_id(p.my_seller)
-                p.package_purchased = the_seller.seller_package
-                sellers.append(the_seller.id_in_group)
+                if p.my_seller > 0:
+                    the_seller = self.get_player_by_id(p.my_seller)
+                    p.package_purchased = the_seller.seller_package
+                    sellers.append(the_seller.id_in_group)
 
         if len(sellers) != len(set(sellers)): #si la length de ambas listas difiere, signiifca que hay algun repetido que set elimino (porque en los sets no puede haber repetidos)
             sellers_dic = dict(collections.Counter(sellers))
             print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
 
             for key, value in sellers_dic.items():
+                #Si el número de paquetes que el vendedor jey vendio es mayor a 1
                 if value > 1:
-                    print("THIS WORKS: " + str(key))
                     buyers_time = {}
                     for p in self.get_players():
                         if p.role() == "buyer":
-                            print("JUGADOR: " + str(p) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
+                            print("JUGADOR: " + str(p) + " PAQUETE: " + str(p.package_purchased) + " VENDEDOR: " + str(key))
 
                             if p.my_seller == key:
                                 print("INFO: " + str(p.package_purchased) + "key: " + str(key))
                                 buyers_time[p.id_in_group] = p.time_spent
                                 print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
-                            else:
-                                print("EL COMPRADOR DEL JUGADOR NO ES IGUAL AL QUE SE REPITE")
+
 
 
                     print("DICTIONARY: " + str(buyers_time))
                     # after looping over all players I have here buyers and times
                     # get the one with tge less time
                     real_buyer = min(buyers_time, key = buyers_time.get)
+                    print("REAL BUYER ACÁ" + str(real_buyer) )
                     for jugador in buyers_time.keys():
                         if jugador != real_buyer:
                             b = self.get_player_by_id(jugador)
@@ -160,7 +161,7 @@ class Player(BasePlayer):
 
     package_purchased = models.IntegerField()
     my_seller = models.IntegerField(initial= 0)
-    paid = models.IntegerField()
+    paid = models.IntegerField(initial = 0)
 
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()

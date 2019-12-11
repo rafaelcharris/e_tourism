@@ -21,7 +21,7 @@
         {% if p.role == 'seller' %}
             <tr>
                 <td> {{p.id_in_group}}</td>
-                <td> {{p.get_seller_package_display}}</td>
+                <td> {{p.seller_package}}</td>
                 <td> {{p.ask_price_ini|c}}</td>
             </tr>
         {% endif %}
