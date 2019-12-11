@@ -55,7 +55,7 @@ class seller_2(Page):
             role = self.player.role()
         )
 #TODO: On the options list values should be shown with ECU con the side.
-#TODO: Fix how Drip price is displayed in buyer ppage. If final price is 80, drip proce should show 78*.
+
 class buyer(Page):
 
     timeout_seconds = 500
