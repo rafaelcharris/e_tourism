@@ -41,6 +41,7 @@ class SellerWaitPage(WaitPage):
     title_text = "Please Wait"
     body_text = "Please wait while the other sellers set their prices"
 
+#TODO: Fix sellers IDs so they show from 1 to 10 instead of 1 to 19
 class seller_2(Page):
     form_model = 'player'
     form_fields = [
@@ -53,9 +54,10 @@ class seller_2(Page):
         dict(
             role = self.player.role()
         )
-
+#TODO: On the options list values should be shown with ECU con the side.
+#TODO: Fix how Drip price is displayed in buyer ppage. If final price is 80, drip proce should show 78*.
 class buyer(Page):
-    timeout_seconds = 10
+    timeout_seconds = 500
     form_model = 'player'
     form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
@@ -79,6 +81,7 @@ class buyer(Page):
 class ResultsWaitPage(WaitPage):
     pass
 
+#TODO: Fix "You was too late..." for "It took you too long to make a decision. For this reason, your profit for this trading round are 0."
 class Results(Page):
     def vars_for_template(self):
         self.group.set_payoff()

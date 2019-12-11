@@ -38,7 +38,6 @@ class Constants(BaseConstants):
 
     instructions_template ='app_1_market_com_practices/instructions.html'
 
-
 class Subsession(BaseSubsession):
 
     def creating_session(self):
