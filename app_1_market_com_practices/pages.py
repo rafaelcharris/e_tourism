@@ -6,7 +6,6 @@ class instructions(Page):
     form_model = 'player'
 
 
-
 class instructions_2(Page):
     pass
 
