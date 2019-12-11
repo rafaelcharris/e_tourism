@@ -90,9 +90,10 @@ class Group(BaseGroup):
         sellers =[]
         for p in self.get_players():
             if p.role() == "buyer":
-                the_seller = self.get_player_by_id(p.my_seller)
-                p.package_purchased = the_seller.seller_package
-                sellers.append(the_seller.id_in_group)
+                if p.my_seller > 0:
+                    the_seller = self.get_player_by_id(p.my_seller)
+                    p.package_purchased = the_seller.seller_package
+                    sellers.append(the_seller.id_in_group)
 
         if len(sellers) != len(set(sellers)): #si la length de ambas listas difiere, signiifca que hay algun repetido que set elimino (porque en los sets no puede haber repetidos)
             sellers_dic = dict(collections.Counter(sellers))
@@ -110,8 +111,7 @@ class Group(BaseGroup):
                                 print("INFO: " + str(p.package_purchased) + "key: " + str(key))
                                 buyers_time[p.id_in_group] = p.time_spent
                                 print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
-                            else:
-                                print("EL COMPRADOR DEL JUGADOR NO ES IGUAL AL QUE SE REPITE")
+
 
 
                     print("DICTIONARY: " + str(buyers_time))
@@ -161,7 +161,7 @@ class Player(BasePlayer):
 
     package_purchased = models.IntegerField()
     my_seller = models.IntegerField(initial= 0)
-    paid = models.IntegerField()
+    paid = models.IntegerField(initial = 0)
 
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()

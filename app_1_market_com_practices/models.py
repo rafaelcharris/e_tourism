@@ -64,7 +64,10 @@ class Subsession(BaseSubsession):
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
-                    p.participant.vars["valuations"] = dict(zip(zip(Constants.packages, Constants.cities), numpy.random.choice(Constants.buyer_valuations, size = 5, replace = False)))
+                    random_package = numpy.random.choice(Constants.buyer_valuations, size = 5, replace = False)
+                    p.participant.vars["valuations_package"] = dict(zip(Constants.packages, random_package))
+                    p.participant.vars["valuations"] = dict(zip(zip(Constants.packages, Constants.cities), random_package))
+
                     #p.buyer_valuation_pac1 = p.participant.vars["valuations"].get(1)
                     #p.buyer_valuation_pac2 = p.participant.vars["valuations"].get(2)
                     #p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
@@ -88,7 +91,8 @@ class Group(BaseGroup):
                     the_seller.sold = True
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
-                    p.payoff = p.participant.vars['valuations'].get(p.package_purchased) - p.paid
+                    p.payoff = p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid
+                    #TODO fix pay function. it depends on there beign a dictionary between packages and valuations
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = 0
@@ -99,9 +103,10 @@ class Group(BaseGroup):
         sellers =[]
         for p in self.get_players():
             if p.role() == "buyer":
-                the_seller = self.get_player_by_id(p.my_seller)
-                p.package_purchased = the_seller.seller_package
-                sellers.append(the_seller.id_in_group)
+                if p.my_seller > 0:
+                    the_seller = self.get_player_by_id(p.my_seller)
+                    p.package_purchased = the_seller.seller_package
+                    sellers.append(the_seller.id_in_group)
 
         if len(sellers) != len(set(sellers)): #si la length de ambas listas difiere, signiifca que hay algun repetido que set elimino (porque en los sets no puede haber repetidos)
             sellers_dic = dict(collections.Counter(sellers))
@@ -119,8 +124,6 @@ class Group(BaseGroup):
                                 print("INFO: " + str(p.package_purchased) + "key: " + str(key))
                                 buyers_time[p.id_in_group] = p.time_spent
                                 print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
-                            else:
-                                print("EL COMPRADOR DEL JUGADOR NO ES IGUAL AL QUE SE REPITE")
 
 
                     print("DICTIONARY: " + str(buyers_time))
@@ -190,7 +193,7 @@ class Player(BasePlayer):
     )
 
     package_purchased = models.IntegerField()
-    my_seller = models.IntegerField()
-    paid = models.IntegerField()
+    my_seller = models.IntegerField(initial = 0)
+    paid = models.IntegerField(initial = 0)
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()
