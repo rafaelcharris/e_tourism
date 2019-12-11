@@ -55,7 +55,7 @@ class seller_2(Page):
         )
 
 class buyer(Page):
-    #timeout_seconds = 60
+    timeout_seconds = 10
     form_model = 'player'
     form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
