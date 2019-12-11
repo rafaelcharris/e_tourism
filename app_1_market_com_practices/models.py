@@ -19,7 +19,6 @@ doc = """
 Markets
 """
 
-#TODO deal with id_in group = 0
 
 class Constants(BaseConstants):
     name_in_url = 'app_1_market_com_practices'
@@ -66,7 +65,6 @@ class Subsession(BaseSubsession):
                     random_package = numpy.random.choice(Constants.buyer_valuations, size = 5, replace = False)
                     p.participant.vars["valuations_package"] = dict(zip(Constants.packages, random_package))
                     p.participant.vars["valuations"] = dict(zip(zip(Constants.packages, Constants.cities), random_package))
-
                     #p.buyer_valuation_pac1 = p.participant.vars["valuations"].get(1)
                     #p.buyer_valuation_pac2 = p.participant.vars["valuations"].get(2)
                     #p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
@@ -91,7 +89,6 @@ class Group(BaseGroup):
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
                     p.payoff = p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid
-                    #TODO fix pay function. it depends on there beign a dictionary between packages and valuations
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = 0
