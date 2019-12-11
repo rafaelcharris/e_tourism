@@ -99,12 +99,12 @@ class Group(BaseGroup):
             print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
 
             for key, value in sellers_dic.items():
+                #Si el número de paquetes que el vendedor jey vendio es mayor a 1
                 if value > 1:
-                    print("THIS WORKS: " + str(key))
                     buyers_time = {}
                     for p in self.get_players():
                         if p.role() == "buyer":
-                            print("JUGADOR: " + str(p) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
+                            print("JUGADOR: " + str(p) + " PAQUETE: " + str(p.package_purchased) + " VENDEDOR: " + str(key))
 
                             if p.my_seller == key:
                                 print("INFO: " + str(p.package_purchased) + "key: " + str(key))
@@ -118,6 +118,7 @@ class Group(BaseGroup):
                     # after looping over all players I have here buyers and times
                     # get the one with tge less time
                     real_buyer = min(buyers_time, key = buyers_time.get)
+                    print("REAL BUYER ACÁ" + str(real_buyer) )
                     for jugador in buyers_time.keys():
                         if jugador != real_buyer:
                             b = self.get_player_by_id(jugador)
