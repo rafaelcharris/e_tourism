@@ -26,6 +26,7 @@
             </tr>
 
 {% if player.role == 'buyer' %}
+    {% if player.package_purchased > 0 %}
             <tr>
                 <td>Package purchased</td>
                 <td>{{ package }}</td>
@@ -38,6 +39,9 @@
                 <td> Price</td>
                 <td>{{ price|c}} </td>
             </tr>
+    {% else %}
+            YOU WAS TOO LATE AND WAS NOT ABLE TO BUY ANYTHING
+    {% endif %}
 {% else %}
             {% if player.sold == False %}
             You didn't manage to sell your tourist package. For this reason, your profit for this trading round is {{player.payoff |c}}.
