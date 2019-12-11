@@ -19,7 +19,6 @@ doc = """
 Markets
 """
 
-#TODO deal with id_in group = 0
 
 class Constants(BaseConstants):
     name_in_url = 'app_1_market_com_practices'
