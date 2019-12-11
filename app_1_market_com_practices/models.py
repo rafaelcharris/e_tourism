@@ -132,6 +132,10 @@ class Group(BaseGroup):
                             b.package_purchased = 0
                             b.payoff = 0
 
+    def drip_price(self):
+        for p in self.get_players():
+            p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
+
 class Player(BasePlayer):
 
     def role(self):
@@ -139,6 +143,9 @@ class Player(BasePlayer):
             return 'buyer'
         else:
             return 'seller'
+
+    drip = models.IntegerField(initial = 0)
+
 
     #Seller
     seller_package = models.IntegerField(choices =
