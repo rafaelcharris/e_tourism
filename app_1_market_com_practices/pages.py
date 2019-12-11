@@ -86,7 +86,6 @@ class buyer(Page):
 class ResultsWaitPage(WaitPage):
     pass
 
-#TODO: Fix "You was too late..." for "It took you too long to make a decision. For this reason, your profit for this trading round are 0."
 class Results(Page):
     def vars_for_template(self):
         self.group.set_payoff()
