@@ -141,6 +141,9 @@ class Player(BasePlayer):
         else:
             return 'seller'
 
+    drip = models.IntegerField(initial = 0)
+
+
     #Seller
     seller_package = models.IntegerField(choices =
     [

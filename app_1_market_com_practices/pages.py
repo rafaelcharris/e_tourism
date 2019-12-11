@@ -62,9 +62,16 @@ class buyer(Page):
     def is_displayed(self):
         return self.player.role() != 'seller'
 
+
+
     def vars_for_template(self):
         import time
         self.player.time_spent = time.time()
+
+        if self.player.role() == "seller":
+            self.player.drip = self.player.ask_price_fin - c(1)
+            print("THIS IS THA DRIP:" + str(self.player.drip))
+
         return dict(
             role = self.participant.vars['role'],
             pac_val = self.participant.vars['valuations'],
