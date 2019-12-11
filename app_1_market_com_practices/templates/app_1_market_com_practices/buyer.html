@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    Buyer (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}))
+    Decision of the buyer (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}))
 {% endblock %}
 
 {% block content %}
@@ -21,8 +21,7 @@
                 <td>{{ player.id_in_group }}</td>
             </tr>
             <tr>
-                <td><b>Private valuations for packages</b></td>
-                <td></td>
+                <td colspan="2"><b>Private valuations for packages</b></td>
             </tr>
             {% for pac, val in pac_val.items %}
             <tr>
