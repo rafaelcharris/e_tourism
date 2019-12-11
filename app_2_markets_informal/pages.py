@@ -3,7 +3,13 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 class instructions(Page):
+    form_model = 'player'
+
+
+
+class instructions_2(Page):
     pass
+
 
 class MyWaitPage(WaitPage):
     def is_displayed(self):
@@ -15,7 +21,10 @@ class MyWaitPage(WaitPage):
 
 class seller(Page):
     form_model = 'player'
-    form_fields = ['ask_price_ini', 'see_list']
+    form_fields = ['ask_price_ini',
+                   'see_list',
+                   'com_practice'
+                   ]
 
     def is_displayed(self):
         return self.player.role() != 'buyer'
@@ -36,7 +45,6 @@ class SellerWaitPage(WaitPage):
 class seller_2(Page):
     form_model = 'player'
     form_fields = [
-        'com_practice',
         'ask_price_fin'
     ]
     def is_displayed(self):
@@ -48,9 +56,9 @@ class seller_2(Page):
         )
 
 class buyer(Page):
+    timeout_seconds = 60
     form_model = 'player'
     form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
-    timeout_seconds = 60 #tiempo para que la página pase
 
     def is_displayed(self):
         return self.player.role() != 'seller'
@@ -68,15 +76,14 @@ class buyer(Page):
             pac4 = self.player.buyer_valuation_pac4,
             pac5 = self.player.buyer_valuation_pac5
         )
-    #todo agregar página/expandible de
 
 class ResultsWaitPage(WaitPage):
     pass
 
 class Results(Page):
-
     def vars_for_template(self):
         self.group.set_payoff()
+        self.group.who_purchased()
 
         return dict(
             role = self.participant.vars['role'],
@@ -90,6 +97,7 @@ class Results(Page):
 
 
 page_sequence = [instructions,
+                 instructions_2,
                  seller,
                  SellerWaitPage,
                  seller_2,

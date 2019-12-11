@@ -55,7 +55,7 @@ class seller_2(Page):
         )
 
 class buyer(Page):
-    timeout_seconds = 60
+    #timeout_seconds = 60
     form_model = 'player'
     form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
 
@@ -69,11 +69,11 @@ class buyer(Page):
             role = self.participant.vars['role'],
             pac_val = self.participant.vars['valuations'],
             #parece que esto que sigue es innecesario
-            pac1 = self.player.buyer_valuation_pac1,
-            pac2 = self.player.buyer_valuation_pac2,
-            pac3 = self.player.buyer_valuation_pac3,
-            pac4 = self.player.buyer_valuation_pac4,
-            pac5 = self.player.buyer_valuation_pac5
+            #pac1 = self.player.buyer_valuation_pac1,
+            #pac2 = self.player.buyer_valuation_pac2,
+            #pac3 = self.player.buyer_valuation_pac3,
+            #pac4 = self.player.buyer_valuation_pac4,
+            #pac5 = self.player.buyer_valuation_pac5
         )
 
 class ResultsWaitPage(WaitPage):
