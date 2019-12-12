@@ -11,7 +11,7 @@ from otree.api import (
 import itertools
 import numpy
 import collections
-import pandas as pd
+from statistics import mean
 
 author = 'UEC'
 
@@ -144,7 +144,7 @@ class Group(BaseGroup):
                 prices.append(p.ask_price_fin)
         for p in self.get_players():
             if p.role() == "seller":
-                p.over_average = 0 if p.ask_price_fin <= pd.mean(prices) else 1
+                p.over_average = 0 if p.ask_price_fin <= mean(prices) else 1
 
 class Player(BasePlayer):
 
