@@ -97,7 +97,7 @@ class Results(Page):
     def vars_for_template(self):
         self.group.set_payoff()
         self.group.who_purchased()
-        self.group.times_reported()
+        self.group.get_times_reported()
 
         return dict(
             role = self.participant.vars['role'],

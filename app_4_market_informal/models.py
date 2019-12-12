@@ -82,6 +82,8 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
+    penalty_bonus = models.IntegerField()
+
     def set_payoff(self):
         for p in self.get_players():
             if p.role() == "buyer":
@@ -140,17 +142,25 @@ class Group(BaseGroup):
         for p in self.get_players():
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
 
-    def times_reported(self):
+    def get_times_reported(self):
         for p in self.get_players():
             if p.role() == "buyer":
-                seller_rep = self.get_player_by_id(p.report_seller)
-                seller_rep.times_reported +=1
+                if p.report is True:
+                    seller_rep = self.get_player_by_id(p.report_seller)
+                    seller_rep.times_reported += 1
+
         for p in self.get_players():
             if p.role() == "seller":
-                p.penalty = Constants.report_penalty * p.times_reported if p.times_reported > 3 else 0
+                p.penalty = int(Constants.report_penalty) * int(p.times_reported) if p.times_reported > 3 else 0
                 p.payoff -= p.penalty
-            else:
-                p.payoff += p.penalty/(Constants.players_per_group/2)
+                self.penalty_bonus = p.penalty//(Constants.players_per_group//2)
+
+        if self.penalty_bonus > 0:
+            for p in self.get_players():
+                if p.role() == "buyers":
+                    p.payoff += self.penalty_bonus
+
+
 class Player(BasePlayer):
 
     def role(self):
@@ -190,7 +200,7 @@ class Player(BasePlayer):
 
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
-    times_reported = models.IntegerField()
+    times_reported = models.IntegerField(initial = 0)
     penalty = models.IntegerField()
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
