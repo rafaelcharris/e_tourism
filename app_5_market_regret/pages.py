@@ -72,6 +72,7 @@ class buyer(Page):
         import time
         self.player.time_spent = time.time()
         self.group.drip_price()
+        self.group.average_price()
 
         return dict(
             role = self.participant.vars['role'],
