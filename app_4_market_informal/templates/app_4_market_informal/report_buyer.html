@@ -2,16 +2,19 @@
 {% load otree static %}
 
 {% block title %}
-Report Sellers
+Decision of the Buyer
 {% endblock %}
 
 {% block content %}
+
+    <p>Please select a seller that you believe was using a commercial practice untruthfully.</p>
 
 <table class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">Seller ID</th>
                 <th scope="col">Offer</th>
+                 <th scope="col">Select a Seller</th>
             </tr>
         </thead>
         <tbody>
@@ -42,6 +45,9 @@ Report Sellers
                             <button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
                         </div>
                     </div>
+                </td>
+                <td>
+                    <input type="checkbox">
                 </td>
     {% endif %}
 {% endfor %}
