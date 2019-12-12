@@ -1,0 +1,226 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Decision of the seller (Period {{ subsession.round_number }} of {{ Constants.num_rounds }})
+{% endblock %}
+
+{% block content %}
+    <table class="table table-bordered">
+
+        <tbody>
+        <tr>
+                <td>Your seller ID is:</td>
+                <td> {{player.id_in_group}} </td>
+        </tr>
+            <tr>
+                <td>The package you are going to sell is:</td>
+                <td> {{player.get_seller_package_display}} </td>
+            </tr>
+            <tr>
+                <td>The cost of this package is: </td>
+                <td> {{player.seller_valuation |c}}</td>
+            </tr>
+            <tr>
+                <td>Please set the price at which you want to sell this package in the following box: <br>
+                Remember that for you to make a profit you must sell the package at a higher price than its cost.</td>
+                <td><div class = "form-inline"> {{ form.ask_price_ini}} &nbsp; ECU</div></td>
+            </tr>
+            <tr>
+                <td>Would you like to see the complete list of offers in the package market, including prices? <br>
+                    This action will cost you {{Constants.see_list_cost}} that will be deducted from your initial endowment. </td>
+                <td>{{ form.see_list }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+    <p>Additionally, you can choose a commercial practice to help you make your package more attractive in the market. There
+        are three commercial practices available that sellers will be able to use for this purpose.</p>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Commercial Practice</th>
+                <th scope="col">Definition</th>
+                <th scope="col">Example</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Best Price Guarantee</th>
+                <td>This commercial practice allows you to make the announcement that, among all packages with the same
+                    destination, this one has the lowest price.</td>
+                <td>Suppose you offer the package to Rome. There may be other sellers in the market selling the same
+                    package to Rome, but if you opt for this commercial practice, you would be saying that, of all the
+                    packages to Rome, yours is the cheapest.</td>
+            </tr>
+            <tr>
+                <th scope="row">Reference Pricing</th>
+                <td>This commercial practice allows you to make the announcement that between the first price you
+                    proposed and the end, you offered a discount.</td>
+                <td>Suppose you offer a package to Rome. You can claim that you made a discount between the first price
+                    you bid of 60 ECU and the final (the one you confirmed after deciding whether or not to observe the
+                    competition)</td>
+            </tr>
+            <tr>
+                <th scope="row">Drip pricing</th>
+                <td>This commercial practice allows you to display a price for the package you are bidding that is less
+                    than the total price you are asking for it. The difference between the actual price and the price
+                    you are displaying is equal to the cost for viewing the full list of packages (2 ECU), regardless
+                    of whether you decided to pay this cost or not.</td>
+                <td>Suppose you offer a package to Rome and the price you claim for this package is 80 ECU. If you
+                    decide to use this commercial practice, your offer will appear with a price of 78 ECU*, with a note
+                    indicating the total price.</td>
+        </tbody>
+    </table>
+
+    <p>Notice that these commercial practices can be used truthfully (case 1) or untruthfully (case 2). Using the
+        examples in the table above, in the following table you will find each of the commercial practices and the
+        examples for case 1 and case 2.</p>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Commercial Practice</th>
+                <th scope="col">Case 1 (truthful)</th>
+                <th scope="col">Case 2 (untruthful)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Best Price Guarantee</th>
+                <td>1) When there is no other package to Rome. 2) When there exists at least another package to Rome
+                    and the latter has a larger price.</td>
+                <td>1) When there exists at least another package to Rome and the latter has a smaller price.</td>
+            </tr>
+            <tr>
+                <th scope="row">Reference Pricing</th>
+                <td>1) Use of the real discount.</td>
+                <td>1) Use of the real discount plus 20 ECU.</td>
+            </tr>
+            <tr>
+                <th scope="row">Drip pricing</th>
+                <td>1) When the seller shows the Price minus the cost to see the first offer of the other sellers.</td>
+                <td>1) When the seller decides not to see the prices of the competitors but still show the price net of this cost.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>Remember that it is your decision whether or not to use any of these commercial practices.</p>
+
+    <p>In the table below you can see what your bid would look like in the list of bids with each of the business
+        practices if you decided to use one of them.</p>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Commercial Practice</th>
+                <th scope="col">Chosen</th>
+                <th scope="col">Unchosen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Best Price Guarantee</th>
+                <td>
+                    <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <h3 class="card-header">Rome</h3>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">80 ECU</h5>
+                            <br>
+                            <br>
+                            <hr class="my-4">
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <h3 class="card-header">Rome</h3>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">80 ECU</h5>
+                            <br>
+                            <p class="card-text">Best price guaranteed</p>
+                            <hr class="my-4">
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Reference Pricing</th>
+                <td>
+                    <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <h3 class="card-header">Rome</h3>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">80 ECU</h5>
+                            <br>
+                            <br>
+                            <hr class="my-4">
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <h3 class="card-header">Rome</h3>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title"><del> 100 ECU </del></h5>
+                            <h5 class="card-title">80 ECU</h5>
+                            <br>
+                            <hr class="my-4">
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Drip pricing</th>
+                <td>
+                    <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <h3 class="card-header">Rome</h3>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">80 ECU</h5>
+                            <br>
+                            <br>
+                            <hr class="my-4">
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <h3 class="card-header">Rome</h3>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title"> 78 ECU*</h5>
+                            <br>
+                            <br>
+                            <hr class="my-4">
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Buy</a>
+                        </div>
+                    </div>
+                </td>
+        </tbody>
+    </table>
+
+<table class="table table-bordered">
+     <thead>
+            <tr>
+                <th colspan="2">Choose a commercial practice</th>
+            </tr>
+     </thead>
+        <tbody>
+            <tr>
+                <td>Now that you know how your offer will look if you choose a commercial practice, choose one from the following list: </td>
+                <td> {{ form.com_practice }} </td>
+            </tr>
+        </tbody>
+</table>
+
+    <p>Please click on the "Next" button to see the complete list of offers and prices in the market and to define the
+        final price of the package you are going to sell.</p>
+
+    {% next_button %}
+{% endblock %}
