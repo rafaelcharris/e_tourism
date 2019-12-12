@@ -33,7 +33,7 @@
     {% if player.package_purchased > 0 %}
             <tr>
                 <td>Package purchased</td>
-                <td>{{ package }}</td>
+                <td>{{ player.package_purchased_display }}</td>
             </tr>
             <tr>
                 <td> Seller </td>
@@ -43,8 +43,7 @@
                 <td> Price</td>
                 <td>{{ price|c}} </td>
             </tr>
-        </tbody>
-    </table>
+
     {% else %}
             <p>You took you too long to make a decision. For this reason, your profit for this trading round is 0.<br> </p>
     {% endif %}
@@ -56,5 +55,7 @@
             {% endif %}
 
 {% endif %}
+    </tbody>
+</table>
     {% next_button %}
 {% endblock %}
