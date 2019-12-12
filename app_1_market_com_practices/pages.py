@@ -59,7 +59,7 @@ class buyer(Page):
 
     timeout_seconds = 500
     form_model = 'player'
-    form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
+    form_fields = ['my_seller']
 
     def is_displayed(self):
         return self.player.role() != 'seller'
