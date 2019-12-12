@@ -84,7 +84,7 @@ class buyer(Page):
 class report_buyer(Page):
 
     def is_displayed(self):
-        self.player.report is True
+        return self.player.report is True
 
 class ResultsWaitPage(WaitPage):
     pass

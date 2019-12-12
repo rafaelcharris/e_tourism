@@ -118,9 +118,20 @@ $(document).ready(function() {
         </tbody>
         </table>
 
-    Would you like to report sellers for their commertial practices?
+    <p>Remember that you have the ability to report the untruthful use of commercial practices by a seller. If you
+        believe that a seller has used the commercial practices untruthfully, please check that seller on the next
+        page.</p>
 
-    <p>Once you click on the "Buy" button your payment will be calculated for this trading round.</p>
+    <p>If at least 3 buyers report the same seller for using a commercial practice untruthfully, the seller will have
+        to pay a fine. This fine will be 6 ECU plus 2 ECU for each additional buyer who reports it. The amount of
+        the fine will be divided equally among the buyers who reported the seller.</p>
+
+    <p> Would you like to report a seller? Reporting will cost you 1 ECU that will be deducted from your initial
+    endowment </p>
+    <div class = "form-inline">{{form.report}} </div>
+
+    <p>Once you click on the "Buy" button, you will be see the next page where you can report a seller if you chose to.</p>
+
 
     {% next_button %}
 
