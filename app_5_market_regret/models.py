@@ -138,10 +138,14 @@ class Group(BaseGroup):
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
 
     def average_price(self):
+        pac_prices = {}
         prices = []
+        package =[]
         for p in self.get_players():
             if p.role() == "seller":
                 prices.append(p.ask_price_fin)
+                package.append(p.seller_package)
+                #TODO sacar el promedio por paquete y hacer la comparación!
         for p in self.get_players():
             if p.role() == "seller":
                 p.over_average = 0 if p.ask_price_fin <= mean(prices) else 1
