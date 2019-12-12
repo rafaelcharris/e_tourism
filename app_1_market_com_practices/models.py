@@ -88,6 +88,8 @@ class Group(BaseGroup):
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
                     p.payoff = p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid
+                    print("VALUATION DEL PAQUETE: " + str(p.participant.vars['valuations_package'].get(p.package_purchased)))
+
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = 0
@@ -194,7 +196,16 @@ class Player(BasePlayer):
     ]
     )
 
-    package_purchased = models.IntegerField()
+    package_purchased = models.IntegerField( choices =
+        [
+            [0, "None"],
+            [1, "Rome"],
+            [2, "Vienna"],
+            [3, "Paris"],
+            [4, "Madrid"],
+            [5, "Berlin"]
+        ]
+    )
     my_seller = models.IntegerField(initial = 0)
     paid = models.IntegerField(initial = 0)
     buyer_id = models.IntegerField()

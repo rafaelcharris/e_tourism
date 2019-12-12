@@ -220,7 +220,16 @@ class Player(BasePlayer):
     ]
     )
 
-    package_purchased = models.IntegerField()
+    package_purchased = models.IntegerField( choices =
+        [
+            [0, "None"],
+            [1, "Rome"],
+            [2, "Vienna"],
+            [3, "Paris"],
+            [4, "Madrid"],
+            [5, "Berlin"]
+        ]
+    )
     my_seller = models.IntegerField(initial = 0)
     paid = models.IntegerField(initial = 0)
     buyer_id = models.IntegerField()
