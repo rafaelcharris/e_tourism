@@ -54,7 +54,6 @@ class seller_2(Page):
         dict(
             role = self.player.role()
         )
-#TODO: On the options list values should be shown with ECU con the side.
 
 class buyer(Page):
 
@@ -64,7 +63,6 @@ class buyer(Page):
 
     def is_displayed(self):
         return self.player.role() != 'seller'
-
 
 
     def vars_for_template(self):
