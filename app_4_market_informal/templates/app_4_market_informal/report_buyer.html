@@ -7,6 +7,17 @@ Decision of the Buyer
 
 {% block content %}
 
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#id_check").click(function(){
+    $("#seller_report").val();
+  });
+});
+</script>
+{% endblock %}
+
     <p>Please select a seller that you believe was using a commercial practice untruthfully.</p>
 
 <table class="table table-bordered">
@@ -46,7 +57,7 @@ Decision of the Buyer
                     </div>
                 </td>
                 <td>
-                    <input id = "id_{{p.id_in_group}}" name ="seller_report" type="checkbox" value = {{p.id_in_group}}>
+                    <input id = "id_check" name ="seller_report" type="checkbox" value = {{p.id_in_group}}>
                 </td>
         {% else %}
         <p>No player used a commercial practice so you can't report one</p>
