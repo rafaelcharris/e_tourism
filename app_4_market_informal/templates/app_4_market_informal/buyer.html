@@ -13,17 +13,19 @@ $(document).ready(function() {
   $('[data-toggle="tooltip"]').tooltip()
 })
 </script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
   $("#button_id").click(function(){
-    $("#hidden_seller").val();
+    $("#id_hidden_seller").val();
   });
 });
 </script>
 {% endblock %}
 
 {% comment %} info de tooltip: https://www.w3schools.com/css/css_tooltip.asp {% endcomment %}
+
 <style>
     .tooltip {
   position: relative;
@@ -120,7 +122,7 @@ $(document).ready(function(){
                             {% endif %}
                             <hr class="my-4">
                             <button id = "button_id" name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
-                            <input type="hidden" name="my_seller" id="hidden_seller" value={{p.id_in_group}}/>
+                            <input type="hidden" name="my_seller" id = "id_hidden_seller" value = {{p.id_in_group}} />
                         </div>
                     </div>
                 </td>

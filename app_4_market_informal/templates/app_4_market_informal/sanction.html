@@ -95,7 +95,7 @@ $(document).ready(function() {
                     </div>
                 </td>
                 <td>
-                    <input id = "id_check" name ="report_seller" type="checkbox" value = {{p.id_in_group}}>
+                    <input id = "id_check" name ="report_seller" type="checkbox" value = {{p.id_in_group}} />
                 </td>
         {% else %}
         <p>No player used a commercial practice so you can't report one</p>
@@ -106,5 +106,5 @@ $(document).ready(function() {
         </table>
 
     {% next_button %}
-
+{{ form.report_seller.errors }}
 {% endblock %}
