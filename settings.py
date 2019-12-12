@@ -39,13 +39,13 @@ SESSION_CONFIGS = [
         app_sequence=['app_4_market_informal'],
         use_browser_bots=False,
    ),
- #   dict(
- #       name='e_tourism_market_regret',
- #       display_name="Market Regret",
- #       num_demo_participants=4,
- #       app_sequence=['app_5_market_regret'],
- #       use_browser_bots=False,
- #   ),
+    dict(
+        name='e_tourism_market_regret',
+        display_name="Market Regret",
+        num_demo_participants=4,
+        app_sequence=['app_5_market_regret'],
+        use_browser_bots=False,
+    ),
 
 ]
 
