@@ -210,4 +210,4 @@ class Player(BasePlayer):
     paid = models.IntegerField(initial = 0)
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()
-    report = models.BooleanField()
+    report = models.BooleanField(initial = False)
