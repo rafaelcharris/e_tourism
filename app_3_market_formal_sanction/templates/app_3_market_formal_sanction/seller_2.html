@@ -1,0 +1,56 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Decision of the seller (Period {{ subsession.round_number }} of {{ Constants.num_rounds }})
+{% endblock %}
+
+{% block content %}
+
+    {% if player.see_list == 1 %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Seller ID</th>
+                <th scope="col">Package</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for p in group.get_players %}
+        {% if p.role == 'seller' %}
+            <tr>
+                <td> {{p.id_in_group}}</td>
+                <td> {{p.get_seller_package_display}}</td>
+                <td> {{p.ask_price_ini|c}}</td>
+            </tr>
+        {% endif %}
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    {% endif %}
+
+    <table class = "table table-bordered">
+        <tbody>
+            <tr>
+                <td>Your valuation was: </td>
+                <td>{{player.seller_valuation}} ECU </td>
+            </tr>
+            <tr>
+                <td> Your initial price was:</td>
+                <td>{{player.ask_price_ini}} ECU </td>
+            </tr>
+            <tr>
+                <td>If you wish to change the initial price to your package, please write the final price in the box below: <br>
+                Remember that for you to make a profit you must sell the package at a higher price than its cost.</td>
+                <td><div class = "form-inline"> {{ form.ask_price_fin }} &nbsp; ECU  </div></td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Once you have set up the final price, please click on the "Next" Button.</p>
+
+
+    {% next_button %}
+{% endblock %}

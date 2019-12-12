@@ -26,6 +26,7 @@ class Constants(BaseConstants):
     num_rounds = 5
     endowment = c(25)
     see_list_cost = c(1)
+    prob_audit = 0.2
 
     packages = [i for i in range(1, 6)]
 
@@ -36,7 +37,7 @@ class Constants(BaseConstants):
 
     com_practice = [i for i in range(1,5)]
 
-    instructions_template ='app_1_market_com_practices/instructions.html'
+    instructions_template ='app_3_market_formal_sanction/instructions.html'
 
 class Subsession(BaseSubsession):
 
@@ -78,6 +79,7 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
+
 
     def set_payoff(self):
         for p in self.get_players():
@@ -135,6 +137,28 @@ class Group(BaseGroup):
         for p in self.get_players():
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
 
+    def audit(self):
+        prices = []
+
+        for p in self.get_players():
+            if p.role() == "seller":
+                prices.append(p.ask_price_fin)
+        # esta función debería prenderse un 20% de las veces para hacer un audit
+
+        if numpy.random.uniform(0, 1) <= Constants.prob_audit:
+
+            for p in self.get_players():
+                if p.role() == "seller":
+                    p.audited = True
+                    if p.com_practice == 1:
+                        p.bad_practice = p.ask_price_fin > min(prices)
+                    elif p.com_practice == 2:
+                        p.bad_practice = p.ask_price_fin >= p.ask_price_ini
+                    else:  # p.comm_practice == 3:
+                        p.bad_practice = False
+                        # todo definir cómo es hacer trampa con drip pricing.
+
+
 class Player(BasePlayer):
 
     def role(self):
@@ -174,6 +198,8 @@ class Player(BasePlayer):
 
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
+    bad_practice = models.BooleanField(initial = False)
+    audited = models.BooleanField(initial = False)
 
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
