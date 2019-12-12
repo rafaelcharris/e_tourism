@@ -21,7 +21,7 @@ Markets
 
 
 class Constants(BaseConstants):
-    name_in_url = 'app_1_market_formal_sanction'
+    name_in_url = 'app_3_formal_sanction'
     players_per_group = 4
     num_rounds = 5
     endowment = c(25)
