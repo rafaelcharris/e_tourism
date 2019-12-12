@@ -16,7 +16,45 @@ $(document).ready(function(){
   });
 });
 </script>
+<script>
+$(document).ready(function() {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 {% endblock %}
+<style>
+    .tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+</style>
+
 
     <p>Please select a seller that you believe was using a commercial practice untruthfully.</p>
 
@@ -52,12 +90,12 @@ $(document).ready(function(){
                             </h5>
                             {% endif %}
                             <hr class="my-4">
-                            <button id = buy name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
+                            <button type = "button" id = buy class = "btn btn-primary btn-large">Buy</button>
                         </div>
                     </div>
                 </td>
                 <td>
-                    <input id = "id_check" name ="seller_report" type="checkbox" value = {{p.id_in_group}}>
+                    <input id = "id_check" name ="report_seller" type="checkbox" value = {{p.id_in_group}}>
                 </td>
         {% else %}
         <p>No player used a commercial practice so you can't report one</p>

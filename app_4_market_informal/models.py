@@ -211,4 +211,4 @@ class Player(BasePlayer):
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()
     report = models.BooleanField()
-    seller_report = models.IntegerField()
+    report_seller = models.IntegerField()

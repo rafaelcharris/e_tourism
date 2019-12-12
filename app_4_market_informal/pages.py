@@ -81,10 +81,10 @@ class buyer(Page):
             #pac4 = self.player.buyer_valuation_pac4,
             #pac5 = self.player.buyer_valuation_pac5
         )
-class report_buyer(Page):
+class sanction(Page):
+    form_model = 'player'
+    form_fields = ['report_seller']
 
-    form_fields = 'player'
-    form_model = ['seller_reported']
 
     def is_displayed(self):
         return self.player.report is True
@@ -115,7 +115,7 @@ page_sequence = [instructions,
                  seller_2,
                  MyWaitPage,
                  buyer,
-                 report_buyer,
+                 sanction,
                  ResultsWaitPage,
                  Results
                  ]
