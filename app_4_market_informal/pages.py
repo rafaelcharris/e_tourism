@@ -83,8 +83,12 @@ class buyer(Page):
         )
 class report_buyer(Page):
 
+    form_fields = 'player'
+    form_model = ['seller_reported']
+
     def is_displayed(self):
         return self.player.report is True
+
 
 class ResultsWaitPage(WaitPage):
     pass

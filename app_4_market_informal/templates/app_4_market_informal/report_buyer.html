@@ -20,6 +20,7 @@ Decision of the Buyer
         <tbody>
 {%for p in group.get_players %}
     {% if p.role == "seller" %}
+        {% if p.com_practice < 4 %}
             <tr>
                 <td>Seller {{p.id_in_group}}</td>
                 <td>
@@ -47,8 +48,11 @@ Decision of the Buyer
                     </div>
                 </td>
                 <td>
-                    <input type="checkbox">
+                    <input name ="seller_report" type="checkbox" value = {{p.id_in_group}}>
                 </td>
+        {% else %}
+        <p>No player used a commertial practice so you can't report one</p>
+        {% endif %}
     {% endif %}
 {% endfor %}
         </tbody>
