@@ -17,7 +17,7 @@ $(document).ready(function() {
 <script>
 $(document).ready(function(){
   $("#button_id").click(function(){
-    $("#hidden_seller").val();
+    $("#id_hidden_seller").val();
   });
 });
 </script>
@@ -120,7 +120,7 @@ $(document).ready(function(){
                             {% endif %}
                             <hr class="my-4">
                             <button id = "button_id" name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
-                            <input type="hidden" name="my_seller" id="hidden_seller" value={{p.id_in_group}}/>
+                            <input type="hidden" name="my_seller" id = "id_hidden_seller" value = {{p.id_in_group}} />
                         </div>
                     </div>
                 </td>
