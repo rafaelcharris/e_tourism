@@ -109,7 +109,7 @@ $(document).ready(function() {
                             <h5 class="card-title">{{p.ask_price_fin}} </h5>
                             {% endif %}
                             <hr class="my-4">
-                            <button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
+                            <button type = "button" name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
                         </div>
                     </div>
                 </td>
@@ -132,7 +132,7 @@ $(document).ready(function() {
 
     <p>Once you click on the "Buy" button, you will be see the next page where you can report a seller if you chose to.</p>
 
-
+{{ form.my_seller.errors }}
     {% next_button %}
 
 {% endblock %}

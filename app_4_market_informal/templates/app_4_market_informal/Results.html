@@ -33,7 +33,7 @@
     {% if player.package_purchased > 0 %}
             <tr>
                 <td>Package purchased</td>
-                <td>{{ player.package_purchased_display }}</td>
+                <td>{{ player.get_package_purchased_display }}</td>
             </tr>
             <tr>
                 <td> Seller </td>
@@ -59,3 +59,4 @@
 </table>
     {% next_button %}
 {% endblock %}
+

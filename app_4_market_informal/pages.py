@@ -106,7 +106,7 @@ class Results(Page):
             sold = self.player.sold
         )
 
-
+#TODO usar hidden input en la forma para que el botón de purchase mande la info y no tenga problema.
 
 page_sequence = [instructions,
                  instructions_2,
