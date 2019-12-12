@@ -56,18 +56,18 @@ class Subsession(BaseSubsession):
                     p.seller_id = next(id_s)
                     #todo have to fix this id. They don't work as I would like it to
                     p.participant.vars['seller_id'] = p.seller_id #assign a seller id
-
+                    print("EL SELLER ID ES: " + str(p.seller_id))
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
                     random_package = numpy.random.choice(Constants.buyer_valuations, size = 5, replace = False)
                     p.participant.vars["valuations_package"] = dict(zip(Constants.packages, random_package))
                     p.participant.vars["valuations"] = dict(zip(zip(Constants.packages, Constants.cities), random_package))
-                    #p.buyer_valuation_pac1 = p.participant.vars["valuations"].get(1)
-                    #p.buyer_valuation_pac2 = p.participant.vars["valuations"].get(2)
-                    #p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
-                    #p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
-                    #p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
+                    p.buyer_valuation_pac1 = p.participant.vars["valuations_package"].get(1)
+                    p.buyer_valuation_pac2 = p.participant.vars["valuations_package"].get(2)
+                    p.buyer_valuation_pac3 = p.participant.vars["valuations_package"].get(3)
+                    p.buyer_valuation_pac4 = p.participant.vars["valuations_package"].get(4)
+                    p.buyer_valuation_pac5 = p.participant.vars["valuations_package"].get(5)
 
                     id_b = itertools.cycle([i for i in range(1, 11)])
                 #todo fix this id. They don't work as it should
@@ -87,6 +87,7 @@ class Group(BaseGroup):
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
                     p.payoff = p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid
+                    p.payoff = p.payoff if p.payoff >= 0  else 0
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = 0
