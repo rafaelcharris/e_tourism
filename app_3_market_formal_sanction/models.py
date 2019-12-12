@@ -27,7 +27,7 @@ class Constants(BaseConstants):
     endowment = c(25)
     see_list_cost = c(1)
     prob_audit = 0.2
-
+    punishment = c(6)
     packages = [i for i in range(1, 6)]
 
     cities =["Rome", "Vienna", "Paris", "Madrid", "Berlin"]
@@ -94,7 +94,7 @@ class Group(BaseGroup):
                     p.package_purchased = 0
                     p.payoff = 0
             else:
-                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
+                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold) - int(p.bad_practice)*Constants.punishment
 
     def who_purchased(self):
         sellers =[]
