@@ -94,7 +94,6 @@ class Results(Page):
         return dict(
             role = self.participant.vars['role'],
             payoff = self.player.payoff,
-            package = self.participant.vars['valuations_package'].get(self.player.package_purchased),
             price = self.player.paid,
             seller = self.player.my_seller,
             sold = self.player.sold

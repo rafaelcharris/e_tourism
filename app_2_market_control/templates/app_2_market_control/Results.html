@@ -15,7 +15,7 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <p>
+        <tbody>
             <tr>
                 <td>Role</td>
                 <td>{{ role }}</td>
@@ -29,7 +29,7 @@
     {% if player.package_purchased > 0 %}
             <tr>
                 <td>Package purchased</td>
-                <td>{{ package }}</td>
+                <td>{{ player.get_package_display }}</td>
             </tr>
             <tr>
                 <td> Seller </td>
