@@ -191,8 +191,8 @@ class Player(BasePlayer):
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
     over_average = models.BooleanField(choices =[
-        [0, "under or equal to"],
-        [1, "over"]
+        [0, "below or equal to"],
+        [1, "above"]
     ])
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
