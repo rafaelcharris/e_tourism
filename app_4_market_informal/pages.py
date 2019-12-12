@@ -83,8 +83,12 @@ class buyer(Page):
         )
 class report_buyer(Page):
 
+    form_fields = 'player'
+    form_model = ['seller_reported']
+
     def is_displayed(self):
         return self.player.report is True
+
 
 class ResultsWaitPage(WaitPage):
     pass
@@ -102,7 +106,7 @@ class Results(Page):
             sold = self.player.sold
         )
 
-
+#TODO usar hidden input en la forma para que el botón de purchase mande la info y no tenga problema.
 
 page_sequence = [instructions,
                  instructions_2,
