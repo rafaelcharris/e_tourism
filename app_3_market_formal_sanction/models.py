@@ -154,9 +154,9 @@ class Group(BaseGroup):
                         p.bad_practice = p.ask_price_fin > min(prices)
                     elif p.com_practice == 2:
                         p.bad_practice = p.ask_price_fin >= p.ask_price_ini
-                    else:  # p.comm_practice == 3:
-                        p.bad_practice = False
-                        # todo definir cómo es hacer trampa con drip pricing.
+                    elif p.com_practice == 3 and p.see_list is False:  # p.comm_practice == 3:
+                        p.bad_practice = True
+
 
 
 class Player(BasePlayer):
