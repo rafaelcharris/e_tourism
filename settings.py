@@ -10,7 +10,12 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 SESSION_CONFIGS = [
-
+    dict(
+        name='app_7_question',
+        display_name="Questionnaire",
+        num_demo_participants=1,
+        app_sequence=['app_7_question'],
+        use_browser_bots=False,),
     dict(
         name = 'e_tourism_market_practices',
         display_name = "Market Commercial Practices",

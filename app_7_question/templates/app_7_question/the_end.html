@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Fin
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Agradecemos su participación en esta investigación.
+    </p>
+    <p>
+    Por favor permanezca sentado. Nosotros los llamaremos por su nombre para entregarle el sobre con su
+        pago. Luego podrá retirarse.
+    </p>
+    <p>
+        Si usted desea participar en una actividad similar a esta, y por la cuál también podrá ganar algún dinero, por
+        favor escriba su correo electronico a continuación para hacerle llegar información al respecto.
+    </p>
+{% formfield player.e_mail %}
+    <p>
+        Que tenga un buen día.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
+
+{% block styles  %}
+    '<link href="{% static "css.css" %}" rel="stylesheet">
+{% endblock %}
