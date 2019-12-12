@@ -89,6 +89,7 @@ class Group(BaseGroup):
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
                     p.payoff = p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid
+                    print("VALUATION DEL PAQUETE: " + str(p.participant.vars['valuations_package'].get(p.package_purchased)))
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = 0
@@ -175,7 +176,7 @@ class Player(BasePlayer):
 
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
-
+    times_reported = models.IntegerField()
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
     buyer_valuation_pac1 = models.IntegerField()
