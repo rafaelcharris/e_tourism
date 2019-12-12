@@ -121,7 +121,7 @@ $(document).ready(function(){
                             <h5 class="card-title">{{p.ask_price_fin}} </h5>
                             {% endif %}
                             <hr class="my-4">
-                            <button type = "button" id = "buy" class = "btn btn-primary btn-large">Buy</button>
+                            <button type = "button" data-toggle="tooltip" title = "you have purchased this package" id = "buy" class = "btn btn-primary btn-large">Buy</button>
                             <input type = "hidden" id = "buy_hidden" name = "my_seller" value = {{p.id_in_group}} />
                         </div>
                     </div>
