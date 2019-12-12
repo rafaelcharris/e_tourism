@@ -149,6 +149,7 @@ class Group(BaseGroup):
         for p in self.get_players():
             if p.role() == "seller":
                 p.over_average = 0 if p.ask_price_fin <= mean(prices) else 1
+                p.emoji = 128522 if p.ask_price_fin <= mean(prices) else 128532
 
 class Player(BasePlayer):
 
@@ -226,3 +227,4 @@ class Player(BasePlayer):
     paid = models.IntegerField(initial = 0)
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()
+    emoji = models.IntegerField()
