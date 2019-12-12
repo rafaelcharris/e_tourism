@@ -3,9 +3,9 @@
 
 {% block title %}
     {% if player.role == "seller" %}
-        Decision of the seller
+        Decision of the seller (Period {{ subsession.round_number }} of {{ Constants.num_rounds }})
     {% else %}
-        Decision of the buyer
+        Decision of the buyer (Period {{ subsession.round_number }} of {{ Constants.num_rounds }})
     {% endif %}
 {% endblock %}
 
