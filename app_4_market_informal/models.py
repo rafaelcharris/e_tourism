@@ -37,6 +37,7 @@ class Constants(BaseConstants):
 
     com_practice = [i for i in range(1,5)]
     report_price = c(1)
+    report_penalty = c(2)
 
     instructions_template ='app_1_market_com_practices/instructions.html'
 
@@ -95,7 +96,8 @@ class Group(BaseGroup):
                     p.package_purchased = 0
                     p.payoff = 0
             else:
-                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
+                p.penalty = Constants.report_penalty*p.times_reported if p.times_reported > 3 else 0
+                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold) - p.penalty
 
     def who_purchased(self):
         sellers =[]
@@ -138,6 +140,12 @@ class Group(BaseGroup):
         for p in self.get_players():
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
 
+    def times_reported(self):
+        for p in self.get_players():
+            if p.role() == "buyer":
+                seller_rep = self.get_player_by_id(p.report_seller)
+                seller_rep.times_reported +=1
+
 class Player(BasePlayer):
 
     def role(self):
@@ -178,6 +186,7 @@ class Player(BasePlayer):
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
     times_reported = models.IntegerField()
+    penalty = models.IntegerField()
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
     buyer_valuation_pac1 = models.IntegerField()
