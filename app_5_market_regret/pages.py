@@ -5,6 +5,9 @@ from .models import Constants
 class instructions(Page):
     form_model = 'player'
 
+    def is_displayed(self):
+        return self.player.round_number == 1
+
 
 class instructions_2(Page):
     pass
@@ -59,8 +62,7 @@ class buyer(Page):
 
     timeout_seconds = 500
     form_model = 'player'
-    form_fields = ['my_seller',
-                   'report']
+    form_fields = ['my_seller']
 
     def is_displayed(self):
         return self.player.role() != 'seller'
@@ -70,6 +72,7 @@ class buyer(Page):
         import time
         self.player.time_spent = time.time()
         self.group.drip_price()
+        self.group.average_price()
 
         return dict(
             role = self.participant.vars['role'],
@@ -81,14 +84,6 @@ class buyer(Page):
             #pac4 = self.player.buyer_valuation_pac4,
             #pac5 = self.player.buyer_valuation_pac5
         )
-class sanction(Page):
-    form_model = 'player'
-    form_fields = ['report_seller']
-
-
-    def is_displayed(self):
-        return self.player.report is True
-
 
 class ResultsWaitPage(WaitPage):
     pass
@@ -106,7 +101,7 @@ class Results(Page):
             sold = self.player.sold
         )
 
-#TODO usar hidden input en la forma para que el botón de purchase mande la info y no tenga problema.
+
 
 page_sequence = [instructions,
                  instructions_2,
@@ -115,7 +110,6 @@ page_sequence = [instructions,
                  seller_2,
                  MyWaitPage,
                  buyer,
-                 sanction,
                  ResultsWaitPage,
                  Results
                  ]

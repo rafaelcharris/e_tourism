@@ -8,11 +8,10 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-from django.db import models as django_models
 import itertools
 import numpy
 import collections
-
+import pandas as pd
 
 author = 'UEC'
 
@@ -22,7 +21,7 @@ Markets
 
 
 class Constants(BaseConstants):
-    name_in_url = 'app_1_market_informal_sanction'
+    name_in_url = 'app_1_market_com_practices'
     players_per_group = 4
     num_rounds = 5
     endowment = c(25)
@@ -36,7 +35,6 @@ class Constants(BaseConstants):
     buyer_valuations = [100, 100, 90, 80, 80, 70, 60, 60, 50, 40]
 
     com_practice = [i for i in range(1,5)]
-    report_price = c(1)
 
     instructions_template ='app_1_market_com_practices/instructions.html'
 
@@ -89,8 +87,9 @@ class Group(BaseGroup):
                     the_seller.sold = True
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
-                    p.payoff = p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid - int(p.report)*Constants.report_price
+                    p.payoff = p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid
                     print("VALUATION DEL PAQUETE: " + str(p.participant.vars['valuations_package'].get(p.package_purchased)))
+
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = 0
@@ -138,6 +137,15 @@ class Group(BaseGroup):
         for p in self.get_players():
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
 
+    def average_price(self):
+        prices = []
+        for p in self.get_players():
+            if p.role() == "seller":
+                prices.append(p.ask_price_fin)
+        for p in self.get_players():
+            if p.role() == "seller":
+                p.over_average = 0 if p.ask_price_fin <= pd.mean(prices) else 1
+
 class Player(BasePlayer):
 
     def role(self):
@@ -177,7 +185,10 @@ class Player(BasePlayer):
 
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
-    times_reported = models.IntegerField()
+    over_average = models.BooleanField(choices =[
+        [0, "under or equal"],
+        [1, "over"]
+    ])
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
     buyer_valuation_pac1 = models.IntegerField()
@@ -211,4 +222,3 @@ class Player(BasePlayer):
     paid = models.IntegerField(initial = 0)
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()
-    report = models.BooleanField()
