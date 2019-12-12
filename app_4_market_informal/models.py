@@ -109,9 +109,9 @@ class Group(BaseGroup):
                     the_seller = self.get_player_by_id(p.my_seller)
                     p.package_purchased = the_seller.seller_package
                     sellers.append(the_seller.id_in_group)
-
+        print("LISTA DE SELLERS: " + str(sellers))
         if len(sellers) != len(set(sellers)): #si la length de ambas listas difiere, signiifca que hay algun repetido que set elimino (porque en los sets no puede haber repetidos)
-            sellers_dic = dict(collections.Counter(sellers))
+            sellers_dic = dict(collections.Counter(sellers)) #todo creo que hay problema acá. no parece contar bien
             print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
 
             for key, value in sellers_dic.items():
@@ -157,7 +157,7 @@ class Group(BaseGroup):
 
         if self.penalty_bonus > 0:
             for p in self.get_players():
-                if p.role() == "buyers":
+                if p.role() == "buyer":
                     p.payoff += self.penalty_bonus
 
 
