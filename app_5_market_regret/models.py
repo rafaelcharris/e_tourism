@@ -138,13 +138,18 @@ class Group(BaseGroup):
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
 
     def average_price(self):
+        pac_prices = {}
         prices = []
+        package =[]
         for p in self.get_players():
             if p.role() == "seller":
                 prices.append(p.ask_price_fin)
+                package.append(p.seller_package)
+                #TODO sacar el promedio por paquete y hacer la comparación!
         for p in self.get_players():
             if p.role() == "seller":
                 p.over_average = 0 if p.ask_price_fin <= mean(prices) else 1
+                p.emoji = 128522 if p.ask_price_fin <= mean(prices) else 128532
 
 class Player(BasePlayer):
 
@@ -186,8 +191,8 @@ class Player(BasePlayer):
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
     over_average = models.BooleanField(choices =[
-        [0, "under or equal"],
-        [1, "over"]
+        [0, "below or equal to"],
+        [1, "above"]
     ])
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
@@ -222,3 +227,4 @@ class Player(BasePlayer):
     paid = models.IntegerField(initial = 0)
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()
+    emoji = models.IntegerField()
