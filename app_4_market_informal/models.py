@@ -96,8 +96,8 @@ class Group(BaseGroup):
                     p.package_purchased = 0
                     p.payoff = 0
             else:
-                p.penalty = Constants.report_penalty*p.times_reported if p.times_reported > 3 else 0
-                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold) - p.penalty
+
+                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
 
     def who_purchased(self):
         sellers =[]
@@ -145,7 +145,12 @@ class Group(BaseGroup):
             if p.role() == "buyer":
                 seller_rep = self.get_player_by_id(p.report_seller)
                 seller_rep.times_reported +=1
-
+        for p in self.get_players():
+            if p.role() == "seller"
+                p.penalty = Constants.report_penalty * p.times_reported if p.times_reported > 3 else 0
+                p.payoff -= p.penalty
+            else:
+                p.payoff += p.penalty/(Constants.players_per_group/2)
 class Player(BasePlayer):
 
     def role(self):
