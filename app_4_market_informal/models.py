@@ -146,7 +146,7 @@ class Group(BaseGroup):
                 seller_rep = self.get_player_by_id(p.report_seller)
                 seller_rep.times_reported +=1
         for p in self.get_players():
-            if p.role() == "seller"
+            if p.role() == "seller":
                 p.penalty = Constants.report_penalty * p.times_reported if p.times_reported > 3 else 0
                 p.payoff -= p.penalty
             else:
