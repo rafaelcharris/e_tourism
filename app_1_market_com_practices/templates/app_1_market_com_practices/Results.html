@@ -15,7 +15,7 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody>
+        <p>
             <tr>
                 <td>Role</td>
                 <td>{{ role }}</td>
@@ -40,7 +40,7 @@
                 <td>{{ price|c}} </td>
             </tr>
     {% else %}
-            YOU WAS TOO LATE AND WAS NOT ABLE TO BUY ANYTHING
+            <p>You took you too long to make a decision. For this reason, your profit for this trading round is 0.<br> </p>
     {% endif %}
 {% else %}
             {% if player.sold == False %}

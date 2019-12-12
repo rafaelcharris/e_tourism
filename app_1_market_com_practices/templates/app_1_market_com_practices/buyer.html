@@ -2,10 +2,50 @@
 {% load otree static %}
 
 {% block title %}
+
     Decision of the buyer (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}))
 {% endblock %}
 
 {% block content %}
+<script>
+$(document).ready(function() {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+</script>
+
+<style>
+    .tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+</style>
 
  <p>In the following table you will be able to see each one of the packages with its respective private valuation.</p>
     <table class="table table-bordered">
@@ -26,7 +66,7 @@
             {% for pac, val in pac_val.items %}
             <tr>
                 <td> {{pac.1}}</td>
-                <td>{{ val }}</td>
+                <td>{{ val }} ECU</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -62,7 +102,9 @@
                             <br>
                             <h5 class="card-title">{{p.ask_price_fin|c}} </h5>
                             {% elif p.com_practice == 3 %}
-                            <h5 class="card-title">{{p.ask_price_fin}}* </h5>
+                            <h5 class="card-title">
+                               {{ p.drip|c}} <a href = # data-toggle="tooltip" title = "Total Price = {{p.drip|c}} + 1 ECU  ={{p.ask_price_fin}} " data-original-title="Default tooltip">*</a>
+                            </h5>
                             {% else %}
                             <h5 class="card-title">{{p.ask_price_fin}} </h5>
                             {% endif %}

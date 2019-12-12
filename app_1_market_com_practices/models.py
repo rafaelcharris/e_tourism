@@ -24,7 +24,7 @@ class Constants(BaseConstants):
     name_in_url = 'app_1_market_com_practices'
     players_per_group = 4
     num_rounds = 5
-    endowment = c(25) #TODO CAMBIAR EN LAS OTRAS APPS
+    endowment = c(25)
     see_list_cost = c(1)
 
     packages = [i for i in range(1, 6)]
@@ -132,6 +132,10 @@ class Group(BaseGroup):
                             b.package_purchased = 0
                             b.payoff = 0
 
+    def drip_price(self):
+        for p in self.get_players():
+            p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
+
 class Player(BasePlayer):
 
     def role(self):
@@ -139,6 +143,9 @@ class Player(BasePlayer):
             return 'buyer'
         else:
             return 'seller'
+
+    drip = models.IntegerField(initial = 0)
+
 
     #Seller
     seller_package = models.IntegerField(choices =

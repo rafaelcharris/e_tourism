@@ -54,19 +54,22 @@ class seller_2(Page):
         dict(
             role = self.player.role()
         )
-#TODO: On the options list values should be shown with ECU con the side.
-#TODO: Fix how Drip price is displayed in buyer ppage. If final price is 80, drip proce should show 78*.
+
 class buyer(Page):
+
     timeout_seconds = 500
     form_model = 'player'
-    form_fields = ['my_seller'] #la idea es que como tengo la id en group, puedo recuperar qué estaba vendiendo y a cómo.
+    form_fields = ['my_seller']
 
     def is_displayed(self):
         return self.player.role() != 'seller'
 
+
     def vars_for_template(self):
         import time
         self.player.time_spent = time.time()
+        self.group.drip_price()
+
         return dict(
             role = self.participant.vars['role'],
             pac_val = self.participant.vars['valuations'],
@@ -81,7 +84,6 @@ class buyer(Page):
 class ResultsWaitPage(WaitPage):
     pass
 
-#TODO: Fix "You was too late..." for "It took you too long to make a decision. For this reason, your profit for this trading round are 0."
 class Results(Page):
     def vars_for_template(self):
         self.group.set_payoff()
