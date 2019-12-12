@@ -1,0 +1,72 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+
+    Decision of the buyer (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}))
+{% endblock %}
+
+{% block content %}
+
+ <p>In the following table you will be able to see each one of the packages with its respective private valuation.</p>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Package</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Your ID is</td>
+                <td>{{ player.id_in_group }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><b>Private valuations for packages</b></td>
+            </tr>
+            {% for pac, val in pac_val.items %}
+            <tr>
+                <td> {{pac.1}}</td>
+                <td>{{ val }} ECU</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>On this page you will be able to see the complete list of package offers with their respective prices. Remember,
+        in order to purchase a package, it must be priced lower than or equal to the private value you received for that
+        package or the transaction will be canceled.</p>
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Seller ID</th>
+                <th scope="col">Offer</th>
+            </tr>
+        </thead>
+        <tbody>
+{%for p in group.get_players %}
+    {% if p.role == "seller" %}
+            <tr>
+                <td>Seller {{p.id_in_group}}</td>
+                <td>
+                    <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <h3 class="card-header">{{p.get_seller_package_display}}</h3>
+                        <div class="card-body text-dark">
+                            <h5 class="card-title">{{p.ask_price_fin}} </h5>
+                            <br>
+                            <button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
+                        </div>
+                    </div>
+                </td>
+    {% endif %}
+{% endfor %}
+        </tbody>
+        </table>
+
+    <p>Once you click on the "Buy" button your payment will be calculated for this trading round.</p>
+
+    {% next_button %}
+
+{% endblock %}

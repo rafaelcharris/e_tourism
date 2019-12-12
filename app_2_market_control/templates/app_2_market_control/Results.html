@@ -2,11 +2,12 @@
 {% load otree static %}
 
 {% block title %}
-    (Period {{ subsession.round_number }} of {{ Constants.num_rounds }})
+    Results of Trading Period ({{ subsession.round_number }} of {{ Constants.num_rounds }})
 {% endblock %}
 
 {% block content %}
 
+<p>Your results from this trading round are: </p>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -14,7 +15,7 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody>
+        <p>
             <tr>
                 <td>Role</td>
                 <td>{{ role }}</td>
@@ -25,6 +26,7 @@
             </tr>
 
 {% if player.role == 'buyer' %}
+    {% if player.package_purchased > 0 %}
             <tr>
                 <td>Package purchased</td>
                 <td>{{ package }}</td>
@@ -35,13 +37,18 @@
             </tr>
             <tr>
                 <td> Price</td>
-                <td>{{ price }}</td>
+                <td>{{ price|c}} </td>
             </tr>
+    {% else %}
+            <p>You took you too long to make a decision. For this reason, your profit for this trading round is 0.<br> </p>
+    {% endif %}
 {% else %}
-            <tr>
-                <td> Did you sold this package?</td>
-                <td>{{ sold }}</td>
-            </tr>
+            {% if player.sold == False %}
+            You didn't manage to sell your tourist package. For this reason, your profit for this trading round is {{player.payoff |c}}.
+            {% else %}
+            You managed to sell your tourist package. For this reason, your profit for this trading round is: {{player.payoff |c}}
+            {% endif %}
+
 {% endif %}
             <tr>
                 <td>Your payoff</td>
