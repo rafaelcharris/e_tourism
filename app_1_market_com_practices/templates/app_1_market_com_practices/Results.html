@@ -15,7 +15,7 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <p>
+        <tbody>
             <tr>
                 <td>Role</td>
                 <td>{{ role }}</td>
@@ -23,6 +23,10 @@
             <tr>
                 <td>Your ID is</td>
                 <td>{{ player.id_in_group }}</td>
+            </tr>
+            <tr>
+                <td>Your payoff</td>
+                <td>{{ payoff }}</td>
             </tr>
 
 {% if player.role == 'buyer' %}
@@ -39,6 +43,8 @@
                 <td> Price</td>
                 <td>{{ price|c}} </td>
             </tr>
+        </tbody>
+    </table>
     {% else %}
             <p>You took you too long to make a decision. For this reason, your profit for this trading round is 0.<br> </p>
     {% endif %}
@@ -50,12 +56,5 @@
             {% endif %}
 
 {% endif %}
-            <tr>
-                <td>Your payoff</td>
-                <td>{{ payoff }}</td>
-            </tr>
-        </tbody>
-    </table>
-
     {% next_button %}
 {% endblock %}
