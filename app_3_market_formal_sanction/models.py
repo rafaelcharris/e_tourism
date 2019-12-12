@@ -12,6 +12,7 @@ import itertools
 import numpy
 import collections
 
+
 author = 'UEC'
 
 doc = """
@@ -20,25 +21,28 @@ Markets
 
 
 class Constants(BaseConstants):
-    name_in_url = 'app_1_market_control'
+    name_in_url = 'app_1_market_com_practices'
     players_per_group = 4
     num_rounds = 5
-    endowment = c(30)
-    see_list_cost = c(3)
-
+    endowment = c(25)
+    see_list_cost = c(1)
+    prob_audit = 0.2
+    punishment = c(6)
     packages = [i for i in range(1, 6)]
-    id = itertools.cycle([i for i in range(1,11)])
+
+    cities =["Rome", "Vienna", "Paris", "Madrid", "Berlin"]
 
     seller_valuations = [70, 60, 50, 50, 40, 40, 30, 20, 10, 10]
     buyer_valuations = [100, 100, 90, 80, 80, 70, 60, 60, 50, 40]
 
-    instructions_template ='app_1_market_com_practices/instructions.html'
+    com_practice = [i for i in range(1,5)]
 
+    instructions_template ='app_3_market_formal_sanction/instructions.html'
 
 class Subsession(BaseSubsession):
 
     def creating_session(self):
-
+        #crear roles
             if self.round_number == 1:
                     roles = itertools.cycle(['seller', 'buyer'])
                     for p in self.get_players():
@@ -48,28 +52,34 @@ class Subsession(BaseSubsession):
         #assign packages con replacement
             for p in self.get_players():
                 if p.participant.vars['role'] == 'seller':
+                    id_s = itertools.cycle([i for i in range(1, 11)])
                     p.seller_package = numpy.random.randint(1, 5)
                     p.participant.vars['seller_package'] = p.seller_package
                     p.seller_valuation = numpy.random.choice(Constants.seller_valuations, replace=False)
-                    p.seller_id = next(Constants.id)
+                    p.seller_id = next(id_s)
                     #todo have to fix this id. They don't work as I would like it to
                     p.participant.vars['seller_id'] = p.seller_id #assign a seller id
 
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
-                    p.participant.vars["valuations"] = dict(zip(Constants.packages, numpy.random.choice(Constants.buyer_valuations, size =5, replace = False)))
-                    p.buyer_valuation_pac1 = p.participant.vars["valuations"].get(1)
-                    p.buyer_valuation_pac2 = p.participant.vars["valuations"].get(2)
-                    p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
-                    p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
-                    p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
+                    random_package = numpy.random.choice(Constants.buyer_valuations, size = 5, replace = False)
+                    p.participant.vars["valuations_package"] = dict(zip(Constants.packages, random_package))
+                    p.participant.vars["valuations"] = dict(zip(zip(Constants.packages, Constants.cities), random_package))
+                    #p.buyer_valuation_pac1 = p.participant.vars["valuations"].get(1)
+                    #p.buyer_valuation_pac2 = p.participant.vars["valuations"].get(2)
+                    #p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
+                    #p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
+                    #p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
+
+                    id_b = itertools.cycle([i for i in range(1, 11)])
                 #todo fix this id. They don't work as it should
-                    p.participant.vars['buyer_id'] = next(Constants.id)
+                    p.participant.vars['buyer_id'] = next(id_b)
 
 
 
 class Group(BaseGroup):
+
 
     def set_payoff(self):
         for p in self.get_players():
@@ -79,12 +89,12 @@ class Group(BaseGroup):
                     the_seller.sold = True
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
-                    p.payoff = p.participant.vars['valuations'].get(p.package_purchased) - p.paid
+                    p.payoff = p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = 0
             else:
-                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
+                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold) - int(p.bad_practice)*Constants.punishment
 
     def who_purchased(self):
         sellers =[]
@@ -100,12 +110,12 @@ class Group(BaseGroup):
             print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
 
             for key, value in sellers_dic.items():
-                #Si el número de paquetes que el vendedor jey vendio es mayor a 1
                 if value > 1:
+                    print("THIS WORKS: " + str(key))
                     buyers_time = {}
                     for p in self.get_players():
                         if p.role() == "buyer":
-                            print("JUGADOR: " + str(p) + " PAQUETE: " + str(p.package_purchased) + " VENDEDOR: " + str(key))
+                            print("JUGADOR: " + str(p.id_in_group) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
 
                             if p.my_seller == key:
                                 print("INFO: " + str(p.package_purchased) + "key: " + str(key))
@@ -113,17 +123,40 @@ class Group(BaseGroup):
                                 print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
 
 
-
                     print("DICTIONARY: " + str(buyers_time))
                     # after looping over all players I have here buyers and times
                     # get the one with tge less time
                     real_buyer = min(buyers_time, key = buyers_time.get)
-                    print("REAL BUYER ACÁ" + str(real_buyer) )
                     for jugador in buyers_time.keys():
                         if jugador != real_buyer:
                             b = self.get_player_by_id(jugador)
                             b.package_purchased = 0
                             b.payoff = 0
+
+    def drip_price(self):
+        for p in self.get_players():
+            p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
+
+    def audit(self):
+        prices = []
+
+        for p in self.get_players():
+            if p.role() == "seller":
+                prices.append(p.ask_price_fin)
+        # esta función debería prenderse un 20% de las veces para hacer un audit
+
+        if numpy.random.uniform(0, 1) <= Constants.prob_audit:
+
+            for p in self.get_players():
+                if p.role() == "seller":
+                    p.audited = True
+                    if p.com_practice == 1:
+                        p.bad_practice = p.ask_price_fin > min(prices)
+                    elif p.com_practice == 2:
+                        p.bad_practice = p.ask_price_fin >= p.ask_price_ini
+                    elif p.com_practice == 3 and p.see_list is False:  # p.comm_practice == 3:
+                        p.bad_practice = True
+
 
 
 class Player(BasePlayer):
@@ -134,8 +167,20 @@ class Player(BasePlayer):
         else:
             return 'seller'
 
+    drip = models.IntegerField(initial = 0)
+
+
     #Seller
-    seller_package = models.IntegerField()
+    seller_package = models.IntegerField(choices =
+    [
+        [0, "None"],
+        [1, "Rome"],
+        [2, "Vienna"],
+        [3, "Paris"],
+        [4, "Madrid"],
+        [5, "Berlin"]
+
+    ])
     seller_valuation = models.IntegerField()
     ask_price_ini = models.IntegerField()
 
@@ -143,6 +188,9 @@ class Player(BasePlayer):
         return self.seller_valuation
 
     see_list = models.BooleanField(initial = False)
+    com_practice = models.IntegerField(choices = [
+        [1, "Best Price Guarantee"], [2,"Reference Pricing"], [3, "Drip Pricing"], [4, "None"]
+    ])
     ask_price_fin = models.IntegerField()
 
     def ask_price_fin_min(self):
@@ -150,18 +198,30 @@ class Player(BasePlayer):
 
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
+    bad_practice = models.BooleanField(initial = False)
+    audited = models.BooleanField(initial = False)
 
     #Buyer
-
+    #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
     buyer_valuation_pac1 = models.IntegerField()
     buyer_valuation_pac2 = models.IntegerField()
     buyer_valuation_pac3 = models.IntegerField()
     buyer_valuation_pac4 = models.IntegerField()
     buyer_valuation_pac5 = models.IntegerField()
 
-    package_purchased = models.IntegerField()
-    my_seller = models.IntegerField(initial= 0)
-    paid = models.IntegerField(initial = 0)
+    buyer_packages = models.IntegerField(choices =
+    [
+        [0, "None"],
+        [1, "Rome"],
+        [2, "Vienna"],
+        [3, "Paris"],
+        [4, "Madrid"],
+        [5, "Berlin"]
+    ]
+    )
 
+    package_purchased = models.IntegerField()
+    my_seller = models.IntegerField(initial = 0)
+    paid = models.IntegerField(initial = 0)
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()

@@ -15,7 +15,7 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody>
+    <tbody>
             <tr>
                 <td>Role</td>
                 <td>{{ role }}</td>
@@ -43,8 +43,8 @@
                 <td> Price</td>
                 <td>{{ price|c}} </td>
             </tr>
-        </tbody>
-    </table>
+    </tbody>
+</table>
     {% else %}
             <p>You took you too long to make a decision. For this reason, your profit for this trading round is 0.<br> </p>
     {% endif %}
@@ -54,7 +54,18 @@
             {% else %}
             You managed to sell your tourist package. For this reason, your profit for this trading round is: {{player.payoff |c}}
             {% endif %}
-
+            {% if player.audited = True %}
+                <p>You were audited</p>
+                {% if player.bad_practice == True %}
+                    <p> And you were found to commit malpractice</p>
+                {% else %}
+                    <p> You were nos found to commit malpractice</p>
+                {% endif %}
+            {% else %}
+            <p> You were not audited</p>
+            {% endif %}
 {% endif %}
+
+
     {% next_button %}
 {% endblock %}

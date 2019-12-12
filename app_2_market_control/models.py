@@ -34,9 +34,7 @@ class Constants(BaseConstants):
     seller_valuations = [70, 60, 50, 50, 40, 40, 30, 20, 10, 10]
     buyer_valuations = [100, 100, 90, 80, 80, 70, 60, 60, 50, 40]
 
-    com_practice = [i for i in range(1,5)]
-
-    instructions_template ='app_1_market_com_practices/instructions.html'
+    instructions_template ='app_1_market_control/instructions.html'
 
 class Subsession(BaseSubsession):
 
@@ -78,6 +76,7 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
+
 
     def set_payoff(self):
         for p in self.get_players():
@@ -164,9 +163,7 @@ class Player(BasePlayer):
         return self.seller_valuation
 
     see_list = models.BooleanField(initial = False)
-    com_practice = models.IntegerField(choices = [
-        [1, "Best Price Guarantee"], [2,"Reference Pricing"], [3, "Drip Pricing"], [4, "None"]
-    ])
+
     ask_price_fin = models.IntegerField()
 
     def ask_price_fin_min(self):
