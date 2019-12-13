@@ -6,8 +6,8 @@ import random, itertools
 
 
 class PlayerBot(Bot):
+    sellers = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
     def play_round(self):
-        sellers = itertools.cycle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
         if self.player.round_number == 1:
             if self.player.role() == "seller":
                 yield pages.instructions
@@ -18,7 +18,7 @@ class PlayerBot(Bot):
             elif self.player.role() == "buyer":
                 yield pages.instructions
                 yield pages.instructions_2
-                yield pages.buyer, dict(my_seller = next(sellers))
+                yield pages.buyer, dict(my_seller = random.choice(self.sellers))
                 yield pages.Results
         else:
             if self.player.role() == "seller":
@@ -28,7 +28,7 @@ class PlayerBot(Bot):
                 yield pages.Results
             elif self.player.role() == "buyer":
                 yield pages.instructions_2
-                yield pages.buyer, dict(my_seller = next(sellers))
+                yield pages.buyer, dict(my_seller = random.choice(self.sellers))
                 yield pages.Results
 
 
