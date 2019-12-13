@@ -11,56 +11,49 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 SESSION_CONFIGS = [
     dict(
-        name='bot_testing',
-        display_name="Testing bots",
-#        num_demo_participants=2,
-        num_demo_participants=2,
-        app_sequence=['app_2_market_control', 'app_8_summary'],
-#        app_sequence=['app_7_question'],
-#        app_sequence=['app_0_consent', 'app_2_market_control', 'app_8_summary'],
-#        app_sequence = ['app_3_market_formal_sanction'],
-        use_browser_bots=False, ),
-    dict(
-        name='app_7_question',
-        display_name="Questionnaire",
-        num_demo_participants=1,
-        app_sequence=['app_7_question'],
-        use_browser_bots=False,),
-    dict(
-        name = 'e_tourism_market_practices',
-        display_name = "Market Commercial Practices",
-        num_demo_participants = 4,
-        app_sequence = ['app_1_market_com_practices'],
-        use_browser_bots = False,
-    ),
-    dict(
         name='e_tourism_market_control',
         display_name="Market Control",
-        num_demo_participants=4,
-        app_sequence=['app_2_market_control'],
+        num_demo_participants=20,
+        app_sequence=['app_0_consent', 'app_2_market_control', 'app_8_summary', 'app_7_question', 'app_9_report'],
+        use_browser_bots=False,
+    ),
+    dict(
+        name='e_tourism_market_practices',
+        display_name="Market Commercial Practices",
+        num_demo_participants=20,
+        app_sequence=['app_0_consent', 'app_1_market_com_practices', 'app_8_summary', 'app_7_question', 'app_9_report'],
         use_browser_bots=False,
     ),
     dict(
         name='e_tourism_market_formal_sanction',
         display_name="Market Formal Sanction",
-        num_demo_participants=4,
-        app_sequence=['app_3_market_formal_sanction'],
+        num_demo_participants=20,
+        app_sequence=['app_0_consent', 'app_3_market_formal_sanction', 'app_8_summary', 'app_7_question', 'app_9_report'],
         use_browser_bots=False,
     ),
     dict(
         name='e_tourism_market_informal_sanction',
         display_name="Market Informal Sanction",
-        num_demo_participants=4,
-        app_sequence=['app_4_market_informal'],
+        num_demo_participants=20,
+        app_sequence=['app_0_consent', 'app_4_market_informal', 'app_8_summary', 'app_7_question', 'app_9_report'],
         use_browser_bots=False,
-   ),
+    ),
     dict(
         name='e_tourism_market_regret',
         display_name="Market Regret",
-        num_demo_participants=4,
-        app_sequence=['app_5_market_regret'],
+        num_demo_participants=20,
+        app_sequence=['app_0_consent', 'app_5_market_regret', 'app_8_summary', 'app_7_question', 'app_9_report'],
         use_browser_bots=False,
     ),
+    dict(
+        name='bot_testing',
+        display_name="Testing bots",
+        num_demo_participants=2,
+        app_sequence=['app_0_consent', 'app_2_market_control', 'app_8_summary', 'app_9_report'],
+#        app_sequence=['app_7_question'],
+        use_browser_bots=False, ),
+
+
 
 ]
 
