@@ -22,7 +22,7 @@ Markets
 
 class Constants(BaseConstants):
     name_in_url = 'app_1_market_com_practices'
-    players_per_group = 4
+    players_per_group = 20
     num_rounds = 5
     endowment = 25
     see_list_cost = 1
@@ -184,7 +184,7 @@ class Player(BasePlayer):
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
     my_buyer = models.IntegerField(initial = 0)
-
+    ref20 = models.IntegerField()
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
     buyer_valuation_pac1 = models.IntegerField()
