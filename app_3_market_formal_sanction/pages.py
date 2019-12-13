@@ -94,7 +94,8 @@ class Results(Page):
         self.group.set_payoff()
         self.group.who_purchased()
         self.group.drip_price()
-        self.group.re
+        self.group.ref_20()
+
         return dict(
             role = self.participant.vars['role'],
             payoff = self.player.payoff,
