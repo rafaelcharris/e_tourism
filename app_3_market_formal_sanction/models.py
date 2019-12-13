@@ -95,7 +95,8 @@ class Group(BaseGroup):
                     p.package_purchased = 0
                     p.payoff = 0
             else:
-                p.payoff = (p.ask_price_fin - p.seller_valuation)*int(p.sold) - int(p.see_list)*Constants.see_list_cost - int(p.bad_practice)*Constants.punishment
+                p.payoff = Constants.endowment
+                p.payoff += (p.ask_price_fin - p.seller_valuation)*int(p.sold) - int(p.see_list)*Constants.see_list_cost - int(p.bad_practice)*Constants.punishment
 
     def who_purchased(self):
         sellers =[]
