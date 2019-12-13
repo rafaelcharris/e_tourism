@@ -91,8 +91,7 @@ $(document).ready(function() {
                 <td>Seller {{p.id_in_group}}</td>
                 <td>
                     <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <h3 class="card-header">
-                        <a href = # data-toggle="tooltip" title = "The price you are going to pay is {{p.get_over_average_display}} what it normally is &#{{p.emoji}}" data-original-title="Default tooltip">{{p.get_seller_package_display}}</a>
+                        <h3 class="card-header"> {{p.get_seller_package_display}}
                         </h3>
                         <div class="card-body text-dark">
                             {% if p.com_practice == 1 %}
@@ -115,7 +114,8 @@ $(document).ready(function() {
                             <h5 class="card-title">{{p.ask_price_fin}} </h5>
                             {% endif %}
                             <hr class="my-4">
-                            <button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
+                            <a href = # data-toggle="tooltip" title = "The price you are going to pay is {{p.get_over_average_display}} what it normally is &#{{p.emoji}}" data-original-title="Default tooltip">
+                            <button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button> </a>
                         </div>
                     </div>
                 </td>
