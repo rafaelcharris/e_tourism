@@ -26,6 +26,7 @@ class Constants(BaseConstants):
     num_rounds = 5
     endowment = 25
     see_list_cost = 1
+    reference_20 = 20
 
     packages = [i for i in range(1, 6)]
 
@@ -36,7 +37,6 @@ class Constants(BaseConstants):
 
     com_practice = [i for i in range(1,5)]
 
-    reference_20 = 20
     instructions_template ='app_1_market_com_practices/instructions.html'
 
 class Subsession(BaseSubsession):

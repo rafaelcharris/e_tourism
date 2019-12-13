@@ -12,7 +12,7 @@ class PlayerBot(Bot):
             if self.player.role() == "seller":
                 yield pages.instructions
                 yield pages.instructions_2
-                yield pages.seller, dict(ask_price_ini = 70, see_list = bool(random.randint(0 ,1)), com_practice = random.choice(1,5))
+                yield pages.seller, dict(ask_price_ini = 70, see_list = bool(random.randint(0 ,1)), com_practice = random.randint(1,5))
                 yield pages.seller_2, dict(ask_price_fin = 70)
                 yield pages.Results
             elif self.player.role() == "buyer":
@@ -23,7 +23,7 @@ class PlayerBot(Bot):
         else:
             if self.player.role() == "seller":
                 yield pages.instructions_2
-                yield pages.seller, dict(ask_price_ini = 70, see_list = bool(random.randint(0 ,1)))
+                yield pages.seller, dict(ask_price_ini = 70, see_list = bool(random.randint(0 ,1)), com_practice = random.randint(1,5))
                 yield pages.seller_2, dict(ask_price_fin = 70)
                 yield pages.Results
             elif self.player.role() == "buyer":
