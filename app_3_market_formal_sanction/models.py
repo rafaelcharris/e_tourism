@@ -22,13 +22,14 @@ Markets
 
 class Constants(BaseConstants):
     name_in_url = 'app_3_formal_sanction'
-    players_per_group = 4
+    players_per_group = 20
     num_rounds = 5
     endowment = 25
     see_list_cost = 1
     prob_audit = 0.2
     punishment = 20
     packages = [i for i in range(1, 6)]
+    reference_20 = 20
 
     cities =["Rome", "Vienna", "Paris", "Madrid", "Berlin"]
 
@@ -139,6 +140,10 @@ class Group(BaseGroup):
         for p in self.get_players():
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
 
+    def ref_20(self):
+        for p in self.get_players():
+            p.ref20 = p.ask_price_ini + Constants.reference_20 if p.role() == "seller" else 0
+
     def audit(self):
         prices = []
 
@@ -203,6 +208,7 @@ class Player(BasePlayer):
     bad_practice = models.BooleanField(initial = False)
     audited = models.BooleanField(initial = False)
     my_buyer = models.IntegerField(initial = 0)
+    ref20 = models.IntegerField()
 
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
