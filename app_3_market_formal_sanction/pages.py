@@ -73,6 +73,7 @@ class buyer(Page):
 
     def vars_for_template(self):
         self.group.drip_price()
+        self.group.ref_20()
 
         return dict(
             role = self.participant.vars['role'],
@@ -93,8 +94,6 @@ class Results(Page):
         self.group.audit()
         self.group.set_payoff()
         self.group.who_purchased()
-        self.group.drip_price()
-        self.group.ref_20()
 
         return dict(
             role = self.participant.vars['role'],
