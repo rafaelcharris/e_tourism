@@ -67,10 +67,12 @@ class buyer(Page):
     def is_displayed(self):
         return self.player.role() != 'seller'
 
-
-    def vars_for_template(self):
+    def before_next_page(self):
         import time
         self.player.time_spent = time.time()
+
+
+    def vars_for_template(self):
         self.group.drip_price()
 
         return dict(
