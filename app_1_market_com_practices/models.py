@@ -26,6 +26,7 @@ class Constants(BaseConstants):
     num_rounds = 5
     endowment = 25
     see_list_cost = 1
+    reference_20 = 20
 
     packages = [i for i in range(1, 6)]
 
@@ -137,6 +138,11 @@ class Group(BaseGroup):
     def drip_price(self):
         for p in self.get_players():
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
+
+    def ref_20(self):
+        for p in self.get_players():
+            p.ref20 = p.ask_price_ini + Constants.reference_20 if p.role() == "seller" else 0
+
 
 class Player(BasePlayer):
 

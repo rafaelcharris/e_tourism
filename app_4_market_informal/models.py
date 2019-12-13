@@ -144,7 +144,7 @@ class Group(BaseGroup):
 
     def ref_20(self):
         for p in self.get_players():
-            p.ref20 = p.ask_price_ini + Constants.reference_20
+            p.ref20 = p.ask_price_ini + Constants.reference_20 if p.role() == "seller" else 0
 
     def get_times_reported(self):
         sellers_reported = []
