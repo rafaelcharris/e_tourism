@@ -36,6 +36,7 @@ class Constants(BaseConstants):
 
     com_practice = [i for i in range(1,5)]
 
+    reference_20 = 20
     instructions_template ='app_1_market_com_practices/instructions.html'
 
 class Subsession(BaseSubsession):
@@ -138,6 +139,10 @@ class Group(BaseGroup):
         for p in self.get_players():
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
 
+    def ref_20(self):
+        for p in self.get_players():
+            p.ref20 = p.ask_price_ini + Constants.reference_20 if p.role() == "seller" else 0
+
     def average_price(self):
         pac_prices = {}
         prices = []
@@ -151,6 +156,7 @@ class Group(BaseGroup):
             if p.role() == "seller":
                 p.over_average = 0 if p.ask_price_fin <= mean(prices) else 1
                 p.emoji = 128522 if p.ask_price_fin <= mean(prices) else 128532
+
 
 class Player(BasePlayer):
 
@@ -196,6 +202,7 @@ class Player(BasePlayer):
         [1, "above"]
     ])
     my_buyer = models.IntegerField(initial = 0)
+    ref20 = models.IntegerField(initial=0)
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
     buyer_valuation_pac1 = models.IntegerField()

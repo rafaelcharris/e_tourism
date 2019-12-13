@@ -71,6 +71,7 @@ class buyer(Page):
 
     def vars_for_template(self):
         self.group.drip_price()
+        self.group.ref_20()
 
         return dict(
             role = self.participant.vars['role'],
