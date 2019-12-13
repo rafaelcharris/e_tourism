@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Survey
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        We thank you for your participation in this activity.
+    </p>
+    <p>
+    While we prepare your payment please answer the following questions. At the end we will call you one by one to
+        give you the money you have earned.
+    </p>
+    <p>
+    Please click on the "Next" button to continue to the survey.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
+
+{% block styles  %}
+    '<link href="{% static "css.css" %}" rel="stylesheet">
+{% endblock %}
