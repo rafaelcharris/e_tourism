@@ -10,26 +10,18 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">Results from the market</th>
+                <th scope="col" colspan="2">Results from the activity</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Name</td>
-                <td>{{ player.summary_name }}</td>
+                <td>The trading round sorted for payment was:</td>
+                <td>{{ paying_round }}</td>
             </tr>
             <tr>
-                <td>Id</td>
-                <td>{{ player.summary_id }}</td>
-            </tr>
-            <tr>
-                <td>Role</td>
-                <td>{{ player.summary_role }}</td>
-            </tr>
-            <tr>
-                <td>Payoff</td>
-                <td>{{ player.real_payoff }}</td>
+                <td>Your payoff (including the initial endowment of {{ endowment }} ECU) is:</td>
+                <td>{{ payoff_final }}</td>
             </tr>
         </tbody>
     </table>

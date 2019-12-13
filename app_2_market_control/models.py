@@ -23,8 +23,8 @@ Markets
 
 class Constants(BaseConstants):
     name_in_url = 'app_1_market_control'
-    players_per_group = 20
-    num_rounds = 5
+    players_per_group = 2
+    num_rounds = 2
     endowment = 25
     see_list_cost = 1
 
@@ -217,5 +217,8 @@ class Player(BasePlayer):
     def payoff_final_f(self):
         self.paying_round = random.randint(1, Constants.num_rounds)
         self.payoff_final = int(self.in_round(self.paying_round).payoff)
+        self.participant.vars['paying_round'] = self.paying_round
+        self.participant.vars['payoff_final'] = self.payoff_final
+        self.session.vars['endowment'] = Constants.endowment
         print("##########################", self.paying_round)
         print("##########################", self.payoff_final)
