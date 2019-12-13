@@ -37,7 +37,7 @@ class Constants(BaseConstants):
     com_practice = [i for i in range(1,5)]
     report_price = 1
     report_penalty = 2
-
+    reference_20 = 20
     instructions_template ='app_4_market_informal/instructions.html'
 
 class Subsession(BaseSubsession):
@@ -142,6 +142,10 @@ class Group(BaseGroup):
         for p in self.get_players():
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
 
+    def ref_20(self):
+        for p in self.get_players():
+            p.ref20 = p.ask_price_ini + Constants.reference_20
+
     def get_times_reported(self):
         sellers_reported = []
         for p in self.get_players():
@@ -208,6 +212,8 @@ class Player(BasePlayer):
     times_reported = models.IntegerField(initial = 0)
     penalty = models.IntegerField()
     my_buyer = models.IntegerField(initial=0)
+    ref20 = models.IntegerField(initial=0)
+
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
     buyer_valuation_pac1 = models.IntegerField()

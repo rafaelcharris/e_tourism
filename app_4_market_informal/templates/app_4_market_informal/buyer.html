@@ -107,6 +107,10 @@ $(document).ready(function() {
                             <h5 class="card-title"><del>{{p.ask_price_ini|c}}</del> </h5>
                             <br>
                             <h5 class="card-title">{{p.ask_price_fin|c}} </h5>
+                            {% elif p.com_practice == 3 %}
+                            <h5 class="card-title"><del>{{p.ref20 |c}}</del> </h5>
+                            <br>
+                            <h5 class="card-title">{{p.ask_price_fin|c}} </h5>
                             {% elif p.com_practice == 4 %}
                             <h5 class="card-title">
                                {{ p.drip|c}} <a href = # data-toggle="tooltip" title = "Total Price = {{p.drip|c}} + 1 ECU  ={{p.ask_price_fin}} " data-original-title="Default tooltip">*</a>
@@ -115,7 +119,7 @@ $(document).ready(function() {
                             <h5 class="card-title">{{p.ask_price_fin}} </h5>
                             {% endif %}
                             <hr class="my-4">
-                            <button id = "button_id" name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
+                            <button name = "my_seller" value = {{p.id_in_group}} class = "btn btn-primary btn-large">Buy</button>
                         </div>
                     </div>
                 </td>
