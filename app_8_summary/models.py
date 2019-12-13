@@ -31,7 +31,7 @@ class Player(BasePlayer):
 
     summary_name = models.LongStringField()
     summary_id = models.IntegerField()
-    summary_role = models.BooleanField()
+    summary_role = models.StringField()
 
     def push_vars_to_summary(self): #pushes vars to summary page
         self.summary_role = self.participant.vars.get('role')
