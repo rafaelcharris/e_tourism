@@ -12,14 +12,14 @@ SESSION_CONFIG_DEFAULTS = dict(
 SESSION_CONFIGS = [
     dict(
         name='bot_testing',
-        display_name="Testing bots on control",
+        display_name="Testing bots",
         num_demo_participants=2,
 #        num_demo_participants=20,      
         app_sequence=['app_2_market_control'],
 #        app_sequence=['app_7_question'],
 #        app_sequence=['app_0_consent', 'app_2_market_control', 'app_8_summary'],
 #        app_sequence = ['app_3_market_formal_sanction'],
-        use_browser_bots=True, ),
+        use_browser_bots=False, ),
     dict(
         name='app_7_question',
         display_name="Questionnaire",
