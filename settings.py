@@ -13,8 +13,9 @@ SESSION_CONFIGS = [
     dict(
         name='bot_testing_control',
         display_name="Testing bots on control",
-        num_demo_participants=20,
-        app_sequence=['app_7_question'],
+        num_demo_participants=2,
+        app_sequence=['app_2_market_control'],
+#        app_sequence=['app_7_question'],
 #        app_sequence=['app_0_consent', 'app_2_market_control', 'app_8_summary'],
 #        app_sequence=['app_0_consent', 'app_2_market_control', 'app_7_question', 'app_8_summary'],
         use_browser_bots=False, ),
