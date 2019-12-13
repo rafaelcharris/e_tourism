@@ -91,7 +91,7 @@ class Group(BaseGroup):
                     p.payoff += int(p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid)
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
-                    p.payoff = 0
+                    p.payoff = int(Constants.endowment)
             else:
                 p.payoff = int(Constants.endowment)
                 p.payoff += int((p.ask_price_fin - p.seller_valuation)*int(p.sold) - int(p.see_list)*Constants.see_list_cost)
@@ -132,7 +132,7 @@ class Group(BaseGroup):
                         if jugador != real_buyer:
                             b = self.get_player_by_id(jugador)
                             b.package_purchased = 0
-                            b.payoff = 0
+                            b.payoff = int(Constants.endowment)
 
     def drip_price(self):
         for p in self.get_players():
