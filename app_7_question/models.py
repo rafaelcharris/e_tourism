@@ -22,23 +22,13 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     pass
 
-def preg_likert(label):
-    return models.IntegerField(
-        label = label,
-        min  = 1, max = 5,
-        widget=widgets.Slider,
-    )
-def preg_cuatro(label):
-    return models.StringField(
-        label = label,
-        choices = ['No', 'Sí, una vez', 'Sí, más de una vez']
-    )
-
 class Player(BasePlayer):
 
-    gender = models.StringField(
+    gender = models.IntegerField(
         label = 'What is your gender?',
-        choices = ["Male", "Female", "Other"],
+        choices = [(0, "Female"),
+                   (1, "Male"),
+                   (2,"Other")],
         widget = widgets.RadioSelectHorizontal
     )
 
@@ -51,7 +41,7 @@ class Player(BasePlayer):
         label = "What is your country of origin?",
     )
 
-    education = models.StringField(
+    education = models.IntegerField(
         label = 'What is your education level (maximum degree of completed studies)?',
         choices = [(1, "No schooling"),
                    (2, "Primary School"),
@@ -61,7 +51,7 @@ class Player(BasePlayer):
                    (6, "Post-graduate Degree (Master / Ph.D.)")]
     )
 
-    civil_status = models.StringField(
+    civil_status = models.IntegerField(
         label = 'What is your civil status',
         choices = [(1, 'Single (Never married)'),
                    (2, 'Living with partner'),
