@@ -78,7 +78,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-
     def set_payoff(self):
         for p in self.get_players():
             if p.role() == "buyer":
@@ -97,7 +96,6 @@ class Group(BaseGroup):
             else:
                 p.payoff = int(Constants.endowment)
                 p.payoff += int((p.ask_price_fin - p.seller_valuation)*int(p.sold) - int(p.see_list)*Constants.see_list_cost)
-
 
     def who_purchased(self):
         sellers =[]
