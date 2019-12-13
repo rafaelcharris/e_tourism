@@ -11,6 +11,7 @@ from otree.api import (
 import itertools
 import numpy
 import collections
+import random
 
 
 author = 'UEC'
@@ -22,7 +23,7 @@ Markets
 
 class Constants(BaseConstants):
     name_in_url = 'app_1_market_control'
-    players_per_group = 2
+    players_per_group = 20
     num_rounds = 5
     endowment = 25
     see_list_cost = 1
@@ -56,7 +57,7 @@ class Subsession(BaseSubsession):
                     p.seller_id = next(id_s)
                     #todo have to fix this id. They don't work as I would like it to
                     p.participant.vars['seller_id'] = p.seller_id #assign a seller id
-                    print("EL SELLER ID ES: " + str(p.seller_id))
+                    #print("EL SELLER ID ES: " + str(p.seller_id))
                 else:
             # Assign valuations for each packaque for the sellers
             #Esta parte del código debería asignarle un valor random a cada paquete
@@ -109,23 +110,23 @@ class Group(BaseGroup):
 
         if len(sellers) != len(set(sellers)): #si la length de ambas listas difiere, signiifca que hay algun repetido que set elimino (porque en los sets no puede haber repetidos)
             sellers_dic = dict(collections.Counter(sellers))
-            print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
+            #print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
 
             for key, value in sellers_dic.items():
                 if value > 1:
-                    print("THIS WORKS: " + str(key))
+                    #print("THIS WORKS: " + str(key))
                     buyers_time = {}
                     for p in self.get_players():
                         if p.role() == "buyer":
-                            print("JUGADOR: " + str(p.id_in_group) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
+                            #print("JUGADOR: " + str(p.id_in_group) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
 
                             if p.my_seller == key:
-                                print("INFO: " + str(p.package_purchased) + "key: " + str(key))
+                                #print("INFO: " + str(p.package_purchased) + "key: " + str(key))
                                 buyers_time[p.id_in_group] = p.time_spent
-                                print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
+                                #print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
 
 
-                    print("DICTIONARY: " + str(buyers_time))
+                    #print("DICTIONARY: " + str(buyers_time))
                     # after looping over all players I have here buyers and times
                     # get the one with tge less time
                     real_buyer = min(buyers_time, key = buyers_time.get)
@@ -210,3 +211,11 @@ class Player(BasePlayer):
     paid = models.IntegerField(initial = 0)
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()
+    paying_round = models.IntegerField()
+    payoff_final = models.IntegerField()
+
+    def payoff_final_f(self):
+        self.paying_round = random.randint(1, Constants.num_rounds)
+        self.payoff_final = int(self.in_round(self.paying_round).payoff)
+        print("##########################", self.paying_round)
+        print("##########################", self.payoff_final)

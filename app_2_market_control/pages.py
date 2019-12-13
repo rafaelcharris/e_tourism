@@ -70,6 +70,9 @@ class buyer(Page):
         import time
         self.player.time_spent = time.time()
 
+#        if self.player.round_number == Constants.num_rounds:
+#            self.player.payoff_final_f()
+
     def vars_for_template(self):
         self.group.drip_price()
 
@@ -91,6 +94,8 @@ class Results(Page):
     def vars_for_template(self):
         self.group.set_payoff()
         self.group.who_purchased()
+        if self.player.round_number == Constants.num_rounds:
+            self.player.payoff_final_f()
 
         return dict(
             role = self.participant.vars['role'],
