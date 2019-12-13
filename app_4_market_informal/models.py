@@ -67,11 +67,11 @@ class Subsession(BaseSubsession):
                     random_package = numpy.random.choice(Constants.buyer_valuations, size = 5, replace = False)
                     p.participant.vars["valuations_package"] = dict(zip(Constants.packages, random_package))
                     p.participant.vars["valuations"] = dict(zip(zip(Constants.packages, Constants.cities), random_package))
-                    p.buyer_valuation_pac1 = p.participant.vars["valuations_packages"].get(1)
-                    p.buyer_valuation_pac2 = p.participant.vars["valuations_packages"].get(2)
-                    p.buyer_valuation_pac3 = p.participant.vars["valuations_packages"].get(3)
-                    p.buyer_valuation_pac4 = p.participant.vars["valuations_packages"].get(4)
-                    p.buyer_valuation_pac5 = p.participant.vars["valuations_packages"].get(5)
+                    p.buyer_valuation_pac1 = p.participant.vars["valuations_package"].get(1)
+                    p.buyer_valuation_pac2 = p.participant.vars["valuations_package"].get(2)
+                    p.buyer_valuation_pac3 = p.participant.vars["valuations_package"].get(3)
+                    p.buyer_valuation_pac4 = p.participant.vars["valuations_package"].get(4)
+                    p.buyer_valuation_pac5 = p.participant.vars["valuations_package"].get(5)
 
                     id_b = itertools.cycle([i for i in range(1, 11)])
                     #todo fix this id. They don't work as it should
@@ -144,10 +144,9 @@ class Group(BaseGroup):
 
     def get_times_reported(self):
         for p in self.get_players():
-            if p.role() == "buyer":
-                if p.report is True:
-                    seller_rep = self.get_player_by_id(p.report_seller)
-                    seller_rep.times_reported += 1
+            if p.role() == "buyer" and p.report is True:
+                seller_rep = self.get_player_by_id(p.report_seller)
+                seller_rep.times_reported += 1
 
         for p in self.get_players():
             if p.role() == "seller":

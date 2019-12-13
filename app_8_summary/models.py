@@ -2,7 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
-
+import numpy
 
 author = 'Your name here'
 
@@ -22,8 +22,10 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    pass
 
+    def real_payoff(self):
+        for p in self.get_players():
+            p.real_payoff = p.in_round(numpy.random.randint(1,5)).payoff
 
 class Player(BasePlayer):
 
@@ -40,3 +42,5 @@ class Player(BasePlayer):
 #    def report_summary(self): # pushes vars to the admin_report
 #        self.participant.vars['FINAL_payoff'] = self.summary_FINAL_payoff
 #        print("[[ APP_8_SUMMARY]] - PLAYER - REPORT_SUMMARY.............--------------------------------]")
+
+    real_payoff = models.IntegerField()
