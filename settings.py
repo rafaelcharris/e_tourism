@@ -17,8 +17,8 @@ SESSION_CONFIGS = [
         app_sequence=['app_2_market_control'],
 #        app_sequence=['app_7_question'],
 #        app_sequence=['app_0_consent', 'app_2_market_control', 'app_8_summary'],
-#        app_sequence=['app_0_consent', 'app_2_market_control', 'app_7_question', 'app_8_summary'],
-        use_browser_bots=False, ),
+#        app_sequence = ['app_1_market_com_practices'],
+        use_browser_bots=True, ),
     dict(
         name='app_7_question',
         display_name="Questionnaire",
