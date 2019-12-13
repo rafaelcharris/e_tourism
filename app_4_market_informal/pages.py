@@ -5,6 +5,9 @@ from .models import Constants
 class instructions(Page):
     form_model = 'player'
 
+    def is_displayed(self):
+        return self.player.round_number == 1
+
 
 class instructions_2(Page):
     pass

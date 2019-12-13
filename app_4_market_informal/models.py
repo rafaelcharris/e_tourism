@@ -22,7 +22,7 @@ Markets
 
 class Constants(BaseConstants):
     name_in_url = 'app_4_informal'
-    players_per_group = 4
+    players_per_group = 20
     num_rounds = 5
     endowment = 25
     see_list_cost = 1
@@ -150,7 +150,8 @@ class Group(BaseGroup):
         sellers_reported = []
         for p in self.get_players():
             if p.role() == "buyer":
-                sellers_reported.append(p.report_seller)
+                if p.report_seller > 0:
+                    sellers_reported.append(p.report_seller)
         report_dict = dict(collections.Counter(sellers_reported))
 
         for key, val in report_dict.items():
@@ -248,4 +249,4 @@ class Player(BasePlayer):
     buyer_id = models.IntegerField()
     time_spent = models.FloatField()
     report = models.BooleanField()
-    report_seller = models.IntegerField()
+    report_seller = models.IntegerField(initial = 0)
