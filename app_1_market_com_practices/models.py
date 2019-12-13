@@ -90,7 +90,6 @@ class Group(BaseGroup):
                     p.paid = the_seller.ask_price_fin
                     p.payoff = int(Constants.endowment)
                     p.payoff += int(p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid)
-
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = int(Constants.endowment)
@@ -169,7 +168,7 @@ class Player(BasePlayer):
 
     see_list = models.BooleanField(initial = False)
     com_practice = models.IntegerField(choices = [
-        [1, "Best Price Guarantee"], [2,"Reference Pricing"], [3, "Drip Pricing"], [4, "None"]
+        [1, "Best Price Guarantee"], [2,"Reference Pricing"], [3, "Reference Pricing (+20 ECU of discount)"], [4, "Drip Pricing"], [5, "None"]
     ])
     ask_price_fin = models.IntegerField()
 
