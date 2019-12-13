@@ -143,10 +143,16 @@ class Group(BaseGroup):
             p.drip = p.ask_price_fin - 1 if p.role() == "seller" else 0
 
     def get_times_reported(self):
+        sellers_reported = []
         for p in self.get_players():
-            if p.role() == "buyer" and p.report is True:
-                seller_rep = self.get_player_by_id(p.report_seller)
-                seller_rep.times_reported += 1
+            if p.role() == "buyer":
+                sellers_reported.append(p.report_seller)
+        report_dict = dict(collections.Counter(sellers_reported))
+
+        for key, val in report_dict.items():
+            for p in self.get_players():
+                the_reported = self.get_player_by_id(key)
+                the_reported.times_reported = val
 
         for p in self.get_players():
             if p.role() == "seller":
