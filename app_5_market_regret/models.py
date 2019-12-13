@@ -87,15 +87,16 @@ class Group(BaseGroup):
                     the_seller.sold = True
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
-                    p.payoff = p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid
+                    p.payoff = Constants.endowment
+                    p.payoff += p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid
                     print("VALUATION DEL PAQUETE: " + str(p.participant.vars['valuations_package'].get(p.package_purchased)))
-                    p.payoff = p.payoff if p.payoff >= 0  else 0
 
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = 0
             else:
-                p.payoff = (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
+                p.payoff = Constants.endowment
+                p.payoff += (p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold)
 
     def who_purchased(self):
         sellers =[]
