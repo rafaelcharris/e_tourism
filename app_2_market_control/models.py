@@ -24,8 +24,8 @@ class Constants(BaseConstants):
     name_in_url = 'app_1_market_control'
     players_per_group = 4
     num_rounds = 5
-    endowment = c(25)
-    see_list_cost = c(1)
+    endowment = 25
+    see_list_cost = 1
 
     packages = [i for i in range(1, 6)]
 
@@ -86,14 +86,14 @@ class Group(BaseGroup):
                     the_seller.sold = True
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
-                    p.payoff = Constants.endowment
-                    p.payoff += p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid
+                    p.payoff = int(Constants.endowment)
+                    p.payoff += int(p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid)
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = 0
             else:
-                p.payoff = Constants.endowment
-                p.payoff += (p.ask_price_fin - p.seller_valuation)*int(p.sold) - int(p.see_list)*Constants.see_list_cost
+                p.payoff = int(Constants.endowment)
+                p.payoff += int((p.ask_price_fin - p.seller_valuation)*int(p.sold) - int(p.see_list)*Constants.see_list_cost)
 
     def who_purchased(self):
         sellers =[]
