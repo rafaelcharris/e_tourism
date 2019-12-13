@@ -22,7 +22,7 @@ Markets
 
 class Constants(BaseConstants):
     name_in_url = 'app_5_market_regret'
-    players_per_group = 4
+    players_per_group = 20
     num_rounds = 5
     endowment = 25
     see_list_cost = 1
