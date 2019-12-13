@@ -90,6 +90,7 @@ class Group(BaseGroup):
                 if p.my_seller > 0:
                     the_seller = self.get_player_by_id(p.my_seller)
                     the_seller.sold = True
+                    the_seller.my_buyer = p.id_in_group
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
                     p.payoff = Constants.endowment
@@ -204,6 +205,7 @@ class Player(BasePlayer):
     sold = models.BooleanField(initial = False)
     times_reported = models.IntegerField(initial = 0)
     penalty = models.IntegerField()
+    my_buyer = models.IntegerField(initial=0)
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete
     buyer_valuation_pac1 = models.IntegerField()
