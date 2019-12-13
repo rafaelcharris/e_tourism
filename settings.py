@@ -12,8 +12,6 @@ SESSION_CONFIG_DEFAULTS = dict(
 SESSION_CONFIGS = [
     dict(
         name='bot_testing',
-
-
         display_name="Testing bots",
         num_demo_participants=2,
 #        num_demo_participants=20,      
