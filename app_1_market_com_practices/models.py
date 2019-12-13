@@ -24,8 +24,8 @@ class Constants(BaseConstants):
     name_in_url = 'app_1_market_com_practices'
     players_per_group = 4
     num_rounds = 5
-    endowment = c(25)
-    see_list_cost = c(1)
+    endowment = 25
+    see_list_cost = 1
 
     packages = [i for i in range(1, 6)]
 
@@ -65,11 +65,11 @@ class Subsession(BaseSubsession):
                     random_package = numpy.random.choice(Constants.buyer_valuations, size = 5, replace = False)
                     p.participant.vars["valuations_package"] = dict(zip(Constants.packages, random_package))
                     p.participant.vars["valuations"] = dict(zip(zip(Constants.packages, Constants.cities), random_package))
-                    #p.buyer_valuation_pac1 = p.participant.vars["valuations"].get(1)
-                    #p.buyer_valuation_pac2 = p.participant.vars["valuations"].get(2)
-                    #p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
-                    #p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
-                    #p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
+                    p.buyer_valuation_pac1 = p.participant.vars["valuations_packages"].get(1)
+                    p.buyer_valuation_pac2 = p.participant.vars["valuations_packages"].get(2)
+                    p.buyer_valuation_pac3 = p.participant.vars["valuations_packages"].get(3)
+                    p.buyer_valuation_pac4 = p.participant.vars["valuations_packages"].get(4)
+                    p.buyer_valuation_pac5 = p.participant.vars["valuations_packages"].get(5)
 
                     id_b = itertools.cycle([i for i in range(1, 11)])
                 #todo fix this id. They don't work as it should
@@ -90,14 +90,13 @@ class Group(BaseGroup):
                     p.paid = the_seller.ask_price_fin
                     p.payoff = int(Constants.endowment)
                     p.payoff += int(p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid)
-                    print("VALUATION DEL PAQUETE: " + str(p.participant.vars['valuations_package'].get(p.package_purchased)))
 
                 else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
                     p.package_purchased = 0
                     p.payoff = int(Constants.endowment)
             else:
                 p.payoff = int(Constants.endowment)
-                p.payoff += int((p.ask_price_fin - p.seller_valuation - int(p.see_list)*Constants.see_list_cost)*int(p.sold))
+                p.payoff += int((p.ask_price_fin - p.seller_valuation)*int(p.sold) - int(p.see_list)*Constants.see_list_cost)
 
     def who_purchased(self):
         sellers =[]
@@ -179,7 +178,7 @@ class Player(BasePlayer):
 
     seller_id = models.IntegerField()
     sold = models.BooleanField(initial = False)
-    my_buyer = models.IntegerField()
+    my_buyer = models.IntegerField(initial = 0)
 
     #Buyer
     #Preguntar a Felipe si puedo borrar estos campos de valuación de cada paquete

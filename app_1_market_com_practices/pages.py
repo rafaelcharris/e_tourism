@@ -71,7 +71,6 @@ class buyer(Page):
         import time
         self.player.time_spent = time.time()
 
-
     def vars_for_template(self):
         self.group.drip_price()
 
