@@ -130,7 +130,7 @@ class Group(BaseGroup):
                         if jugador != real_buyer:
                             b = self.get_player_by_id(jugador)
                             b.package_purchased = 0
-                            b.payoff = 0
+                            b.payoff = int(Constants.endowment)
 
     def drip_price(self):
         for p in self.get_players():
