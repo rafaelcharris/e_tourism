@@ -8,7 +8,6 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-from django.db import models as django_models
 import itertools
 import numpy
 import collections
@@ -25,8 +24,8 @@ class Constants(BaseConstants):
     name_in_url = 'app_4_informal'
     players_per_group = 4
     num_rounds = 5
-    endowment = c(25)
-    see_list_cost = c(1)
+    endowment = 25
+    see_list_cost = 1
 
     packages = [i for i in range(1, 6)]
 
@@ -36,10 +35,10 @@ class Constants(BaseConstants):
     buyer_valuations = [100, 100, 90, 80, 80, 70, 60, 60, 50, 40]
 
     com_practice = [i for i in range(1,5)]
-    report_price = c(1)
-    report_penalty = c(2)
+    report_price = 1
+    report_penalty = 2
 
-    instructions_template ='app_1_market_com_practices/instructions.html'
+    instructions_template ='app_4_market_informal/instructions.html'
 
 class Subsession(BaseSubsession):
 
@@ -68,14 +67,14 @@ class Subsession(BaseSubsession):
                     random_package = numpy.random.choice(Constants.buyer_valuations, size = 5, replace = False)
                     p.participant.vars["valuations_package"] = dict(zip(Constants.packages, random_package))
                     p.participant.vars["valuations"] = dict(zip(zip(Constants.packages, Constants.cities), random_package))
-                    #p.buyer_valuation_pac1 = p.participant.vars["valuations"].get(1)
-                    #p.buyer_valuation_pac2 = p.participant.vars["valuations"].get(2)
-                    #p.buyer_valuation_pac3 = p.participant.vars["valuations"].get(3)
-                    #p.buyer_valuation_pac4 = p.participant.vars["valuations"].get(4)
-                    #p.buyer_valuation_pac5 = p.participant.vars["valuations"].get(5)
+                    p.buyer_valuation_pac1 = p.participant.vars["valuations_packages"].get(1)
+                    p.buyer_valuation_pac2 = p.participant.vars["valuations_packages"].get(2)
+                    p.buyer_valuation_pac3 = p.participant.vars["valuations_packages"].get(3)
+                    p.buyer_valuation_pac4 = p.participant.vars["valuations_packages"].get(4)
+                    p.buyer_valuation_pac5 = p.participant.vars["valuations_packages"].get(5)
 
                     id_b = itertools.cycle([i for i in range(1, 11)])
-                #todo fix this id. They don't work as it should
+                    #todo fix this id. They don't work as it should
                     p.participant.vars['buyer_id'] = next(id_b)
 
 
@@ -93,16 +92,14 @@ class Group(BaseGroup):
                     the_seller.my_buyer = p.id_in_group
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
-                    p.payoff = Constants.endowment
-                    p.payoff += p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid - int(p.report)*Constants.report_price
-                    print("VALUATION DEL PAQUETE: " + str(p.participant.vars['valuations_package'].get(p.package_purchased)))
-
-                else: # En caso de que el vendedor sea cero, entonces dele paquete 0 y pago 0
-                    p.package_purchased = 0
-                    p.payoff = 0
+                    p.payoff = int(Constants.endowment)
+                    p.payoff += int(p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid) - int(p.report)*Constants.report_price
+                else:
+                        p.package_purchased = 0
+                        p.payoff = int(Constants.endowment)
             else:
-                p.payoff = Constants.endowment
-                p.payoff += (p.ask_price_fin - p.seller_valuation)*int(p.sold) - int(p.see_list)*Constants.see_list_cost
+                p.payoff = int(Constants.endowment)
+                p.payoff += int((p.ask_price_fin - p.seller_valuation)*int(p.sold) - int(p.see_list)*Constants.see_list_cost)
 
     def who_purchased(self):
         sellers =[]
@@ -112,9 +109,9 @@ class Group(BaseGroup):
                     the_seller = self.get_player_by_id(p.my_seller)
                     p.package_purchased = the_seller.seller_package
                     sellers.append(the_seller.id_in_group)
-        print("LISTA DE SELLERS: " + str(sellers))
+
         if len(sellers) != len(set(sellers)): #si la length de ambas listas difiere, signiifca que hay algun repetido que set elimino (porque en los sets no puede haber repetidos)
-            sellers_dic = dict(collections.Counter(sellers)) #todo creo que hay problema acá. no parece contar bien
+            sellers_dic = dict(collections.Counter(sellers))
             print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
 
             for key, value in sellers_dic.items():
@@ -139,7 +136,7 @@ class Group(BaseGroup):
                         if jugador != real_buyer:
                             b = self.get_player_by_id(jugador)
                             b.package_purchased = 0
-                            b.payoff = 0
+                            b.payoff = int(Constants.endowment)
 
     def drip_price(self):
         for p in self.get_players():
@@ -194,7 +191,7 @@ class Player(BasePlayer):
 
     see_list = models.BooleanField(initial = False)
     com_practice = models.IntegerField(choices = [
-        [1, "Best Price Guarantee"], [2,"Reference Pricing"], [3, "Drip Pricing"], [4, "None"]
+        [1, "Best Price Guarantee"], [2,"Reference Pricing"], [3, "Reference Pricing (+20 ECU of discount)"], [4, "Drip Pricing"], [5, "None"]
     ])
     ask_price_fin = models.IntegerField()
 
