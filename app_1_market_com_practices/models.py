@@ -10,6 +10,7 @@ from otree.api import (
 )
 import itertools
 import numpy
+print("####",numpy.version.version)
 import collections
 import random
 
