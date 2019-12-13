@@ -26,7 +26,7 @@ SESSION_CONFIGS = [
     dict(
         name='e_tourism_market_control',
         display_name="Market Control",
-        num_demo_participants=4,
+        num_demo_participants=20,
         app_sequence=['app_2_market_control'],
         use_browser_bots=False,
     ),
