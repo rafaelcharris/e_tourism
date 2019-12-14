@@ -144,7 +144,9 @@ class Group(BaseGroup):
 
     def ref_20(self):
         for p in self.get_players():
-            p.ref20 = p.ask_price_ini + Constants.reference_20 if p.role() == "seller" else 0
+            p.discount = 0
+            p.discount = (p.ask_price_ini - p.ask_price_fin) if p.role() == "seller" and p.ask_price_ini > p.ask_price_fin else 0
+            p.ref20 = p.ask_price_fin + p.discount + Constants.reference_20 if p.role() == "seller" else 0
 
 
 class Player(BasePlayer):
@@ -223,6 +225,7 @@ class Player(BasePlayer):
     time_spent = models.FloatField()
     paying_round = models.IntegerField()
     payoff_final = models.IntegerField()
+    discount = models.IntegerField()
 
     def payoff_final_f(self):
         self.paying_round = random.randint(1, Constants.num_rounds)
