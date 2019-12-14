@@ -6,8 +6,11 @@ from .models import Constants
 class app_8_summary(Page):
 
     def vars_for_template(self):
-        self.player.push_vars_to_summary()
-        self.group.real_payoff()
+        return dict(
+            paying_round = self.participant.vars.get('paying_round'),
+            payoff_final = self.participant.vars.get('payoff_final'),
+            endowment = self.session.vars.get('endowment')
+        )
 
 
 page_sequence = [

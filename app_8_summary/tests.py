@@ -7,4 +7,4 @@ from .models import Constants
 class PlayerBot(Bot):
 
     def play_round(self):
-        yield pages.app_3_summary
+        yield pages.app_8_summary

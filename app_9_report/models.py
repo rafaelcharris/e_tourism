@@ -6,7 +6,7 @@ from django.db import models as djmodels
 from django.core.validators import EmailValidator
 
 
-author = 'Your name here'
+author = 'UEC-CID'
 
 doc = """
 Your app description
@@ -37,13 +37,8 @@ class Subsession(BaseSubsession):
             row['consent_name'] = p.participant.vars.get('consent_name')
             row['consent_id_number'] = p.participant.vars.get('consent_id_number')
             row['market_agent_role'] = p.participant.vars.get('role')
-            row['market_seller_package'] = p.participant.vars.get('seller_package')
-            row['market_seller_valuation'] = p.participant.vars.get('seller_valuation')
-            row['market_buyer_valuation_pac1'] = p.participant.vars.get('buyer_valuation_pac1')
-            row['market_buyer_valuation_pac2'] = p.participant.vars.get('buyer_valuation_pac2')
-            row['market_buyer_valuation_pac3'] = p.participant.vars.get('buyer_valuation_pac3')
-            row['market_buyer_valuation_pac4'] = p.participant.vars.get('buyer_valuation_pac4')
-            row['market_buyer_valuation_pac5'] = p.participant.vars.get('buyer_valuation_pac5')
+            row['market_paying_round'] = p.participant.vars.get('paying_round')
+            row['market_payoff_final'] = p.participant.vars.get('payoff_final')
             table_rows.append(row)
         return {'table_rows': table_rows}
 

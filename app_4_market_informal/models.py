@@ -11,6 +11,7 @@ from otree.api import (
 import itertools
 import numpy
 import collections
+import random
 
 
 author = 'UEC'
@@ -114,23 +115,23 @@ class Group(BaseGroup):
 
         if len(sellers) != len(set(sellers)): #si la length de ambas listas difiere, signiifca que hay algun repetido que set elimino (porque en los sets no puede haber repetidos)
             sellers_dic = dict(collections.Counter(sellers))
-            print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
+            #print("EL DICTIONARIO DE VENDEDORES ES: " + str(sellers_dic))
 
             for key, value in sellers_dic.items():
                 if value > 1:
-                    print("THIS WORKS: " + str(key))
+                    #print("THIS WORKS: " + str(key))
                     buyers_time = {}
                     for p in self.get_players():
                         if p.role() == "buyer":
-                            print("JUGADOR: " + str(p.id_in_group) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
+                            #print("JUGADOR: " + str(p.id_in_group) + " PAQUETE: " + str(p.package_purchased) + " KEY: " + str(key))
 
                             if p.my_seller == key:
-                                print("INFO: " + str(p.package_purchased) + "key: " + str(key))
+                                #print("INFO: " + str(p.package_purchased) + "key: " + str(key))
                                 buyers_time[p.id_in_group] = p.time_spent
-                                print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
+                                #print("DICTIONARY INSIDE LOOP: " + str(buyers_time))
 
 
-                    print("DICTIONARY: " + str(buyers_time))
+                    #print("DICTIONARY: " + str(buyers_time))
                     # after looping over all players I have here buyers and times
                     # get the one with tge less time
                     real_buyer = min(buyers_time, key = buyers_time.get)
@@ -252,3 +253,15 @@ class Player(BasePlayer):
     time_spent = models.FloatField()
     report = models.BooleanField()
     report_seller = models.IntegerField(initial = 0)
+
+    paying_round = models.IntegerField()
+    payoff_final = models.IntegerField()
+
+    def payoff_final_f(self):
+        self.paying_round = random.randint(1, Constants.num_rounds)
+        self.payoff_final = int(self.in_round(self.paying_round).payoff)
+        self.participant.vars['paying_round'] = self.paying_round
+        self.participant.vars['payoff_final'] = self.payoff_final
+        self.session.vars['endowment'] = Constants.endowment
+        print("##########################", self.paying_round)
+        print("##########################", self.payoff_final)
