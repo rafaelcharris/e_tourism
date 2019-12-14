@@ -60,7 +60,7 @@ class seller_2(Page):
 
 class buyer(Page):
 
-    timeout_seconds = 500
+    timeout_seconds = 60
     form_model = 'player'
     form_fields = ['my_seller']
 
