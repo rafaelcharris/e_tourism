@@ -93,7 +93,7 @@ class Group(BaseGroup):
                     p.package_purchased = the_seller.seller_package
                     p.paid = the_seller.ask_price_fin
                     p.payoff = int(Constants.endowment)
-                    p.payoff += int(p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid) - int(p.report)*Constants.report_price if p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid > 0 else - int(p.report)*Constants.report_price
+                    p.payoff += int(p.participant.vars['valuations_package'].get(p.package_purchased)) - int(p.paid) - int(p.report)*int(Constants.report_price) if p.participant.vars['valuations_package'].get(p.package_purchased) - p.paid > 0 else - int(p.report)*Constants.report_price
                     p.package_purchased = p.package_purchased if p.participant.vars['valuations_package'].get(
                     p.package_purchased) - p.paid > 0 else 0
                     the_seller.sold = True if p.package_purchased > 0 else False
