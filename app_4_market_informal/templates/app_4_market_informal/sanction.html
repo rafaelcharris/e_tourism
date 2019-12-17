@@ -113,12 +113,11 @@ $(document).ready(function() {
         </tbody>
 </table>
     {% next_button %}
-        {% endif %}
-    {% else %}
+        {% else %}
         <p>No player used a commercial practice so you can't report one</p>
         <button id = "id_next" class="otree-btn-next btn btn-primary next-button otree-next-button">Next</button>
             <input id = "id_hidden" type ="hidden" name ="report_seller" value = 0 />
-
+        {% endif %}
     {% endif %}
 {% endfor %}
 
